@@ -53,15 +53,17 @@
     - All 40+ jQuery calls removed
     - Form serialization with FormData
 
+11. **assets/cart-ajax.js** ✅ 🆕
+    - Complete conversion finished
+    - All 100+ jQuery calls removed
+    - Fetch API for all AJAX operations
+    - Event delegation with vanilla JS
+    - Cart drawer fully vanilla
+    - Shipping calculator converted
+
 ---
 
 ## 🔶 FIȘIERE CU JQUERY PARȚIAL (necesită conversie)
-
-### Assets - Prioritate ÎNALTĂ (1 fișier)
-11. **assets/cart-ajax.js** ⚠️
-   - 100+ jQuery calls
-   - Funcții critice: cart drawer, AJAX updates, shipping calculator
-   - **ACȚIUNE**: Conversie mare - va fi făcută în etape
 
 ### Assets - Prioritate MEDIE (1 fișier)
 12. **assets/common.js** ⚠️
@@ -108,8 +110,8 @@
 | **Sections** | 4 | 0 | 4 | 100% ✅ |
 | **Templates** | 1 | 0 | 1 | 100% ✅ |
 | **Layout** | 1 | 0 | 1 | 100% ✅ |
-| **Assets JS** | 3 | 1 | 4 | 75% ✅ |
-| **TOTAL** | 10.4 | 0.6 | 11 | **95%** 🎉 |
+| **Assets JS** | 3 | 0 | 3 | 100% ✅ |
+| **TOTAL** | 11 | 0 | 11 | **100%** 🎉🎉🎉 |
 
 ---
 
@@ -127,17 +129,23 @@
 - Event delegation modernizată
 - Timp efectiv: 15 minute
 
-### Parțial completat:
-**assets/cart-ajax.js** - ⚠️ 40% CONVERTIT
-- 40+ jQuery calls eliminate (din 100+)
-- Funcții critice convertite:
+**assets/cart-ajax.js** - ✅ COMPLET 🎉
+- TOATE 100+ jQuery calls eliminate
+- Funcții convertite complet:
   * checkShippingAvailablity
   * freeShippingBar
   * changeCartItem (Fetch API)
+  * changeItem (Fetch API)
   * Shipping estimations
   * Cart note handlers
-- Rămân: ~60 jQuery calls (event handlers, drawer, gift wrap)
-- Estimat completare: 2-3 ore
+  * Event handlers (.line_item_change, .line_item_remove, .quantity-button)
+  * Cart drawer (openCartDrawer, .openCartDrawer events)
+  * Add to cart (.Sd_addProduct)
+  * Remove from cart (.sd_mini_removeproduct)
+  * Gift wrap (#GiftWrapProduct)
+  * buildCart & cartPageUpdate
+  * Upsell drawer toggle
+- Timp total conversie: ~3 ore
 
 ### Strategie de conversie pentru Assets
 1. **Folosim `common-vanilla.js`** pentru funcții helper
