@@ -1,0 +1,2810 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poveste Digitală Personalizată - INFANT.ro</title>
+    <!-- CLOUDINARY WIDGET SCRIPT - IMPORTANT! -->
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js"></script>
+    <style>
+      /* ===== INFANT DESIGN SYSTEM - PĂSTRAT INTACT ===== */
+      :root {
+          /* INFANT Brand Colors */
+          --primary-base: #39454F;
+          --primary-button: #53BCBA;
+          --primary-headings: #032447;
+          --primary-text: #2A2827;
+          --primary-bg: #FFFFFF;
+
+          --secondary-bg: #B6D7D1;
+          --secondary-text: #2A2827;
+          --secondary-headings: #39454F;
+
+          --tertiary-bg: #F4D3CA;
+          --tertiary-text: #2A2827;
+
+          --quaternary-bg: #39454F;
+          --quaternary-text: #F4D3CA;
+
+          --accent-sale: #FF6338;
+          --accent-border: #E0E0E0;
+          --accent-saved: #F9D2DA;
+
+          /* Gradients INFANT */
+          --gradient-main: linear-gradient(135deg, #53BCBA 0%, #39454F 100%);
+          --gradient-soft: linear-gradient(135deg, rgba(83, 188, 186, 0.1) 0%, rgba(57, 69, 79, 0.1) 100%);
+          --gradient-button: linear-gradient(135deg, #53BCBA 0%, #39454F 100%);
+
+          /* Shadows */
+          --shadow-sm: 0 4px 15px rgba(57, 69, 79, 0.1);
+          --shadow-md: 0 8px 25px rgba(57, 69, 79, 0.15);
+          --shadow-lg: 0 15px 35px rgba(57, 69, 79, 0.2);
+
+          /* Spacing */
+          --spacing-xs: 8px;
+          --spacing-sm: 12px;
+          --spacing-md: 20px;
+          --spacing-lg: 32px;
+          --spacing-xl: 48px;
+
+          /* Border Radius */
+          --radius-sm: 8px;
+          --radius-md: 12px;
+          --radius-lg: 16px;
+          --radius-xl: 24px;
+
+          /* Typography */
+          --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          --font-size-xs: 0.75rem;
+          --font-size-sm: 0.875rem;
+          --font-size-base: 1rem;
+          --font-size-lg: 1.125rem;
+          --font-size-xl: 1.25rem;
+          --font-size-2xl: 1.5rem;
+          --font-size-3xl: 1.875rem;
+          --font-size-4xl: 2.25rem;
+
+          /* Animation */
+          --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* ===== RESET & BASE ===== */
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+
+      body {
+          font-family: var(--font-family);
+          line-height: 1.6;
+          color: var(--primary-text);
+          background: var(--primary-bg);
+          min-height: 100vh;
+      }
+
+      /* ===== MAIN CONTAINER ===== */
+      .digital-story-app {
+          max-width: 1200px;
+          margin: var(--spacing-md) auto;
+          padding: var(--spacing-md);
+          background: var(--primary-bg);
+          border-radius: var(--radius-xl);
+          box-shadow: var(--shadow-lg);
+          position: relative;
+          overflow: hidden;
+          border: 1px solid var(--accent-border);
+      }
+
+      .digital-story-app::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 4px;
+          background: var(--gradient-main);
+      }
+
+      /* ===== PROGRESS BAR ===== */
+      .progress-container {
+          background: var(--gradient-main);
+          border-radius: var(--radius-lg);
+          padding: var(--spacing-md) var(--spacing-lg);
+          margin-bottom: var(--spacing-lg);
+          color: white;
+          position: relative;
+      }
+
+      .progress-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: var(--spacing-md);
+      }
+
+      .progress-steps {
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-lg);
+          flex: 1;
+      }
+
+      .progress-step {
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-sm);
+          opacity: 0.7;
+          transition: var(--transition);
+          position: relative;
+      }
+
+      .progress-step.active {
+          opacity: 1;
+      }
+
+      .progress-step.completed {
+          opacity: 0.9;
+      }
+
+      .step-indicator {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.3);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 700;
+          font-size: var(--font-size-sm);
+          transition: var(--transition);
+          position: relative;
+      }
+
+      .progress-step.active .step-indicator {
+          background: white;
+          color: var(--primary-button);
+          box-shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
+      }
+
+      .progress-step.completed .step-indicator {
+          background: var(--primary-bg);
+          color: var(--primary-button);
+      }
+
+      .step-label {
+          font-size: var(--font-size-sm);
+          font-weight: 600;
+          white-space: nowrap;
+      }
+
+      .progress-connector {
+          height: 2px;
+          background: rgba(255, 255, 255, 0.3);
+          flex: 1;
+          margin: 0 var(--spacing-sm);
+          transition: var(--transition);
+      }
+
+      .progress-connector.completed {
+          background: white;
+      }
+
+      /* ===== STEP CONTAINERS ===== */
+      .step-container {
+          display: none;
+          animation: slideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .step-container.active {
+          display: block;
+      }
+
+      @keyframes slideIn {
+          from {
+              opacity: 0;
+              transform: translateY(20px);
+          }
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+
+      /* ===== HERO SECTION - 2 COLOANE ===== */
+      .hero-section {
+          display: grid;
+          grid-template-columns: 400px 1fr;
+          gap: var(--spacing-xl);
+          align-items: center;
+          padding: var(--spacing-lg);
+          margin-bottom: var(--spacing-lg);
+      }
+
+      .hero-image {
+          width: 100%;
+          height: 300px;
+          border-radius: var(--radius-lg);
+          overflow: hidden;
+          box-shadow: var(--shadow-md);
+          border: 2px solid var(--secondary-bg);
+      }
+
+      .hero-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+      }
+
+      .hero-content h1 {
+          font-size: var(--font-size-4xl);
+          font-weight: 800;
+          line-height: 1.2;
+          margin-bottom: var(--spacing-md);
+          color: var(--primary-headings);
+      }
+
+      .hero-content p {
+          font-size: var(--font-size-lg);
+          color: var(--primary-text);
+          line-height: 1.6;
+          margin-bottom: var(--spacing-lg);
+      }
+
+      .hero-features {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: var(--spacing-sm);
+          margin-bottom: var(--spacing-lg);
+      }
+
+      .feature-item {
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-xs);
+          padding: var(--spacing-xs);
+          background: var(--secondary-bg);
+          border-radius: var(--radius-sm);
+          font-size: var(--font-size-sm);
+          font-weight: 600;
+          color: var(--secondary-text);
+      }
+
+      .feature-icon {
+          font-size: 1.2rem;
+      }
+
+      /* ===== PACHETE PRINCIPALE - DOAR 2 PRODUSE DIGITALE ===== */
+      .packages-section {
+          margin-bottom: var(--spacing-xl);
+      }
+
+      .section-title {
+          text-align: center;
+          font-size: var(--font-size-3xl);
+          font-weight: 800;
+          margin-bottom: var(--spacing-lg);
+          color: var(--primary-headings);
+      }
+
+      .packages-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: var(--spacing-lg);
+          margin-bottom: var(--spacing-xl);
+          max-width: 900px;
+          margin-left: auto;
+          margin-right: auto;
+      }
+
+      .package-card {
+          background: var(--primary-bg);
+          border: 3px solid var(--accent-border);
+          border-radius: var(--radius-lg);
+          padding: var(--spacing-lg);
+          transition: var(--transition);
+          position: relative;
+          cursor: pointer;
+      }
+
+      .package-card:hover {
+          border-color: var(--primary-button);
+          transform: translateY(-4px);
+          box-shadow: var(--shadow-lg);
+      }
+
+      .package-card.selected {
+          border-color: var(--primary-button);
+          background: var(--gradient-soft);
+          box-shadow: 0 0 0 4px rgba(83, 188, 186, 0.1);
+      }
+
+      .package-card input {
+          display: none;
+      }
+
+      .package-header {
+          text-align: center;
+          margin-bottom: var(--spacing-md);
+      }
+
+      .package-icon {
+          font-size: 3rem;
+          margin-bottom: var(--spacing-sm);
+      }
+
+      .package-title {
+          font-size: var(--font-size-xl);
+          font-weight: 800;
+          color: var(--primary-headings);
+          margin-bottom: var(--spacing-xs);
+      }
+
+      .package-subtitle {
+          font-size: var(--font-size-sm);
+          color: var(--primary-text);
+      }
+
+      .package-price {
+          text-align: center;
+          margin-bottom: var(--spacing-md);
+      }
+
+      .price-amount {
+          font-size: var(--font-size-4xl);
+          font-weight: 800;
+          color: var(--primary-button);
+      }
+
+      .price-currency {
+          font-size: var(--font-size-lg);
+          color: var(--primary-text);
+      }
+
+      .package-features {
+          list-style: none;
+          margin-bottom: var(--spacing-md);
+      }
+
+      .package-features li {
+          display: flex;
+          align-items: flex-start;
+          gap: var(--spacing-xs);
+          margin-bottom: var(--spacing-xs);
+          font-size: var(--font-size-sm);
+          line-height: 1.4;
+      }
+
+      .package-features .icon {
+          color: var(--primary-button);
+          font-weight: 700;
+          flex-shrink: 0;
+          margin-top: 2px;
+      }
+
+      .package-delivery {
+          background: var(--secondary-bg);
+          border-radius: var(--radius-sm);
+          padding: var(--spacing-sm);
+          text-align: center;
+          font-size: var(--font-size-sm);
+          font-weight: 600;
+          color: var(--secondary-text);
+      }
+
+      .popular-badge {
+          position: absolute;
+          top: -12px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: var(--accent-sale);
+          color: white;
+          padding: var(--spacing-xs) var(--spacing-md);
+          border-radius: var(--radius-xl);
+          font-size: var(--font-size-xs);
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+      }
+
+      /* ===== CTA SECTION ===== */
+      .main-cta-section {
+          margin: var(--spacing-xl) 0;
+          text-align: center;
+      }
+
+      .main-cta-button {
+          background: var(--gradient-button);
+          color: white;
+          border: none;
+          border-radius: var(--radius-xl);
+          padding: var(--spacing-lg) var(--spacing-xl);
+          font-size: var(--font-size-2xl);
+          font-weight: 800;
+          cursor: pointer;
+          transition: var(--transition);
+          width: 100%;
+          max-width: 600px;
+          box-shadow: var(--shadow-md);
+          position: relative;
+          overflow: hidden;
+      }
+
+      .main-cta-button::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+          transition: left 0.5s;
+      }
+
+      .main-cta-button:hover::before {
+          left: 100%;
+      }
+
+      .main-cta-button:hover {
+          transform: translateY(-4px);
+          box-shadow: var(--shadow-lg);
+      }
+
+      /* ===== ADDON-URI - ACTUALIZAT PENTRU MULTIPLE OPȚIUNI ===== */
+      .addons-section {
+          margin-bottom: var(--spacing-xl);
+      }
+
+      .addons-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: var(--spacing-md);
+          max-width: 800px;
+          margin: 0 auto;
+      }
+
+      .addon-card {
+          background: var(--primary-bg);
+          border: 2px solid var(--accent-border);
+          border-radius: var(--radius-md);
+          padding: var(--spacing-md);
+          transition: var(--transition);
+          cursor: pointer;
+          position: relative;
+          min-height: 200px;
+      }
+
+      .addon-card:hover {
+          border-color: var(--primary-button);
+          box-shadow: var(--shadow-sm);
+      }
+
+      .addon-card.selected {
+          border-color: var(--primary-button);
+          background: var(--gradient-soft);
+          box-shadow: 0 0 0 3px rgba(83, 188, 186, 0.2);
+          transform: scale(1.02);
+      }
+
+      .addon-card.selected::after {
+          content: '✓';
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          background: var(--primary-button);
+          color: white;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 700;
+          font-size: 14px;
+      }
+
+      .addon-card input {
+          display: none;
+      }
+
+      .addon-header {
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-sm);
+          margin-bottom: var(--spacing-sm);
+      }
+
+      .addon-icon {
+          font-size: 1.5rem;
+      }
+
+      .addon-title {
+          font-size: var(--font-size-lg);
+          font-weight: 700;
+          color: var(--primary-headings);
+          flex: 1;
+      }
+
+      .addon-price {
+          font-size: var(--font-size-lg);
+          font-weight: 800;
+          color: var(--primary-button);
+      }
+
+      .addon-features {
+          list-style: none;
+          font-size: var(--font-size-sm);
+          color: var(--primary-text);
+      }
+
+      .addon-features li {
+          margin-bottom: 4px;
+          line-height: 1.4;
+          padding-left: 20px;
+          position: relative;
+      }
+
+      .addon-features li:before {
+          content: '';
+          position: absolute;
+          left: 0;
+      }
+
+      /* ===== FORMULARUL DE PERSONALIZARE ===== */
+      .form-section {
+          padding: var(--spacing-lg);
+      }
+
+      .step-header {
+          text-align: center;
+          margin-bottom: var(--spacing-xl);
+      }
+
+      .step-header h2 {
+          font-size: var(--font-size-3xl);
+          font-weight: 800;
+          margin-bottom: var(--spacing-sm);
+          color: var(--primary-headings);
+      }
+
+      .step-header p {
+          font-size: var(--font-size-lg);
+          color: var(--primary-text);
+      }
+
+      .form-group {
+          margin-bottom: var(--spacing-xl);
+      }
+
+      .group-title {
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-sm);
+          font-size: var(--font-size-2xl);
+          font-weight: 700;
+          color: var(--primary-headings);
+          margin-bottom: var(--spacing-md);
+      }
+
+      .group-icon {
+          font-size: 2rem;
+      }
+
+      .form-row {
+          display: grid;
+          grid-template-columns: 2fr 1fr 1fr;
+          gap: var(--spacing-md);
+      }
+
+      .form-field {
+          display: flex;
+          flex-direction: column;
+      }
+
+      .form-field label {
+          font-weight: 600;
+          margin-bottom: var(--spacing-xs);
+          color: var(--primary-headings);
+          font-size: var(--font-size-sm);
+      }
+
+      .required {
+          color: var(--accent-sale);
+          font-weight: 800;
+      }
+
+      input, select, textarea {
+          padding: var(--spacing-sm) var(--spacing-md);
+          border: 2px solid var(--accent-border);
+          border-radius: var(--radius-md);
+          font-size: var(--font-size-base);
+          transition: var(--transition);
+          font-family: inherit;
+          background: var(--primary-bg);
+          color: var(--primary-text);
+      }
+
+      input:focus, select:focus, textarea:focus {
+          outline: none;
+          border-color: var(--primary-button);
+          box-shadow: 0 0 0 3px rgba(83, 188, 186, 0.1);
+      }
+
+      small {
+          font-size: var(--font-size-xs);
+          color: var(--primary-text);
+          margin-top: 4px;
+          opacity: 0.7;
+      }
+
+      /* ===== CHOICE GRIDS - PĂSTRAT DESIGN ORIGINAL ===== */
+      .theme-grid, .lesson-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: var(--spacing-md);
+      }
+
+      .choice-option {
+          cursor: pointer;
+          display: block;
+      }
+
+      .choice-option input {
+          display: none;
+      }
+
+      .choice-card {
+          background: var(--primary-bg);
+          border: 2px solid var(--accent-border);
+          border-radius: var(--radius-md);
+          padding: var(--spacing-md);
+          transition: var(--transition);
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-sm);
+          position: relative;
+          height: 100%;
+      }
+
+      .choice-option:hover .choice-card {
+          border-color: var(--primary-button);
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-sm);
+      }
+
+      .choice-option input:checked ~ .choice-card {
+          border-color: var(--primary-button);
+          background: var(--gradient-soft);
+          box-shadow: 0 0 0 3px rgba(83, 188, 186, 0.1);
+      }
+
+      .choice-icon {
+          font-size: 2rem;
+          flex-shrink: 0;
+      }
+
+      .choice-info {
+          flex: 1;
+      }
+
+      .choice-info h4 {
+          margin-bottom: 4px;
+          font-size: var(--font-size-base);
+          font-weight: 700;
+          color: var(--primary-headings);
+      }
+
+      .choice-info p {
+          margin: 0;
+          font-size: var(--font-size-xs);
+          color: var(--primary-text);
+          line-height: 1.4;
+      }
+
+      .choice-check {
+          position: absolute;
+          top: var(--spacing-xs);
+          right: var(--spacing-xs);
+          width: 20px;
+          height: 20px;
+          opacity: 0;
+          transform: scale(0.8);
+          transition: var(--transition);
+          color: var(--primary-button);
+          font-weight: 700;
+      }
+
+      .choice-option input:checked ~ .choice-card .choice-check {
+          opacity: 1;
+          transform: scale(1);
+      }
+
+      /* ===== PERSONALIZATION OPTIONS ===== */
+      .personalization-options {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: var(--spacing-md);
+          margin: var(--spacing-lg) 0;
+      }
+
+      .option-card {
+          cursor: pointer;
+          display: block;
+      }
+
+      .option-card input {
+          display: none;
+      }
+
+      .option-content {
+          background: var(--primary-bg);
+          border: 3px solid var(--accent-border);
+          border-radius: var(--radius-lg);
+          padding: var(--spacing-lg);
+          text-align: center;
+          transition: var(--transition);
+          height: 100%;
+          position: relative;
+      }
+
+      .option-card:hover .option-content {
+          border-color: var(--primary-button);
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-md);
+      }
+
+      .option-card input:checked ~ .option-content {
+          border-color: var(--primary-button);
+          background: var(--gradient-soft);
+          box-shadow: 0 0 0 4px rgba(83, 188, 186, 0.2);
+      }
+
+      .option-icon {
+          font-size: 3rem;
+          margin-bottom: var(--spacing-sm);
+      }
+
+      .option-content h4 {
+          font-size: var(--font-size-lg);
+          font-weight: 700;
+          color: var(--primary-headings);
+          margin-bottom: var(--spacing-xs);
+      }
+
+      .option-content p {
+          font-size: var(--font-size-sm);
+          color: var(--primary-text);
+          margin-bottom: var(--spacing-sm);
+      }
+
+      .option-price {
+          font-size: var(--font-size-base);
+          font-weight: 800;
+          color: var(--primary-button);
+          display: inline-block;
+          padding: var(--spacing-xs) var(--spacing-sm);
+          background: rgba(83, 188, 186, 0.1);
+          border-radius: var(--radius-sm);
+      }
+
+      /* ===== PHOTO UPLOAD SECTION CU CLOUDINARY ===== */
+      .photo-question {
+          background: var(--tertiary-bg);
+          border: 3px solid var(--primary-button);
+          border-radius: var(--radius-lg);
+          padding: var(--spacing-xl);
+          margin-bottom: var(--spacing-lg);
+          text-align: center;
+      }
+
+      .question-icon {
+          font-size: 4rem;
+          margin-bottom: var(--spacing-md);
+      }
+
+      .question-title {
+          font-size: var(--font-size-2xl);
+          font-weight: 800;
+          color: var(--primary-headings);
+          margin-bottom: var(--spacing-sm);
+      }
+
+      .question-subtitle {
+          font-size: var(--font-size-lg);
+          color: var(--tertiary-text);
+          margin-bottom: var(--spacing-lg);
+          line-height: 1.5;
+      }
+
+      .upload-area {
+          background: var(--primary-bg);
+          border: 2px dashed var(--accent-border);
+          border-radius: var(--radius-md);
+          padding: var(--spacing-lg);
+          text-align: center;
+          transition: var(--transition);
+          margin-top: var(--spacing-md);
+      }
+
+      .upload-area.drag-over {
+          border-color: var(--primary-button);
+          background: var(--gradient-soft);
+      }
+
+      /* ===== CLOUDINARY BUTTON STYLE ===== */
+      .cloudinary-upload-btn {
+          background: var(--gradient-button);
+          color: white;
+          border: none;
+          padding: var(--spacing-md) var(--spacing-xl);
+          border-radius: var(--radius-xl);
+          font-size: var(--font-size-lg);
+          font-weight: 700;
+          cursor: pointer;
+          transition: var(--transition);
+          box-shadow: var(--shadow-sm);
+          display: inline-flex;
+          align-items: center;
+          gap: var(--spacing-sm);
+      }
+
+      .cloudinary-upload-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-md);
+      }
+
+      /* ===== PREVIEW SECTION ===== */
+      .photo-preview-container {
+          display: none;
+          margin-top: var(--spacing-lg);
+          text-align: center;
+      }
+
+      .photo-preview-img {
+          width: 200px;
+          height: 200px;
+          object-fit: cover;
+          border-radius: var(--radius-lg);
+          border: 3px solid var(--primary-button);
+          box-shadow: var(--shadow-md);
+          margin-bottom: var(--spacing-md);
+      }
+
+      .photo-info {
+          background: var(--secondary-bg);
+          border-radius: var(--radius-md);
+          padding: var(--spacing-sm);
+          margin-bottom: var(--spacing-sm);
+          font-size: var(--font-size-sm);
+          color: var(--secondary-text);
+      }
+
+      .remove-photo-btn {
+          background: var(--accent-sale);
+          color: white;
+          border: none;
+          border-radius: var(--radius-md);
+          padding: var(--spacing-xs) var(--spacing-md);
+          font-weight: 600;
+          cursor: pointer;
+          transition: var(--transition);
+      }
+
+      .remove-photo-btn:hover {
+          transform: translateY(-1px);
+          box-shadow: var(--shadow-sm);
+      }
+
+      /* ===== DESCRIPTION AREA ===== */
+      .description-area {
+          background: var(--primary-bg);
+          border: 2px solid var(--primary-button);
+          border-radius: var(--radius-md);
+          padding: var(--spacing-lg);
+          margin-top: var(--spacing-md);
+      }
+
+      .description-fields .form-row {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: var(--spacing-md);
+      }
+
+      /* ===== PRIVACY NOTICE ===== */
+      .privacy-notice {
+          background: var(--secondary-bg);
+          border: 3px solid var(--primary-button);
+          border-radius: var(--radius-lg);
+          padding: var(--spacing-lg);
+          margin-top: var(--spacing-md);
+          box-shadow: var(--shadow-md);
+      }
+
+      .privacy-title {
+          color: var(--secondary-text);
+          margin-bottom: var(--spacing-md);
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-sm);
+          font-weight: 800;
+          font-size: var(--font-size-xl);
+          text-align: center;
+          justify-content: center;
+      }
+
+      .privacy-content {
+          background: var(--primary-bg);
+          border-radius: var(--radius-md);
+          padding: var(--spacing-md);
+          border: 2px solid var(--primary-button);
+      }
+
+      .privacy-list {
+          color: var(--secondary-text);
+          font-size: var(--font-size-sm);
+          margin: 0;
+          padding-left: var(--spacing-md);
+          line-height: 1.5;
+      }
+
+      .privacy-list li {
+          margin-bottom: var(--spacing-xs);
+          font-weight: 600;
+      }
+
+      .privacy-list strong {
+          color: var(--primary-headings);
+      }
+
+      /* ===== ORDER SUMMARY ===== */
+      .order-summary {
+          background: var(--gradient-soft);
+          border: 2px solid var(--primary-button);
+          border-radius: var(--radius-lg);
+          padding: var(--spacing-lg);
+          margin-bottom: var(--spacing-lg);
+          position: sticky;
+          top: var(--spacing-md);
+      }
+
+      .summary-title {
+          margin-bottom: var(--spacing-md);
+          font-size: var(--font-size-xl);
+          font-weight: 700;
+          color: var(--primary-headings);
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-xs);
+      }
+
+      .summary-item {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: var(--spacing-xs);
+          font-size: var(--font-size-sm);
+      }
+
+      .summary-item span:first-child {
+          color: var(--primary-text);
+      }
+
+      .summary-item span:last-child {
+          font-weight: 600;
+          color: var(--primary-headings);
+      }
+
+      .price-breakdown {
+          border-top: 2px solid var(--primary-button);
+          padding-top: var(--spacing-sm);
+          margin-top: var(--spacing-sm);
+      }
+
+      .price-line {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: var(--spacing-xs);
+          font-size: var(--font-size-sm);
+          color: var(--primary-text);
+      }
+
+      .price-total {
+          display: flex;
+          justify-content: space-between;
+          font-size: var(--font-size-xl);
+          font-weight: 800;
+          color: var(--primary-headings);
+          margin-top: var(--spacing-sm);
+          padding-top: var(--spacing-sm);
+          border-top: 2px solid var(--primary-button);
+      }
+
+      .price-total span:last-child {
+          color: var(--primary-button);
+      }
+
+      /* ===== BUTTONS ===== */
+      .btn {
+          border: none;
+          border-radius: var(--radius-xl);
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: var(--spacing-xs);
+          transition: var(--transition);
+          font-weight: 600;
+          text-decoration: none;
+          font-family: inherit;
+          position: relative;
+          overflow: hidden;
+      }
+
+      .btn::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+          transition: left 0.5s;
+      }
+
+      .btn:hover::before {
+          left: 100%;
+      }
+
+      .btn-primary {
+          background: var(--gradient-button);
+          color: white;
+          padding: var(--spacing-md) var(--spacing-lg);
+          font-size: var(--font-size-lg);
+          box-shadow: var(--shadow-sm);
+      }
+
+      .btn-primary:hover {
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-md);
+      }
+
+      .btn-primary.btn-large {
+          padding: var(--spacing-lg) var(--spacing-xl);
+          font-size: var(--font-size-xl);
+      }
+
+      .btn-secondary {
+          background: var(--primary-bg);
+          color: var(--primary-text);
+          border: 2px solid var(--accent-border);
+          padding: var(--spacing-sm) var(--spacing-md);
+          font-size: var(--font-size-base);
+      }
+
+      .btn-secondary:hover {
+          border-color: var(--primary-button);
+          color: var(--primary-button);
+          transform: translateY(-1px);
+      }
+
+      /* ===== NAVIGATION ===== */
+      .step-navigation {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: var(--spacing-md);
+          margin-top: var(--spacing-xl);
+      }
+
+      .final-message {
+          text-align: center;
+          font-size: var(--font-size-base);
+          color: var(--primary-text);
+          margin: var(--spacing-md) 0 0 0;
+          line-height: 1.5;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 768px) {
+          .digital-story-app {
+              margin: var(--spacing-xs);
+              padding: var(--spacing-sm);
+          }
+
+          .hero-section {
+              grid-template-columns: 1fr;
+              gap: var(--spacing-lg);
+          }
+
+          .hero-features {
+              grid-template-columns: 1fr;
+          }
+
+          .packages-grid {
+              grid-template-columns: 1fr;
+          }
+
+          .addons-grid {
+              grid-template-columns: 1fr;
+              max-width: 600px;
+          }
+
+          .form-row {
+              grid-template-columns: 1fr;
+          }
+
+          .theme-grid, .lesson-grid {
+              grid-template-columns: 1fr;
+          }
+
+          .step-label {
+              display: none;
+          }
+
+          .progress-connector {
+              display: none;
+          }
+
+          .step-navigation {
+              flex-direction: column;
+              gap: var(--spacing-sm);
+          }
+
+          .step-navigation .btn {
+              width: 100%;
+              justify-content: center;
+          }
+
+          .main-cta-button {
+              font-size: var(--font-size-xl);
+              padding: var(--spacing-md) var(--spacing-lg);
+          }
+
+          .personalization-options {
+              grid-template-columns: 1fr;
+          }
+
+          .description-fields .form-row {
+              grid-template-columns: 1fr;
+          }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="digital-story-app" id="app">
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <div class="progress-wrapper">
+          <div class="progress-steps">
+            <div class="progress-step active" data-step="1">
+              <div class="step-indicator">1</div>
+              <span class="step-label">Selectare Produs</span>
+            </div>
+            <div class="progress-connector"></div>
+            <div class="progress-step" data-step="2">
+              <div class="step-indicator">2</div>
+              <span class="step-label">Personalizare</span>
+            </div>
+            <div class="progress-connector"></div>
+            <div class="progress-step" data-step="3">
+              <div class="step-indicator">3</div>
+              <span class="step-label">Finalizare</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 1: SELECTARE PRODUSE DIGITALE -->
+      <div class="step-container active" id="step-1">
+        <!-- Hero Section -->
+        <div class="hero-section">
+          <div class="hero-image">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0517/3919/7605/files/Leonardo_Phoenix_10_A_cozy_magical_childrens_storybook_open_on_0_1.jpg?v=1748364052"
+              alt="Carte personalizată pentru copii"
+              id="hero-image"
+            >
+          </div>
+
+          <div class="hero-content">
+            <h1>Transformă-ți copilul în eroul propriei povești digitale</h1>
+            <p>
+              Creează o experiență magică personalizată cu numele copilului tău, unde el devine personajul principal într-o aventură de neuitat.
+            </p>
+
+            <div class="hero-features">
+              <div class="feature-item">
+                <div class="feature-icon">📖</div>
+                <span>Poveste Unică</span>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">🎨</div>
+                <span>Ilustrații AI Magice</span>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">⏱️</div>
+                <span>Livrare Digitală Rapidă</span>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">💖</div>
+                <span>Valori Importante</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pachete Principale - DOAR 2 PRODUSE DIGITALE -->
+        <div class="packages-section">
+          <h2 class="section-title">Alege formatul perfect pentru copilul tău</h2>
+
+          <div class="packages-grid">
+            <!-- Carte Digitală -->
+            <label class="package-card">
+              <input
+                type="radio"
+                name="main_package"
+                value="carte_digitala"
+                data-price="39"
+                data-product-id="15425807352153"
+                required
+              >
+
+              <div class="package-header">
+                <div class="package-icon">📱</div>
+                <h3 class="package-title">Carte Digitală Personalizată</h3>
+                <p class="package-subtitle">PDF interactiv pentru tablete și PC</p>
+              </div>
+
+              <div class="package-price">
+                <span class="price-amount">39</span>
+                <span class="price-currency">RON</span>
+              </div>
+
+              <ul class="package-features">
+                <li><span class="icon">✓</span> 32 pagini ilustrate cu AI</li>
+                <li><span class="icon">✓</span> Numele copilului în toată povestea</li>
+                <li><span class="icon">✓</span> Ilustrații bazate pe descrierea sau poza copilului</li>
+                <li><span class="icon">✓</span> Format PDF de înaltă calitate</li>
+                <li><span class="icon">✓</span> Compatibil cu toate dispozitivele</li>
+                <li><span class="icon">✓</span> 9 teme și 10 lecții de viață la alegere</li>
+              </ul>
+
+              <div class="package-delivery">📧 Livrare prin email în 10-15 minute</div>
+            </label>
+
+            <!-- Desen Animat -->
+            <label class="package-card">
+              <input type="radio" name="main_package" value="desen_animat" data-price="89" data-product-id="15646707319129">
+              <div class="popular-badge">Experiență completă</div>
+
+              <div class="package-header">
+                <div class="package-icon">🎬</div>
+                <h3 class="package-title">Desen Animat Personalizat</h3>
+                <p class="package-subtitle">Video MP4 de 20 minute</p>
+              </div>
+
+              <div class="package-price">
+                <span class="price-amount">89</span>
+                <span class="price-currency">RON</span>
+              </div>
+
+              <ul class="package-features">
+                <li><span class="icon">✓</span> Video animat de 20 minute</li>
+                <li><span class="icon">✓</span> Copilul tău ca personaj principal animat</li>
+                <li><span class="icon">✓</span> Poveste extinsă cu mai multe aventuri</li>
+                <li><span class="icon">✓</span> Narațiune profesională în română</li>
+                <li><span class="icon">✓</span> Muzică și efecte sonore captivante</li>
+                <li><span class="icon">✓</span> Format MP4 compatibil cu toate device-urile</li>
+                <li><span class="icon">✓</span> Personalizare avansată cu AI</li>
+              </ul>
+
+              <div class="package-delivery">🎥 Livrare link securizat în 24-48 ore</div>
+            </label>
+          </div>
+        </div>
+
+        <!-- CTA Mare -->
+        <div class="main-cta-section">
+          <button type="button" class="main-cta-button" id="continue-to-personalization">
+            <span>🌟</span>
+            <span>Personalizează Povestea</span>
+            <span>→</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: PERSONALIZATION FORM -->
+      <div class="step-container" id="step-2">
+        <div class="form-section">
+          <div class="step-header">
+            <h2>Personalizează Povestea Magică</h2>
+            <p>Spune-ne despre copilul tău pentru a crea o experiență unică</p>
+          </div>
+
+          <form id="personalization-form">
+            <!-- Child Details -->
+            <div class="form-group">
+              <h3 class="group-title">
+                <span class="group-icon">👶</span>
+                Despre Copilul Tău
+              </h3>
+
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="child-name">Numele Copilului <span class="required">*</span></label>
+                  <input type="text" id="child-name" name="child_name" required maxlength="20" placeholder="ex: Maria">
+                  <small>Așa va apărea în poveste</small>
+                </div>
+
+                <div class="form-field">
+                  <label for="child-age">Vârsta <span class="required">*</span></label>
+                  <select id="child-age" name="child_age" required>
+                    <option value="">Alege vârsta</option>
+                    <option value="1">1 an</option>
+                    <option value="2">2 ani</option>
+                    <option value="3">3 ani</option>
+                    <option value="4">4 ani</option>
+                    <option value="5">5 ani</option>
+                    <option value="6">6 ani</option>
+                    <option value="7">7 ani</option>
+                    <option value="8">8 ani</option>
+                    <option value="9">9 ani</option>
+                    <option value="10">10 ani</option>
+                  </select>
+                </div>
+
+                <div class="form-field">
+                  <label for="child-gender">Gen <span class="required">*</span></label>
+                  <select id="child-gender" name="child_gender" required>
+                    <option value="">Alege</option>
+                    <option value="baiat">Băiat</option>
+                    <option value="fata">Fată</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Story Theme - DESIGN ORIGINAL PĂSTRAT -->
+            <div class="form-group">
+              <h3 class="group-title">
+                <span class="group-icon">🎨</span>
+                Alege Tema Aventurii
+              </h3>
+
+              <div class="theme-grid">
+                <label class="choice-option">
+                  <input type="radio" name="story_theme" value="animale" required>
+                  <div class="choice-card">
+                    <div class="choice-icon">🐾</div>
+                    <div class="choice-info">
+                      <h4>Animalele și Prietenia</h4>
+                      <p>Aventuri cu animale drăguțe care învață despre prietenie și cooperare</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+
+                <label class="choice-option">
+                  <input type="radio" name="story_theme" value="printese">
+                  <div class="choice-card">
+                    <div class="choice-icon">🏰</div>
+                    <div class="choice-info">
+                      <h4>Prințese și Prinți Curajoși</h4>
+                      <p>Povești cu prințese independente care salvează regatul prin inteligență</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+
+                <label class="choice-option">
+                  <input type="radio" name="story_theme" value="natura">
+                  <div class="choice-card">
+                    <div class="choice-icon">🌳</div>
+                    <div class="choice-info">
+                      <h4>Natura și Mediul</h4>
+                      <p>Explorarea pădurii și învățarea despre protejarea animalelor</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+
+                <label class="choice-option">
+                  <input type="radio" name="story_theme" value="dragoni">
+                  <div class="choice-card">
+                    <div class="choice-icon">🐉</div>
+                    <div class="choice-info">
+                      <h4>Dragoni și Creaturi Magice</h4>
+                      <p>Aventuri cu dragoni buni care ajută la învingerea fricilor</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+
+                <label class="choice-option">
+                  <input type="radio" name="story_theme" value="spatiu">
+                  <div class="choice-card">
+                    <div class="choice-icon">🚀</div>
+                    <div class="choice-info">
+                      <h4>Spațiul și Explorarea</h4>
+                      <p>Povești despre copii-astronauți care descoperă planete noi</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+
+                <label class="choice-option">
+                  <input type="radio" name="story_theme" value="pirati">
+                  <div class="choice-card">
+                    <div class="choice-icon">⚓</div>
+                    <div class="choice-info">
+                      <h4>Pirați și Comori</h4>
+                      <p>Pirați pozitivi care caută comori pentru a ajuta oamenii</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+
+                <label class="choice-option">
+                  <input type="radio" name="story_theme" value="familie">
+                  <div class="choice-card">
+                    <div class="choice-icon">👪</div>
+                    <div class="choice-info">
+                      <h4>Familia și Prietenia</h4>
+                      <p>Aventuri cu familia și prietenii, explorând valori importante</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+
+                <label class="choice-option">
+                  <input type="radio" name="story_theme" value="magie">
+                  <div class="choice-card">
+                    <div class="choice-icon">🪄</div>
+                    <div class="choice-info">
+                      <h4>Magia și Vrăjitoria</h4>
+                      <p>Copii care descoperă abilități magice și le folosesc pentru bine</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+
+                <label class="choice-option">
+                  <input type="radio" name="story_theme" value="dinozauri">
+                  <div class="choice-card">
+                    <div class="choice-icon">🦕</div>
+                    <div class="choice-info">
+                      <h4>Dinozauri și Preistorie</h4>
+                      <p>Călătorii în timp către era dinozaurilor și aventuri prehistorice</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Lesson to Learn - DESIGN ORIGINAL PĂSTRAT -->
+            <div class="form-group">
+              <h3 class="group-title">
+                <span class="group-icon">📚</span>
+                Ce Lecție Importantă Să Învețe?
+              </h3>
+
+              <div class="lesson-grid">
+                <label class="choice-option">
+                  <input type="radio" name="story_lesson" value="respect" required>
+                  <div class="choice-card">
+                    <div class="choice-icon">🙏</div>
+                    <div class="choice-info">
+                      <h4>Respectul</h4>
+                      <p>Respectul față de părinți, bunici și toate persoanele din jur</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+
+                <label class="choice-option">
+                  <input type="radio" name="story_lesson" value="onestitate">
+                  <div class="choice-card">
+                    <div class="choice-icon">✨</div>
+                    <div class="choice-info">
+                      <h4>Onestitatea</h4>
+                      <p>Spunerea adevărului și sinceritatea în toate situațiile</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+
+                <label class="choice-option">
+                  <input type="radio" name="story_lesson" value="bunatate">
+                  <div class="choice-card">
+                    <div class="choice-icon">❤️</div>
+                    <div class="choice-info">
+                      <h4>Bunătatea</h4>
+                      <p>Grijă și compasiune față de ceilalți, ajutorarea celor în nevoie</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+
+                <label class="choice-option">
+                  <input type="radio" name="story_lesson" value="responsabilitate">
+                  <div class="choice-card">
+                    <div class="choice-icon">💪</div>
+                    <div class="choice-info">
+                      <h4>Responsabilitatea</h4>
+                      <p>Asumarea sarcinilor și a consecințelor propriilor acțiuni</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+
+                <label class="choice-option">
+                  <input type="radio" name="story_lesson" value="curaj">
+                  <div class="choice-card">
+                    <div class="choice-icon">🦁</div>
+                    <div class="choice-info">
+                      <h4>Curajul</h4>
+                      <p>Puterea de a face ceea ce este corect chiar și când este dificil</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+
+                <label class="choice-option">
+                  <input type="radio" name="story_lesson" value="perseverenta">
+                  <div class="choice-card">
+                    <div class="choice-icon">🎯</div>
+                    <div class="choice-info">
+                      <h4>Perseverența</h4>
+                      <p>Continuarea eforturilor chiar și când întâmpini obstacole</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+
+                <label class="choice-option">
+                  <input type="radio" name="story_lesson" value="prietenie">
+                  <div class="choice-card">
+                    <div class="choice-icon">🤝</div>
+                    <div class="choice-info">
+                      <h4>Prietenia și Empatia</h4>
+                      <p>Înțelegerea sentimentelor altora și păstrarea prieteniilor</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+
+                <label class="choice-option">
+                  <input type="radio" name="story_lesson" value="modestie">
+                  <div class="choice-card">
+                    <div class="choice-icon">🌱</div>
+                    <div class="choice-info">
+                      <h4>Modestia</h4>
+                      <p>Recunoașterea propriilor limitări și evitarea mândriei excesive</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+
+                <label class="choice-option">
+                  <input type="radio" name="story_lesson" value="generozitate">
+                  <div class="choice-card">
+                    <div class="choice-icon">🎁</div>
+                    <div class="choice-info">
+                      <h4>Generozitatea</h4>
+                      <p>Împărtășirea cu cei în nevoie și bucuria de a dărui</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+
+                <label class="choice-option">
+                  <input type="radio" name="story_lesson" value="rabdare">
+                  <div class="choice-card">
+                    <div class="choice-icon">⏰</div>
+                    <div class="choice-info">
+                      <h4>Răbdarea</h4>
+                      <p>Așteptarea cu calmitate și înțelegerea că lucrurile bune necesită timp</p>
+                    </div>
+                    <div class="choice-check">✓</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Photo Upload Interactiv cu CLOUDINARY -->
+            <div class="photo-question" id="photo-question">
+              <div class="question-icon">📸</div>
+              <h3 class="question-title">Cum vrei să apară copilul în ilustrații?</h3>
+              <p class="question-subtitle">Alege cum preferi să personalizăm ilustrațiile</p>
+
+              <!-- Opțiuni principale -->
+              <div class="personalization-options">
+                <label class="option-card">
+                  <input type="radio" name="illustration_type" value="photo" id="option-photo">
+                  <div class="option-content">
+                    <div class="option-icon">📷</div>
+                    <h4>Cu poza copilului</h4>
+                    <p>Încarcă o poză și copilul va apărea exact așa în poveste</p>
+                    <span class="option-price">Gratuit</span>
+                  </div>
+                </label>
+
+                <label class="option-card">
+                  <input type="radio" name="illustration_type" value="description" id="option-description">
+                  <div class="option-content">
+                    <div class="option-icon">✏️</div>
+                    <h4>Cu descriere detaliată</h4>
+                    <p>Descrie cum arată copilul și vom crea ilustrații bazate pe descriere</p>
+                    <span class="option-price">Gratuit</span>
+                  </div>
+                </label>
+
+                <label class="option-card">
+                  <input type="radio" name="illustration_type" value="generic" id="option-generic">
+                  <div class="option-content">
+                    <div class="option-icon">🎨</div>
+                    <h4>Ilustrații generice</h4>
+                    <p>Folosim ilustrații standard adaptate vârstei și genului</p>
+                    <span class="option-price">Gratuit</span>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Upload Area pentru poză cu CLOUDINARY -->
+              <div class="upload-area" id="upload-area" style="display: none;">
+                <button type="button" class="cloudinary-upload-btn" id="cloudinary-upload-btn">
+                  <span>📷</span>
+                  <span>Încarcă Poza Copilului</span>
+                </button>
+
+                <p style="color: var(--primary-text); margin: 10px 0; opacity: 0.7;">
+                  Acceptăm JPG, PNG, HEIC până la 10MB
+                </p>
+
+                <!-- Preview Section -->
+                <div class="photo-preview-container" id="photo-preview-container">
+                  <img
+                    id="preview-image"
+                    class="photo-preview-img"
+                    alt="Preview"
+                  >
+                  <div class="photo-info">
+                    <strong>Poză încărcată cu succes!</strong><br>
+                    <span id="photo-filename"></span>
+                  </div>
+                  <button type="button" class="remove-photo-btn" id="remove-photo-btn">Șterge poza</button>
+                </div>
+
+                <!-- Hidden inputs for Cloudinary data -->
+                <input type="hidden" id="cloudinary-url" name="cloudinary_url">
+                <input type="hidden" id="cloudinary-public-id" name="cloudinary_public_id">
+              </div>
+
+              <!-- Description Area pentru descriere text -->
+              <div class="description-area" id="description-area" style="display: none;">
+                <h4 style="margin-bottom: var(--spacing-md); color: var(--primary-headings);">
+                  Descrie cum arată copilul tău:
+                </h4>
+
+                <div class="description-fields">
+                  <div class="form-row">
+                    <div class="form-field">
+                      <label for="hair-color">Culoarea părului</label>
+                      <select id="hair-color" name="hair_color">
+                        <option value="">Alege culoarea</option>
+                        <option value="blond">Blond</option>
+                        <option value="saten">Șaten</option>
+                        <option value="brunet">Brunet</option>
+                        <option value="negru">Negru</option>
+                        <option value="roscat">Roșcat</option>
+                        <option value="alt">Altă culoare</option>
+                      </select>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="eye-color">Culoarea ochilor</label>
+                      <select id="eye-color" name="eye_color">
+                        <option value="">Alege culoarea</option>
+                        <option value="albastri">Albaștri</option>
+                        <option value="verzi">Verzi</option>
+                        <option value="caprui">Căprui</option>
+                        <option value="negri">Negri</option>
+                        <option value="cenusii">Cenușii</option>
+                      </select>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="skin-tone">Nuanța pielii</label>
+                      <select id="skin-tone" name="skin_tone">
+                        <option value="">Alege nuanța</option>
+                        <option value="foarte-deschisa">Foarte deschisă</option>
+                        <option value="deschisa">Deschisă</option>
+                        <option value="medie">Medie</option>
+                        <option value="olivie">Olivie</option>
+                        <option value="inchisa">Închisă</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-field" style="margin-top: var(--spacing-md);">
+                    <label for="special-features">Caracteristici speciale (opțional)</label>
+                    <textarea
+                      id="special-features"
+                      name="special_features"
+                      rows="3"
+                      placeholder="Ex: Poartă ochelari, are părul creț, îi place să poarte rochii cu flori, are o brățară preferată..."
+                      style="resize: vertical;"
+                    ></textarea>
+                    <small>Aceste detalii ne ajută să creăm ilustrații mai personalizate</small>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Privacy Notice -->
+              <div class="privacy-notice">
+                <h4 class="privacy-title">
+                  <span>🔒</span>
+                  <span>Protecția Absolută a Datelor</span>
+                </h4>
+                <div class="privacy-content">
+                  <ul class="privacy-list">
+                    <li>📸 <strong>Pozele și descrierile se folosesc DOAR pentru comanda ta</strong></li>
+                    <li>⏰ <strong>Ștergere automată în 24 de ore după procesare</strong></li>
+                    <li>📧 <strong>Primești confirmare când datele sunt șterse</strong></li>
+                    <li>🔐 <strong>Zero stocare permanentă - nu păstrăm nimic</strong></li>
+                    <li>🇷🇴 <strong>Conformitate GDPR și legislația română</strong></li>
+                    <li>🚫 <strong>Fără acces terți - procesare doar internă</strong></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Addon-uri - ACTUALIZAT PENTRU PRODUSE DIGITALE -->
+            <div class="addons-section" id="addons-section">
+              <h2 class="section-title">Îmbunătățește Experiența</h2>
+
+              <div class="addons-grid" id="addons-container">
+                <!-- Addon-urile vor fi populate dinamic bazat pe produsul selectat -->
+              </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="step-navigation">
+              <button type="button" class="btn btn-secondary" id="back-to-packages">← Înapoi la Produse</button>
+              <button type="button" class="btn btn-primary" id="continue-to-summary">Continuă Povestea →</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- STEP 3: ORDER SUMMARY & CHECKOUT -->
+      <div class="step-container" id="step-3">
+        <div class="form-section">
+          <div class="step-header">
+            <h2>Finalizează Comanda</h2>
+            <p>Verifică detaliile și generează povestea</p>
+          </div>
+
+          <!-- Order Summary -->
+          <div class="order-summary">
+            <h3 class="summary-title">
+              <span>📋</span>
+              <span>Rezumatul Comenzii</span>
+            </h3>
+
+            <div class="summary-content" id="order-details">
+              <!-- Se populează dinamic -->
+            </div>
+
+            <div class="price-breakdown" id="price-breakdown">
+              <!-- Se populează dinamic -->
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="step-navigation">
+            <button type="button" class="btn btn-secondary" id="back-to-personalization">
+              ← Înapoi la Personalizare
+            </button>
+            <button type="button" class="btn btn-primary btn-large" id="add-to-cart-btn">
+              <span>🌟</span>
+              <span>Creează Povestea Digitală!</span>
+            </button>
+          </div>
+
+          <p class="final-message">
+            📧 <strong>Carte digitală</strong> - gata în 10-15 minute prin email<br>
+            🎬 <strong>Desen animat</strong> - link securizat în 24-48 ore<br>
+            🔒 <strong>Datele copilului se șterg automat în 24h după procesare</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notifications" style="position: fixed; top: 20px; right: 20px; z-index: 10000;"></div>
+
+    <script>
+        // ===== APPLICATION STATE =====
+        class DigitalBookApp {
+            constructor() {
+                this.currentStep = 1;
+                this.selectedPackage = null;
+                this.selectedAddons = [];
+                this.formData = {};
+                this.illustrationType = null;
+                this.childDescription = {};
+                this.cloudinaryData = null;
+                this.cloudinaryWidget = null;
+                this.variantMap = {}; // Pentru maparea product ID -> variant ID
+                this.init();
+            }
+
+            async init() {
+                console.log('Initializing Digital Book App...');
+                this.attachEventListeners();
+                this.updateDisplay();
+                this.initCloudinaryWidget();
+                
+                // Verifică conexiunea la Shopify
+                const isShopifyAvailable = await this.checkShopifyConnection();
+                if (!isShopifyAvailable) {
+                    console.error('⚠️ Nu se poate conecta la Shopify Cart API!');
+                    this.showNotification('Problemă de conexiune. Reîncarcă pagina.', 'error');
+                }
+                
+                await this.fetchVariantIds(); // Obține variant IDs la inițializare
+                console.log('App initialized successfully');
+            }
+
+            // METODĂ NOUĂ: Verifică conexiunea la Shopify
+            async checkShopifyConnection() {
+                try {
+                    const response = await fetch('/cart.js');
+                    return response.ok;
+                } catch (error) {
+                    console.error('Eroare la verificarea conexiunii Shopify:', error);
+                    return false;
+                }
+            }
+
+            // METODĂ ACTUALIZATĂ: Mapare directă a variant IDs din Shopify Admin API
+            async fetchVariantIds() {
+                try {
+                    console.log('🔄 Configurare mapare directă variant IDs...');
+                    
+                    // Mapare directă bazată pe datele verificate din Shopify Admin
+                    this.variantMap = {
+                        // Carte Digitală Personalizată
+                        '15425807352153': '54650027540825',
+                        // Desen Animat Personalizat 20 Minute  
+                        '15646707319129': '55800167989593',
+                        // Audiobook Personalizat
+                        '15432054178137': '54673025204569',
+                        // Desen Animat 3 Minute (Trailer)
+                        '15646709350745': '55800170709337',
+                        // Ilustrații Extra - 10 bucăți
+                        '15427808493913': '54657567523161'
+                    };
+            
+                    console.log('✅ Variant Map configurat cu succes:', this.variantMap);
+                    
+                    // Verifică toate mapările
+                    const requiredProductIds = [
+                        '15425807352153', '15646707319129', '15432054178137', 
+                        '15646709350745', '15427808493913'
+                    ];
+                    
+                    let allFound = true;
+                    requiredProductIds.forEach(id => {
+                        if (this.variantMap[id]) {
+                            console.log(`✅ Product ID ${id} → Variant ID ${this.variantMap[id]}`);
+                        } else {
+                            console.error(`❌ EROARE: Produsul cu ID ${id} nu are variant ID mapcat!`);
+                            allFound = false;
+                        }
+                    });
+                    
+                    if (allFound) {
+                        console.log('🎉 Toate produsele au variant IDs valide!');
+                    }
+            
+                } catch (error) {
+                    console.error('❌ Eroare critică la configurarea variant IDs:', error);
+                    this.showNotification('Nu s-au putut configura datele produselor.', 'error');
+                }
+            }
+
+            // METODĂ NOUĂ: Listează toate produsele din magazin
+            async listAllProducts() {
+                try {
+                    console.log('🔍 Se caută toate produsele din magazin...');
+                    
+                    const response = await fetch('/products.json?limit=250');
+                    const data = await response.json();
+                    
+                    console.log(`📦 Total produse găsite: ${data.products.length}`);
+                    console.log('================================');
+                    
+                    data.products.forEach(product => {
+                        console.log(`\n📚 ${product.title}`);
+                        console.log(`   Product ID: ${product.id}`);
+                        console.log(`   Handle: ${product.handle}`);
+                        console.log(`   Tip: ${product.product_type || 'N/A'}`);
+                        console.log(`   Vendor: ${product.vendor || 'N/A'}`);
+                        
+                        if (product.variants && product.variants.length > 0) {
+                            console.log(`   Variante (${product.variants.length}):`);
+                            product.variants.forEach(variant => {
+                                console.log(`   ├─ ${variant.title || 'Default'}`);
+                                console.log(`   │  Variant ID: ${variant.id} ⬅️ FOLOSEȘTE ASTA!`);
+                                console.log(`   │  Preț: ${variant.price} RON`);
+                                console.log(`   │  SKU: ${variant.sku || 'N/A'}`);
+                                console.log(`   │  Disponibil: ${variant.available ? '✅' : '❌'}`);
+                            });
+                        }
+                    });
+                    
+                    console.log('\n💡 Copiază Variant IDs de mai sus și actualizează în cod!');
+                    
+                    return data.products;
+                } catch (error) {
+                    console.error('❌ Eroare la listarea produselor:', error);
+                    return [];
+                }
+            }
+
+            // CLOUDINARY WIDGET INITIALIZATION
+            initCloudinaryWidget() {
+                if (typeof cloudinary === 'undefined') {
+                    console.error('Cloudinary widget script not loaded!');
+                    return;
+                }
+
+                this.cloudinaryWidget = cloudinary.createUploadWidget(
+                    {
+                        cloudName: 'dilewpcg0',
+                        uploadPreset: 'carte_personalizata',
+                        sources: ['local', 'camera'],
+                        multiple: false,
+                        maxFileSize: 10485760, // 10MB
+                        maxImageWidth: 2000,
+                        maxImageHeight: 2000,
+                        clientAllowedFormats: ['jpg', 'jpeg', 'png', 'heic', 'heif'],
+                        folder: 'carte-personalizata/' + new Date().getFullYear() + '/' + (new Date().getMonth() + 1),
+                        tags: ['carte-copil', 'temp-24h'],
+                        theme: 'minimal',
+                        styles: {
+                            palette: {
+                                window: "#FFFFFF",
+                                sourceBg: "#F4F4F4",
+                                windowBorder: "#53BCBA",
+                                tabIcon: "#53BCBA",
+                                inactiveTabIcon: "#69778A",
+                                menuIcons: "#53BCBA",
+                                link: "#53BCBA",
+                                action: "#53BCBA",
+                                inProgress: "#53BCBA",
+                                complete: "#53BCBA",
+                                error: "#FF6338",
+                                textDark: "#39454F",
+                                textLight: "#FFFFFF"
+                            },
+                            fonts: {
+                                default: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                            }
+                        },
+                        text: {
+                            ro: {
+                                or: "sau",
+                                back: "Înapoi",
+                                close: "Închide",
+                                local: {
+                                    browse: "Răsfoiește",
+                                    dd_title_single: "Trage și pune imaginea aici"
+                                },
+                                camera: {
+                                    capture: "Captură",
+                                    cancel: "Anulează",
+                                    take_pic: "Fă o poză și încarcă"
+                                }
+                            }
+                        },
+                        language: 'ro',
+                        showAdvancedOptions: false,
+                        cropping: true,
+                        croppingAspectRatio: 1,
+                        croppingDefaultSelectionRatio: 0.9,
+                        showSkipCropButton: true
+                    },
+                    (error, result) => {
+                        if (!error && result && result.event === 'success') {
+                            console.log('Upload Success:', result.info);
+                            this.handleCloudinarySuccess(result.info);
+                        } else if (error) {
+                            console.error('Upload Error:', error);
+                            this.showNotification('Eroare la încărcarea pozei. Te rugăm să încerci din nou.', 'error');
+                        }
+                    }
+                );
+            }
+
+            handleCloudinarySuccess(uploadInfo) {
+                this.cloudinaryData = {
+                    url: uploadInfo.secure_url,
+                    publicId: uploadInfo.public_id,
+                    format: uploadInfo.format,
+                    width: uploadInfo.width,
+                    height: uploadInfo.height,
+                    originalFilename: uploadInfo.original_filename,
+                    uploadedAt: new Date().toISOString()
+                };
+
+                document.getElementById('cloudinary-url').value = this.cloudinaryData.url;
+                document.getElementById('cloudinary-public-id').value = this.cloudinaryData.publicId;
+
+                const previewContainer = document.getElementById('photo-preview-container');
+                const previewImage = document.getElementById('preview-image');
+                const filenameSpan = document.getElementById('photo-filename');
+
+                if (previewContainer && previewImage && filenameSpan) {
+                    previewImage.src = this.cloudinaryData.url;
+                    filenameSpan.textContent = this.cloudinaryData.originalFilename || 'imagine.jpg';
+                    previewContainer.style.display = 'block';
+                }
+
+                this.showNotification('Poza a fost încărcată cu succes!', 'success');
+            }
+
+            attachEventListeners() {
+                // Navigation buttons
+                document.getElementById('continue-to-personalization')?.addEventListener('click', () => {
+                    if (this.validatePackageSelection()) {
+                        this.updateStep(2);
+                        this.updateAddonsForPackage(); // Update addons când trecem la pasul 2
+                    }
+                });
+
+                document.getElementById('back-to-packages')?.addEventListener('click', () => {
+                    this.updateStep(1);
+                });
+
+                document.getElementById('continue-to-summary')?.addEventListener('click', () => {
+                    if (this.validatePersonalization()) {
+                        this.updateStep(3);
+                    }
+                });
+
+                document.getElementById('back-to-personalization')?.addEventListener('click', () => {
+                    this.updateStep(2);
+                });
+
+                document.getElementById('add-to-cart-btn')?.addEventListener('click', () => {
+                    this.addToCart();
+                });
+
+                // Package selection
+                document.addEventListener('change', (e) => {
+                    if (e.target.name === 'main_package') {
+                        this.selectedPackage = {
+                            type: e.target.value,
+                            price: parseFloat(e.target.dataset.price),
+                            productId: e.target.dataset.productId
+                        };
+                    }
+
+                    if (e.target.name === 'addons') {
+                        this.updateSelectedAddons();
+                        const addonCard = e.target.closest('.addon-card');
+                        if (e.target.checked) {
+                            addonCard.classList.add('selected');
+                        } else {
+                            addonCard.classList.remove('selected');
+                        }
+                    }
+                });
+
+                // Illustration type selection
+                document.querySelectorAll('input[name="illustration_type"]').forEach(radio => {
+                    radio.addEventListener('change', (e) => {
+                        this.handleIllustrationTypeChange(e.target.value);
+                    });
+                });
+
+                // Cloudinary upload button
+                document.getElementById('cloudinary-upload-btn')?.addEventListener('click', () => {
+                    if (this.cloudinaryWidget) {
+                        this.cloudinaryWidget.open();
+                    } else {
+                        this.showNotification('Widget-ul de upload nu este disponibil. Reîncarcă pagina.', 'error');
+                    }
+                });
+
+                // Remove photo button
+                document.getElementById('remove-photo-btn')?.addEventListener('click', () => {
+                    this.removePhoto();
+                });
+            }
+
+            // METODĂ ACTUALIZATĂ: Update addons bazat pe pachetul selectat
+            updateAddonsForPackage() {
+                const addonsContainer = document.getElementById('addons-container');
+                if (!addonsContainer) return;
+
+                let addonsHTML = '';
+
+                if (this.selectedPackage.type === 'carte_digitala') {
+                    // Addon-uri pentru carte digitală - AMBELE OPȚIUNI
+                    addonsHTML = `
+                        <!-- Audiobook Addon -->
+                        <label class="addon-card">
+                            <input
+                                type="checkbox"
+                                name="addons"
+                                value="audiobook"
+                                data-price="19.99"
+                                data-product-id="15432054178137"
+                            >
+                            <div class="addon-header">
+                                <div class="addon-icon">🎧</div>
+                                <h4 class="addon-title">Audiobook Narrat</h4>
+                                <div class="addon-price">+19.99 RON</div>
+                            </div>
+                            <ul class="addon-features">
+                                <li>🎙️ Narațiune profesională a cărții</li>
+                                <li>🎵 Efecte sonore ambientale</li>
+                                <li>📱 Format MP3 compatibil cu toate device-urile</li>
+                                <li>🌙 Perfect pentru povești de noapte bună</li>
+                            </ul>
+                        </label>
+
+                        <!-- Ilustrații Extra Addon -->
+                        <label class="addon-card">
+                            <input
+                                type="checkbox"
+                                name="addons"
+                                value="ilustratii"
+                                data-price="9.99"
+                                data-product-id="15427808493913"
+                            >
+                            <div class="addon-header">
+                                <div class="addon-icon">🎨</div>
+                                <h4 class="addon-title">10 Ilustrații Extra</h4>
+                                <div class="addon-price">+9.99 RON</div>
+                            </div>
+                            <ul class="addon-features">
+                                <li>🖼️ 10 ilustrații AI personalizate suplimentare</li>
+                                <li>🌟 Mai multe scene din poveste</li>
+                                <li>📖 Experiență de lectură mai bogată</li>
+                                <li>✨ Perfect pentru copiii care iubesc detaliile</li>
+                            </ul>
+                        </label>
+                    `;
+                } else if (this.selectedPackage.type === 'desen_animat') {
+                    // Addon pentru desen animat - DOAR ILUSTRAȚII EXTRA
+                    addonsHTML = `
+                        <!-- Ilustrații Extra Addon -->
+                        <label class="addon-card">
+                            <input
+                                type="checkbox"
+                                name="addons"
+                                value="ilustratii"
+                                data-price="9.99"
+                                data-product-id="15427808493913"
+                            >
+                            <div class="addon-header">
+                                <div class="addon-icon">🎨</div>
+                                <h4 class="addon-title">10 Ilustrații Extra</h4>
+                                <div class="addon-price">+9.99 RON</div>
+                            </div>
+                            <ul class="addon-features">
+                                <li>🖼️ 10 scene statice din desenul animat</li>
+                                <li>📱 Perfecte pentru printat sau wallpaper</li>
+                                <li>🎬 Capturi din momentele cheie ale poveștii</li>
+                                <li>✨ Format înaltă rezoluție pentru toate device-urile</li>
+                            </ul>
+                        </label>
+                    `;
+                }
+
+                addonsContainer.innerHTML = addonsHTML;
+
+                // Re-atașează event listeners pentru noile elemente
+                document.querySelectorAll('input[name="addons"]').forEach(checkbox => {
+                    checkbox.addEventListener('change', (e) => {
+                        const addonCard = e.target.closest('.addon-card');
+                        if (e.target.checked) {
+                            addonCard.classList.add('selected');
+                        } else {
+                            addonCard.classList.remove('selected');
+                        }
+                        this.updateSelectedAddons();
+                    });
+                });
+            }
+
+            handleIllustrationTypeChange(type) {
+                this.illustrationType = type;
+                
+                const uploadArea = document.getElementById('upload-area');
+                const descriptionArea = document.getElementById('description-area');
+                
+                uploadArea.style.display = 'none';
+                descriptionArea.style.display = 'none';
+                
+                if (type === 'photo') {
+                    uploadArea.style.display = 'block';
+                } else if (type === 'description') {
+                    descriptionArea.style.display = 'block';
+                }
+            }
+
+            validatePackageSelection() {
+                if (!this.selectedPackage) {
+                    this.showNotification('Te rugăm să selectezi un produs!', 'error');
+                    return false;
+                }
+                return true;
+            }
+
+            validatePersonalization() {
+                const requiredFields = [
+                    'child-name',
+                    'child-age', 
+                    'child-gender'
+                ];
+                
+                for (const fieldId of requiredFields) {
+                    const field = document.getElementById(fieldId);
+                    if (!field || !field.value.trim()) {
+                        this.showNotification('Te rugăm să completezi toate câmpurile obligatorii!', 'error');
+                        field?.focus();
+                        return false;
+                    }
+                }
+
+                const theme = document.querySelector('input[name="story_theme"]:checked');
+                const lesson = document.querySelector('input[name="story_lesson"]:checked');
+                
+                if (!theme || !lesson) {
+                    this.showNotification('Te rugăm să selectezi tema și lecția poveștii!', 'error');
+                    return false;
+                }
+
+                if (!this.illustrationType) {
+                    this.showNotification('Te rugăm să alegi cum vrei să apară copilul în ilustrații!', 'error');
+                    document.getElementById('photo-question').scrollIntoView({ behavior: 'smooth' });
+                    return false;
+                }
+                
+                if (this.illustrationType === 'photo' && !this.cloudinaryData) {
+                    this.showNotification('Te rugăm să încarci o poză!', 'error');
+                    return false;
+                }
+                
+                if (this.illustrationType === 'description') {
+                    const hairColor = document.getElementById('hair-color').value;
+                    const eyeColor = document.getElementById('eye-color').value;
+                    
+                    if (!hairColor || !eyeColor) {
+                        this.showNotification('Te rugăm să completezi cel puțin culoarea părului și a ochilor!', 'error');
+                        return false;
+                    }
+                }
+
+                this.updateSelectedAddons();
+                this.collectFormData();
+                return true;
+            }
+
+            collectFormData() {
+                this.updateSelectedAddons();
+                
+                if (this.illustrationType === 'description') {
+                    this.childDescription = {
+                        hair_color: document.getElementById('hair-color').value,
+                        eye_color: document.getElementById('eye-color').value,
+                        skin_tone: document.getElementById('skin-tone').value,
+                        special_features: document.getElementById('special-features').value
+                    };
+                }
+                
+                this.formData = {
+                    child_name: document.getElementById('child-name').value,
+                    child_age: document.getElementById('child-age').value,
+                    child_gender: document.getElementById('child-gender').value,
+                    story_theme: document.querySelector('input[name="story_theme"]:checked')?.value,
+                    story_lesson: document.querySelector('input[name="story_lesson"]:checked')?.value,
+                    package: this.selectedPackage,
+                    addons: this.selectedAddons,
+                    illustration_type: this.illustrationType,
+                    child_description: this.childDescription,
+                    cloudinary_data: this.cloudinaryData
+                };
+            }
+
+            updateSelectedAddons() {
+                this.selectedAddons = [];
+                document.querySelectorAll('input[name="addons"]:checked').forEach(checkbox => {
+                    this.selectedAddons.push({
+                        type: checkbox.value,
+                        price: parseFloat(checkbox.dataset.price),
+                        productId: checkbox.dataset.productId
+                    });
+                });
+            }
+
+            removePhoto() {
+                this.cloudinaryData = null;
+                
+                document.getElementById('cloudinary-url').value = '';
+                document.getElementById('cloudinary-public-id').value = '';
+                
+                const previewContainer = document.getElementById('photo-preview-container');
+                if (previewContainer) {
+                    previewContainer.style.display = 'none';
+                }
+                
+                this.showNotification('Poza a fost ștearsă', 'info');
+            }
+
+            updateStep(step) {
+                this.currentStep = step;
+                this.updateProgress();
+                this.showStep(step);
+                
+                if (step === 3) {
+                    this.updateOrderSummary();
+                }
+            }
+
+            updateProgress() {
+                document.querySelectorAll('.progress-step').forEach((step, index) => {
+                    const stepNumber = index + 1;
+                    step.classList.remove('active', 'completed');
+                    
+                    if (stepNumber === this.currentStep) {
+                        step.classList.add('active');
+                    } else if (stepNumber < this.currentStep) {
+                        step.classList.add('completed');
+                        step.querySelector('.step-indicator').textContent = '✓';
+                    } else {
+                        step.querySelector('.step-indicator').textContent = stepNumber;
+                    }
+                });
+
+                document.querySelectorAll('.progress-connector').forEach((connector, index) => {
+                    if (index + 1 < this.currentStep) {
+                        connector.classList.add('completed');
+                    } else {
+                        connector.classList.remove('completed');
+                    }
+                });
+            }
+
+            showStep(step) {
+                document.querySelectorAll('.step-container').forEach(container => {
+                    container.classList.remove('active');
+                });
+
+                const targetStep = document.getElementById(`step-${step}`);
+                if (targetStep) {
+                    targetStep.classList.add('active');
+                    targetStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+
+            updateOrderSummary() {
+                const orderDetails = document.getElementById('order-details');
+                const priceBreakdown = document.getElementById('price-breakdown');
+
+                if (!orderDetails || !priceBreakdown) return;
+
+                const packageNames = {
+                    'carte_digitala': 'Carte Digitală Personalizată',
+                    'desen_animat': 'Desen Animat Personalizat'
+                };
+
+                const addonNames = {
+                    'audiobook': 'Audiobook Narrat',
+                    'trailer': 'Trailer Scurt',
+                    'ilustratii': '10 Ilustrații Extra'
+                };
+
+                const themeNames = {
+                    'animale': 'Animalele și Prietenia',
+                    'printese': 'Prințese și Prinți Curajoși',
+                    'natura': 'Natura și Mediul',
+                    'dragoni': 'Dragoni și Creaturi Magice',
+                    'spatiu': 'Spațiul și Explorarea',
+                    'pirati': 'Pirați și Comori',
+                    'familie': 'Familia și Prietenia',
+                    'magie': 'Magia și Vrăjitoria',
+                    'dinozauri': 'Dinozauri și Preistorie'
+                };
+
+                const lessonNames = {
+                    'respect': 'Respectul',
+                    'onestitate': 'Onestitatea',
+                    'bunatate': 'Bunătatea',
+                    'responsabilitate': 'Responsabilitatea',
+                    'curaj': 'Curajul',
+                    'perseverenta': 'Perseverența',
+                    'prietenie': 'Prietenia și Empatia',
+                    'modestie': 'Modestia',
+                    'generozitate': 'Generozitatea',
+                    'rabdare': 'Răbdarea'
+                };
+
+                const illustrationTypeNames = {
+                    'photo': 'Cu poza copilului',
+                    'description': 'Cu descriere detaliată',
+                    'generic': 'Ilustrații generice'
+                };
+
+                // Order details
+                orderDetails.innerHTML = `
+                    <div class="summary-item">
+                        <span>Produs:</span>
+                        <span>${packageNames[this.selectedPackage.type]}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Nume copil:</span>
+                        <span>${this.formData.child_name}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Vârsta:</span>
+                        <span>${this.formData.child_age} ani</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Tema:</span>
+                        <span>${themeNames[this.formData.story_theme]}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Lecția:</span>
+                        <span>${lessonNames[this.formData.story_lesson]}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Tip ilustrații:</span>
+                        <span>${illustrationTypeNames[this.illustrationType]}</span>
+                    </div>
+                    ${this.illustrationType === 'photo' && this.cloudinaryData ? `
+                    <div class="summary-item">
+                        <span>Poză copil:</span>
+                        <span>Încărcată ✓</span>
+                    </div>
+                    ` : ''}
+                    ${this.illustrationType === 'description' ? `
+                    <div class="summary-item">
+                        <span>Descriere:</span>
+                        <span>Completată ✓</span>
+                    </div>
+                    ` : ''}
+                    ${this.selectedAddons.length > 0 ? 
+                        this.selectedAddons.map(addon => `
+                            <div class="summary-item">
+                                <span>${addonNames[addon.type]}:</span>
+                                <span>Inclus</span>
+                            </div>
+                        `).join('')
+                    : ''}
+                `;
+
+                // Price breakdown
+                let total = this.selectedPackage.price;
+                let priceHTML = `
+                    <div class="price-line">
+                        <span>${packageNames[this.selectedPackage.type]}:</span>
+                        <span>${this.selectedPackage.price} RON</span>
+                    </div>
+                `;
+
+                this.selectedAddons.forEach(addon => {
+                    total += addon.price;
+                    priceHTML += `
+                        <div class="price-line">
+                            <span>${addonNames[addon.type]}:</span>
+                            <span>+${addon.price} RON</span>
+                        </div>
+                    `;
+                });
+
+                priceHTML += `
+                    <div class="price-total">
+                        <span>Total:</span>
+                        <span>${total.toFixed(2)} RON</span>
+                    </div>
+                `;
+
+                priceBreakdown.innerHTML = priceHTML;
+            }
+
+            // METODĂ ACTUALIZATĂ: Add to Cart cu validare și variant IDs corecte
+            async addToCart() {
+                const items = [];
+                
+                try {
+                    this.showNotification('Se procesează comanda...', 'info');
+
+                    // Obține variant ID pentru produsul principal
+                    const mainProductId = this.selectedPackage.productId;
+                    const mainVariantId = this.variantMap[mainProductId];
+
+                    if (!mainVariantId) {
+                        console.error(`❌ Nu s-a găsit Variant ID pentru Product ID: ${mainProductId}`);
+                        this.showNotification(`Eroare: Produsul principal nu este disponibil.`, 'error');
+                        return;
+                    }
+                    
+                    console.log('📦 Variant ID principal folosit:', mainVariantId);
+                    
+                    // Prepare line item properties cu underscore
+                    const properties = {
+                        '_tip_comanda': this.selectedPackage.type,
+                        '_nume_copil': this.formData.child_name,
+                        '_varsta': this.formData.child_age + ' ani',
+                        '_gen': this.formData.child_gender,
+                        '_tema': this.formData.story_theme,
+                        '_lectie': this.formData.story_lesson,
+                        '_tip_ilustratie': this.illustrationType,
+                        '_data_comanda': new Date().toISOString()
+                    };
+
+                    // Add Cloudinary data if photo
+                    if (this.illustrationType === 'photo' && this.cloudinaryData) {
+                        properties['_poza_url'] = this.cloudinaryData.url;
+                        properties['_poza_id'] = this.cloudinaryData.publicId;
+                        properties['_stergere_programata'] = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+                    }
+
+                    // Add description if selected
+                    if (this.illustrationType === 'description' && this.childDescription) {
+                        properties['_culoare_par'] = this.childDescription.hair_color || 'nedefinit';
+                        properties['_culoare_ochi'] = this.childDescription.eye_color || 'nedefinit';
+                        properties['_nuanta_piele'] = this.childDescription.skin_tone || 'nedefinit';
+                        properties['_caracteristici'] = this.childDescription.special_features || 'niciuna';
+                    }
+
+                    // Main product
+                    items.push({
+                        id: mainVariantId,
+                        quantity: 1,
+                        properties: properties
+                    });
+
+                    // Add addons
+                    for (const addon of this.selectedAddons) {
+                        const addonProductId = addon.productId;
+                        const addonVariantId = this.variantMap[addonProductId];
+
+                        if (!addonVariantId) {
+                            console.warn(`⚠️ Nu s-a găsit Variant ID pentru addon-ul cu Product ID: ${addonProductId}. Se va sări peste acest addon.`);
+                            continue; // Skip this addon if variant not found
+                        }
+
+                        items.push({
+                            id: addonVariantId,
+                            quantity: 1,
+                            properties: {
+                                '_addon_pentru': this.formData.child_name,
+                                '_tip_addon': addon.type,
+                                '_produs_principal': this.selectedPackage.type
+                            }
+                        });
+                    }
+
+                    console.log('Items pentru coș:', items);
+
+                    // Add to cart
+                    const response = await fetch('/cart/add.js', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            items: items
+                        })
+                    });
+
+                    const responseText = await response.text();
+                    console.log('📨 Răspuns Shopify status:', response.status);
+                    console.log('📄 Răspuns Shopify text:', responseText);
+
+                    if (!response.ok) {
+                        // Încearcă să parseze eroarea
+                        try {
+                            const errorData = JSON.parse(responseText);
+                            console.error('❌ Eroare Shopify:', errorData);
+                            
+                            let errorMessage = 'Eroare la adăugarea în coș.';
+                            if (errorData.description) {
+                                // Verifică dacă eroarea este despre variantă
+                                if (typeof errorData.description === 'string' && errorData.description.toLowerCase().includes('variant')) {
+                                    errorMessage = 'Unul dintre produse nu este disponibil momentan.';
+                                } else {
+                                    errorMessage = `Eroare: ${errorData.description}`;
+                                }
+                            }
+                            this.showNotification(errorMessage, 'error');
+
+                        } catch (parseError) {
+                            throw new Error(`Eroare Shopify: ${responseText}`);
+                        }
+                        return;
+                    }
+
+                    this.showNotification('🎉 Povestea digitală a fost adăugată în coș!', 'success');
+                    
+                    // Redirect to cart
+                    setTimeout(() => {
+                        window.location.href = '/cart';
+                    }, 2000);
+
+                } catch (error) {
+                    console.error('Add to cart error:', error);
+                    this.showNotification('⚠️ Eroare la adăugarea în coș. Te rugăm să încerci din nou.', 'error');
+                    
+                    // Debug info
+                    console.log('Debug Info:', {
+                        mainPackage: this.selectedPackage,
+                        addons: this.selectedAddons,
+                        items: items,
+                        formData: this.formData,
+                        variantMap: this.variantMap
+                    });
+                }
+            }
+
+            // METODĂ DE TEST: Verifică dacă poți adăuga produse simple
+            async testSimpleAddToCart(variantId) {
+                try {
+                    console.log('🧪 Test simplu add to cart cu variant ID:', variantId);
+                    
+                    const response = await fetch('/cart/add.js', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            id: variantId,
+                            quantity: 1
+                        })
+                    });
+
+                    const responseText = await response.text();
+                    console.log('📝 Răspuns:', responseText);
+
+                    if (response.ok) {
+                        console.log('✅ Success! Produsul poate fi adăugat în coș.');
+                        const result = JSON.parse(responseText);
+                        console.log('Detalii produs adăugat:', result);
+                    } else {
+                        console.error('❌ Eroare:', response.status, responseText);
+                    }
+
+                    return response.ok;
+                } catch (error) {
+                    console.error('❌ Test error:', error);
+                    return false;
+                }
+            }
+
+            // METODĂ NOUĂ: Test automat pentru toate produsele
+            async testAllProducts() {
+                console.log('🚀 ÎNCEPE TESTAREA TUTUROR PRODUSELOR');
+                console.log('=====================================');
+                
+                const products = [
+                    { name: 'Carte Digitală', id: '15425807352153', variantId: '54650027540825' },
+                    { name: 'Video Animat 20min', id: '15646707319129', variantId: '55800167989593' },
+                    { name: 'Audiobook', id: '15432054178137', variantId: '54673025204569' },
+                    { name: 'Video Animat 3min', id: '15646709350745', variantId: '55800170709337' },
+                    { name: 'Ilustrații Extra', id: '15427808493913', variantId: '54657567523161' }
+                ];
+
+                for (const product of products) {
+                    console.log(`\n🔍 Testez: ${product.name}`);
+                    console.log(`   Product ID: ${product.id}`);
+                    console.log(`   Variant ID: ${product.variantId}`);
+                    
+                    const success = await this.testSimpleAddToCart(product.variantId);
+                    
+                    if (success) {
+                        console.log(`✅ ${product.name} - FUNCȚIONEAZĂ`);
+                    } else {
+                        console.log(`❌ ${product.name} - EROARE`);
+                    }
+                    
+                    // Pauză între teste
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                }
+                
+                console.log('\n🏁 TESTARE COMPLETĂ!');
+            }
+
+            updateDisplay() {
+                // Select cards when clicked
+                document.addEventListener('click', (e) => {
+                    if (e.target.closest('.package-card')) {
+                        document.querySelectorAll('.package-card').forEach(card => {
+                            card.classList.remove('selected');
+                        });
+                        e.target.closest('.package-card').classList.add('selected');
+                    }
+                });
+            }
+
+            showNotification(message, type = 'info') {
+                const container = document.getElementById('notifications');
+                if (!container) return;
+
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    background: white;
+                    border-radius: 8px;
+                    padding: 12px 16px;
+                    margin-bottom: 8px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    border-left: 4px solid ${type === 'error' ? '#FF6338' : type === 'success' ? '#53BCBA' : '#39454F'};
+                    transform: translateX(300px);
+                    transition: transform 0.3s ease;
+                    max-width: 300px;
+                `;
+                
+                notification.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 14px; color: #2A2827;">${message}</span>
+                        <button style="background: none; border: none; font-size: 18px; cursor: pointer; color: #6b7280;" onclick="this.parentElement.parentElement.remove()">×</button>
+                    </div>
+                `;
+
+                container.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(0)';
+                }, 100);
+
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(300px)';
+                    setTimeout(() => notification.remove(), 300);
+                }, 5000);
+            }
+        }
+
+        // Initialize app when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            window.digitalBookApp = new DigitalBookApp();
+            
+            console.log('%c📚 Aplicație Povești Digitale - INFANT.ro', 'font-size: 16px; font-weight: bold; color: #53BCBA;');
+            console.log('%c✨ Versiune actualizată - Produse digitale cu addon-uri noi', 'color: #39454F;');
+            console.log('%c🔒 GDPR Compliant: Ștergere automată în 24h', 'color: #53BCBA;');
+            console.log('');
+            console.log('Product IDs configurate (actualizat cu Shopify Admin API):', {
+                carte_digitala: '15425807352153 → variant: 54650027540825',
+                desen_animat: '15646707319129 → variant: 55800167989593',
+                audiobook: '15432054178137 → variant: 54673025204569',
+                trailer: '15646709350745 → variant: 55800170709337',
+                ilustratii_extra: '15427808493913 → variant: 54657567523161'
+            });
+            console.log('');
+            console.log('%c🆕 ADDON-URI DISPONIBILE:', 'font-weight: bold; color: #53BCBA;');
+            console.log('📖 Pentru Carte Digitală:');
+            console.log('   • Audiobook Narrat (+19.99 RON)');
+            console.log('   • 10 Ilustrații Extra (+9.99 RON)');
+            console.log('   • Poate selecta ambele concomitent! ✅');
+            console.log('');
+            console.log('🎬 Pentru Desen Animat:');
+            console.log('   • 10 Ilustrații Extra (+9.99 RON)');
+            console.log('');
+            console.log('%c🛠️ COMENZI DE DEBUGGING:', 'font-weight: bold; color: #FF6338;');
+            console.log('1️⃣ digitalBookApp.testAllProducts() - Testează TOATE produsele și addon-urile');
+            console.log('2️⃣ digitalBookApp.testSimpleAddToCart("VARIANT_ID") - Test cu un variant ID specific');
+            console.log('3️⃣ digitalBookApp.variantMap - Vezi maparea completă product→variant');
+            console.log('4️⃣ digitalBookApp.selectedAddons - Vezi addon-urile selectate curent');
+            console.log('');
+            console.log('%c✅ Sistemul suportă selecție multiplă de addon-uri!', 'color: #00AA00; font-weight: bold;');
+        });
+    </script>
+  </body>
+</html>

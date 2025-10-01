@@ -1,0 +1,319 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-product": {
+      "type": "main-product",
+      "blocks": {
+        "fe3c09d6-15d2-4555-a0f5-c87ab0cf370f": {
+          "type": "title",
+          "settings": {
+            "seo_heading": "h2"
+          }
+        },
+        "c069e4ad-5908-400d-a0ad-e071aa04cf33": {
+          "type": "review-star",
+          "settings": {}
+        },
+        "5540566c-63cd-4a90-b9b6-7707e45d7066": {
+          "type": "price",
+          "settings": {}
+        },
+        "8658b9a0-c9c5-4055-a2e1-56a8f49d0b68": {
+          "type": "variant",
+          "settings": {
+            "size_chart": "ghid-marimi"
+          }
+        },
+        "811e6d87-a5e5-4457-9124-d3c2ed070ba9": {
+          "type": "quantity",
+          "settings": {}
+        },
+        "kiwi_size_chart_recommender_kiwi_sizing_4He8mT": {
+          "type": "shopify://apps/kiwi-size-chart-recommender/blocks/kiwiSizing/b7369922-bf15-44ce-a121-a22a8fcbc4b0",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "16819786-9d1e-449d-966d-08d21e1c91af": {
+          "type": "button",
+          "settings": {
+            "dynamic_checkout_btn": true,
+            "enable_fullwidth": true,
+            "show_subscriptions_plan": true,
+            "show_recipient_form": false,
+            "sticky_add_to_cart": true,
+            "sticky_add_to_cart_position": "bottom"
+          }
+        },
+        "payment_icons_g8CJXD": {
+          "type": "payment-icons",
+          "settings": {}
+        },
+        "e02bd487-7756-43fc-8ac6-54fa9a16ca85": {
+          "type": "social-icons",
+          "settings": {}
+        },
+        "complementary_products_rNPTYp": {
+          "type": "complementary_products",
+          "settings": {
+            "heading": "Clientii au mai cumparat si ...",
+            "products_count": 8
+          }
+        }
+      },
+      "block_order": [
+        "fe3c09d6-15d2-4555-a0f5-c87ab0cf370f",
+        "c069e4ad-5908-400d-a0ad-e071aa04cf33",
+        "5540566c-63cd-4a90-b9b6-7707e45d7066",
+        "8658b9a0-c9c5-4055-a2e1-56a8f49d0b68",
+        "811e6d87-a5e5-4457-9124-d3c2ed070ba9",
+        "kiwi_size_chart_recommender_kiwi_sizing_4He8mT",
+        "16819786-9d1e-449d-966d-08d21e1c91af",
+        "payment_icons_g8CJXD",
+        "e02bd487-7756-43fc-8ac6-54fa9a16ca85",
+        "complementary_products_rNPTYp"
+      ],
+      "settings": {
+        "gallery_style": "slider",
+        "show_description": true,
+        "open_description_accordion": true,
+        "show_variant-media": true,
+        "enable_shipping_policy": true,
+        "enable_zoom_icon": false,
+        "enable_thumb": true,
+        "content_divider_mobile": "small",
+        "carousel_thumbnail_position": "center",
+        "carousel_height_desktop": "800px",
+        "carousel_height_mobile": "600px",
+        "width": "full",
+        "style": "accordion",
+        "accordion_content_alignment": "center",
+        "content_heading": "Expediere si Livrare",
+        "content": "Livrarea produselor pentru comenzile ce depasesc valoarea 350 Ron se face GRATUIT . \n\nIn cazul comenzilor cu o valoare mai mica de 350Ron costul livrarii este 18 Ron.\n\nNU se percep taxe pentru kilometri suplimentari (localitati aflate in afara ariei de acoperire a firmei de curierat) insa timpul de livrare poate fi cu 1-2 zile mai mare. \n\n\nPentru comenzile realizate pana la ora 13.30, incercam sa expediem produsele in aceeasi zi.\n\nPentru comenzile realizate dupa ora 13.30, incercam sa expediem produsele in ziua urmatoare.\nComenzile primite peste weekend se proceseaza luni in ordinea primirii comenzilor\n\nProgramul DPD si SameDay de predare a coletelor este:\n\nLuni-Vineri: intre orele 9.00-16.00 Sambata: intre orele 9.00-13.00\n \n\nLivrarea se face dupa ce toate produsele comandate si rezervate la furnizori au intrat in stocul nostru, in 24 - 72 ore de la lansarea comenzii. \n\nMentiunile cu privire la eventualele probleme privind integritatea/continutul unor colete se fac in momentul livrarii pe AWB sau se intocmeste un proces verbal de constatare, se refuza primirea si plata coletului. \n\nOrice reclamatii ulterioare, cu privire la aceste aspecte, sunt nule.",
+        "content_heading2": "Cum se comanda?",
+        "content2": "Metode de plata\n\nAveti la dispozitie 2 modalitati de plata:\n\n1.Plata ramburs\n2.Plata online cu cardul, securizata.\n1a. Plata ramburs:\nPlata poate fi facuta in numerar in momentul in care curierul va livreaza marfa comandata. Valoarea rambursului va fi inscrisa in factura ce insoteste marfa si aceasi cu cea comunicata in momentul plasarii comenzii (prin e-mail sau telefonic de catre un consultant ).\n\n2a. Plata online cu cardul:\nPlata online cu cardul se poate face folosind serviciile Stripe(ePayment) http://www.stripe.com unul dinte cei mai mari procesatori de carduri din lume. Astfel asigurand, protectia si confidentialitatea datelor introduse, la cel mai inalt grad.",
+        "content_heading3": "",
+        "content3": ""
+      }
+    },
+    "image_with_text_tAXXbQ": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_UkbCD3": {
+          "type": "heading",
+          "settings": {
+            "heading": "Cum se comanda?",
+            "highlight_font": "body",
+            "heading_size": "h2",
+            "seo_heading": "h2"
+          }
+        },
+        "icon_with_text_EGh6r8": {
+          "type": "icon-with-text",
+          "settings": {
+            "icon": "shipping",
+            "heading": "Expediere si Livrare",
+            "content": "<p>Livrarea produselor pentru comenzile ce depasesc valoarea 350 Ron se face GRATUIT . </p><p>In cazul comenzilor cu o valoare mai mica de 350Ron costul livrarii este 18 Ron.<br/></p>"
+          }
+        },
+        "icon_with_text_apfYLr": {
+          "type": "icon-with-text",
+          "settings": {
+            "icon": "shipping",
+            "heading": "Metode de plata",
+            "content": "<p>1. Plata ramburs:<br/>Plata poate fi facuta in numerar in momentul in care curierul va livreaza marfa comandata. <br/>2. Plata online cu cardul:<br/>Plata online cu cardul  astfel asigurand, protectia si confidentialitatea datelor introduse.</p>"
+          }
+        },
+        "button_BEwV4f": {
+          "type": "button",
+          "settings": {
+            "btn_text": "Politica de Livrare & Retur",
+            "btn_link": "shopify://pages/politica-de-returnare",
+            "button_size": "med",
+            "mobile_button_size": "m-med"
+          }
+        }
+      },
+      "block_order": [
+        "heading_UkbCD3",
+        "icon_with_text_EGh6r8",
+        "icon_with_text_apfYLr",
+        "button_BEwV4f"
+      ],
+      "settings": {
+        "enable_fullwidth": false,
+        "enable_top_border": false,
+        "enable_bottom_border": false,
+        "border_style": "solid",
+        "image": "shopify://shop_images/gempages_521957207701455797-b4c51fc7-7a05-47db-b891-332effae5fab.png",
+        "image_shadow": true,
+        "enable_image_animation": false,
+        "image_alignment": "left",
+        "image_height": "aspect",
+        "show_icon_on_image": false,
+        "icon": "snail",
+        "left_to_right": 50,
+        "top_to_bottom": 50,
+        "mobile_left_to_right": 50,
+        "mobile_top_to_bottom": 50,
+        "icon_animated_color": "#39454f",
+        "content_position": "center",
+        "bgcolor": "secondary",
+        "image_shadow_color": "#f4d3ca",
+        "section_visibility": "always",
+        "top_space_desktop": 60,
+        "bottom_space_desktop": 30,
+        "top_space_mobile": 30,
+        "bottom_space_mobile": 30
+      }
+    },
+    "product_recommendations": {
+      "type": "product_recommendations",
+      "settings": {
+        "heading": "Recommended Products",
+        "seo_heading": "h2",
+        "products_count": 8,
+        "product_grid_radius_desktop": 10,
+        "product_grid_radius_mobile": 10,
+        "product_grid_spacing_desktop": 10,
+        "product_grid_spacing_mobile": 10,
+        "bgcolor": "primary",
+        "top_space_desktop": 60,
+        "bottom_space_desktop": 60,
+        "top_space_mobile": 30,
+        "bottom_space_mobile": 30
+      }
+    },
+    "recently_viewed_product_N6BEDP": {
+      "type": "recently-viewed-product",
+      "settings": {
+        "heading": "Recently Viewed",
+        "highlight_font": "body",
+        "seo_heading": "h2",
+        "product_grid_radius_desktop": 10,
+        "product_grid_radius_mobile": 10,
+        "product_grid_spacing_desktop": 10,
+        "product_grid_spacing_mobile": 10,
+        "bgcolor": "primary",
+        "section_visibility": "always",
+        "top_space_desktop": 60,
+        "bottom_space_desktop": 60,
+        "top_space_mobile": 30,
+        "bottom_space_mobile": 30
+      }
+    },
+    "1724351734267b3ac7": {
+      "type": "apps",
+      "settings": {
+        "top_space_desktop": 30,
+        "bottom_space_desktop": 30,
+        "top_space_mobile": 30,
+        "bottom_space_mobile": 30
+      }
+    },
+    "166133727946ffaeaa": {
+      "type": "text-with-icons",
+      "blocks": {
+        "5f2a17c3-6834-4f30-ac33-dd871134b6c4": {
+          "type": "column",
+          "settings": {
+            "icon": "shipping",
+            "heading": "Livrare Gratuita",
+            "seo_heading": "h2",
+            "size": "text-medium",
+            "subtext": "350+ Ron"
+          }
+        },
+        "1619ab47-2031-4339-961b-21ca08f7f33e": {
+          "type": "column",
+          "settings": {
+            "icon": "shipping-colored",
+            "heading": "Livrare Rapida",
+            "seo_heading": "h2",
+            "size": "text-medium",
+            "subtext": "1 - 3 Zile Max"
+          }
+        },
+        "f37730b5-14aa-462c-bbfe-db24fa287e5b": {
+          "type": "column",
+          "settings": {
+            "icon": "phone",
+            "heading": "Suport Clienti",
+            "seo_heading": "h2",
+            "size": "text-medium",
+            "subtext": "Tel: +40 730 046 747"
+          }
+        },
+        "d192928f-441f-42d2-852c-5e1864672797": {
+          "type": "column",
+          "settings": {
+            "icon": "global",
+            "heading": "Ramburs Rapid",
+            "seo_heading": "h2",
+            "size": "text-medium",
+            "subtext": "30 Zile Retur"
+          }
+        }
+      },
+      "block_order": [
+        "5f2a17c3-6834-4f30-ac33-dd871134b6c4",
+        "1619ab47-2031-4339-961b-21ca08f7f33e",
+        "f37730b5-14aa-462c-bbfe-db24fa287e5b",
+        "d192928f-441f-42d2-852c-5e1864672797"
+      ],
+      "settings": {
+        "container_width": false,
+        "enable_top_border": false,
+        "enable_bottom_border": false,
+        "section_border_style": "dashed",
+        "column_background": false,
+        "mobile_column_count": "2",
+        "alignment": "center",
+        "icon_content_space_desktop": 15,
+        "icon_content_space_mobile": 15,
+        "enable_border": false,
+        "border_style": "dashed",
+        "column_radius_desktop": 10,
+        "column_radius_mobile": 10,
+        "icon_background": true,
+        "icon_position": "top",
+        "bgcolor": "secondary",
+        "column_background_color": "rgba(0,0,0,0)",
+        "icon_color": "#000000",
+        "icon_background_color": "#f4d3ca",
+        "border_color": "#000000",
+        "section_visibility": "always",
+        "top_space_desktop": 25,
+        "bottom_space_desktop": 25,
+        "top_space_mobile": 30,
+        "bottom_space_mobile": 30
+      }
+    },
+    "172435137270989082": {
+      "type": "apps",
+      "settings": {
+        "top_space_desktop": 30,
+        "bottom_space_desktop": 30,
+        "top_space_mobile": 30,
+        "bottom_space_mobile": 30
+      }
+    }
+  },
+  "order": [
+    "main-product",
+    "image_with_text_tAXXbQ",
+    "product_recommendations",
+    "recently_viewed_product_N6BEDP",
+    "1724351734267b3ac7",
+    "166133727946ffaeaa",
+    "172435137270989082"
+  ]
+}

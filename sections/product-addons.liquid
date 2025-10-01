@@ -1,0 +1,384 @@
+<!-- product-addons.liquid -->
+<style>
+  .addon-section {
+    padding: 40px 0;
+    background-color: #f8f9fa;
+    margin-top: 40px;
+  }
+  
+  .addon-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .addon-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .addon-header h2 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  .addon-header p {
+    font-size: 18px;
+    color: #666;
+  }
+  
+  .addon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .addon-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .addon-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  }
+  
+  .addon-card.selected {
+    border: 2px solid #4CAF50;
+    background-color: #f0f8f0;
+  }
+  
+  .addon-checkbox {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+  
+  .addon-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+    border-radius: 50%;
+  }
+  
+  .addon-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .addon-description {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  
+  .addon-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4CAF50;
+  }
+  
+  .addon-features {
+    margin-top: 15px;
+  }
+  
+  .addon-features li {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+  }
+  
+  .addon-features li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #4CAF50;
+  }
+  
+  .addon-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 20px auto;
+    display: block;
+    transition: all 0.3s ease;
+  }
+  
+  .addon-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+  }
+  
+  .addon-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: scale(1);
+  }
+  
+  @media (max-width: 768px) {
+    .addon-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="addon-section" id="product-addons-section" style="display: none;">
+  <div class="addon-container">
+    <div class="addon-header">
+      <h2>Îmbunătățește experiența poveștii!</h2>
+      <p>Alege addon-urile dorite pentru a face povestea și mai specială</p>
+    </div>
+    
+    <div class="addon-grid" id="addon-grid">
+      <!-- Addon-urile vor fi adăugate dinamic aici -->
+    </div>
+    
+    <button class="addon-button" id="add-addons-button" onclick="addSelectedAddons()">
+      Adaugă addon-urile selectate în coș
+    </button>
+  </div>
+</div>
+
+<script>
+  // ID-urile produselor și variantelor
+  const PRODUCTS = {
+    carteAnimata: {
+      id: '15646709350745',
+      title: 'Carte Animata cu Dublare',
+      addons: ['audio', 'ilustratii']
+    },
+    desenAnimat: {
+      id: '15646707319129', 
+      title: 'DESEN ANIMAT PERSONALIZAT 20 Minute',
+      addons: ['ilustratii']
+    }
+  };
+  
+  const ADDONS = {
+    audio: {
+      id: '15432054178137', // ID-ul pentru Audiobook Personalizat
+      variantId: '54673025204569', // Variant ID pentru Audiobook Personalizat
+      title: 'Audiobook Personalizat',
+      description: 'Versiunea audio a poveștii - citită profesional cu efecte sonore',
+      price: '19.99 RON',
+      features: [
+        'Înregistrare audio 15-20 minute',
+        'Voce profesională expresivă',
+        'Efecte sonore tematice',
+        'Muzică de fundal relaxantă'
+      ],
+      icon: '🎵'
+    },
+    ilustratii: {
+      id: '15427808493913',
+      variantId: '54657567523161',
+      title: '10 Ilustrații Extra',
+      description: 'Extinde povestea cu mai multe scene și aventuri',
+      price: '9.99 RON',
+      features: [
+        '10 ilustrații AI personalizate',
+        'Scene suplimentare din poveste',
+        'Detalii mai bogate',
+        'Experiență extinsă'
+      ],
+      icon: '🎨'
+    }
+  };
+  
+  let currentProductId = null;
+  let selectedAddons = [];
+  
+  // Detectează produsul din cart
+  function detectProductInCart() {
+    fetch('/cart.js')
+      .then(response => response.json())
+      .then(cart => {
+        let productFound = false;
+        
+        cart.items.forEach(item => {
+          const productId = item.product_id.toString();
+          
+          // Verifică dacă este unul dintre produsele țintă
+          if (productId === PRODUCTS.carteAnimata.id || productId === PRODUCTS.desenAnimat.id) {
+            currentProductId = productId;
+            productFound = true;
+            showAddonsForProduct(productId);
+          }
+        });
+        
+        if (!productFound) {
+          document.getElementById('product-addons-section').style.display = 'none';
+        }
+      })
+      .catch(error => console.error('Error fetching cart:', error));
+  }
+  
+  // Afișează addon-urile pentru produsul specific
+  function showAddonsForProduct(productId) {
+    const addonGrid = document.getElementById('addon-grid');
+    addonGrid.innerHTML = '';
+    selectedAddons = [];
+    
+    let product = null;
+    if (productId === PRODUCTS.carteAnimata.id) {
+      product = PRODUCTS.carteAnimata;
+    } else if (productId === PRODUCTS.desenAnimat.id) {
+      product = PRODUCTS.desenAnimat;
+    }
+    
+    if (!product) return;
+    
+    // Creează cardurile pentru addon-uri
+    product.addons.forEach(addonKey => {
+      const addon = ADDONS[addonKey];
+      if (!addon) return;
+      
+      const addonCard = document.createElement('div');
+      addonCard.className = 'addon-card';
+      addonCard.dataset.addonKey = addonKey;
+      addonCard.onclick = () => toggleAddon(addonKey);
+      
+      addonCard.innerHTML = `
+        <input type="checkbox" class="addon-checkbox" id="addon-${addonKey}" />
+        <div class="addon-icon">${addon.icon}</div>
+        <h3 class="addon-title">${addon.title}</h3>
+        <p class="addon-description">${addon.description}</p>
+        <div class="addon-price">${addon.price}</div>
+        <ul class="addon-features">
+          ${addon.features.map(feature => `<li>${feature}</li>`).join('')}
+        </ul>
+      `;
+      
+      addonGrid.appendChild(addonCard);
+    });
+    
+    document.getElementById('product-addons-section').style.display = 'block';
+    updateButton();
+  }
+  
+  // Toggle addon selection
+  function toggleAddon(addonKey) {
+    const card = document.querySelector(`[data-addon-key="${addonKey}"]`);
+    const checkbox = document.getElementById(`addon-${addonKey}`);
+    
+    if (selectedAddons.includes(addonKey)) {
+      selectedAddons = selectedAddons.filter(key => key !== addonKey);
+      card.classList.remove('selected');
+      checkbox.checked = false;
+    } else {
+      selectedAddons.push(addonKey);
+      card.classList.add('selected');
+      checkbox.checked = true;
+    }
+    
+    updateButton();
+  }
+  
+  // Update button state
+  function updateButton() {
+    const button = document.getElementById('add-addons-button');
+    if (selectedAddons.length === 0) {
+      button.disabled = true;
+      button.textContent = 'Selectează cel puțin un addon';
+    } else {
+      button.disabled = false;
+      button.textContent = `Adaugă ${selectedAddons.length} addon${selectedAddons.length > 1 ? '-uri' : ''} în coș`;
+    }
+  }
+  
+  // Adaugă addon-urile selectate în coș
+  async function addSelectedAddons() {
+    if (selectedAddons.length === 0) return;
+    
+    const button = document.getElementById('add-addons-button');
+    button.disabled = true;
+    button.textContent = 'Se adaugă în coș...';
+    
+    try {
+      // Adaugă fiecare addon selectat
+      for (const addonKey of selectedAddons) {
+        const addon = ADDONS[addonKey];
+        if (!addon) continue;
+        
+        await fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: addon.variantId,
+            quantity: 1,
+            properties: {
+              '_addon_for': currentProductId === PRODUCTS.carteAnimata.id 
+                ? PRODUCTS.carteAnimata.title 
+                : PRODUCTS.desenAnimat.title
+            }
+          })
+        });
+      }
+      
+      // Success
+      button.textContent = 'Addon-uri adăugate cu succes! ✓';
+      button.style.backgroundColor = '#4CAF50';
+      
+      // Resetează selecția
+      setTimeout(() => {
+        selectedAddons = [];
+        document.querySelectorAll('.addon-card').forEach(card => {
+          card.classList.remove('selected');
+        });
+        document.querySelectorAll('.addon-checkbox').forEach(cb => {
+          cb.checked = false;
+        });
+        updateButton();
+        
+        // Redirect to cart
+        window.location.href = '/cart';
+      }, 2000);
+      
+    } catch (error) {
+      console.error('Error adding addons:', error);
+      button.textContent = 'Eroare - încearcă din nou';
+      button.style.backgroundColor = '#f44336';
+      button.disabled = false;
+    }
+  }
+  
+  // Inițializare
+  document.addEventListener('DOMContentLoaded', function() {
+    detectProductInCart();
+    
+    // Re-verifică cart-ul periodic
+    setInterval(detectProductInCart, 5000);
+  });
+  
+  // Ascultă evenimente de cart update
+  document.addEventListener('cart:updated', function() {
+    detectProductInCart();
+  });
+</script>

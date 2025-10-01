@@ -1,0 +1,1155 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "video_section_UjECDj": {
+      "type": "video-section",
+      "name": "t:sections.video-banner.presets.name",
+      "settings": {
+        "videofile": "https://cdn.shopify.com/videos/c/o/v/60bb8752b3dd4aba923a6754b653ce4c.mp4",
+        "poster": "shopify://shop_images/Impachetare_Cadou_de_Lux.jpg",
+        "fullwidth": true,
+        "desktop_height": 650,
+        "mobile_height": 350,
+        "autoplay": true,
+        "video_size": "cover",
+        "bg_pattern": "wave",
+        "title": "Bine ati venit la Infant",
+        "seo_heading": "h2",
+        "subtitle": "Tot ce aveti nevoie bebelus si dumneavoastra!",
+        "overlay_content": true,
+        "title_color": "#ffffff",
+        "subtitle_color": "#39454f",
+        "btn_color": "#000000",
+        "overlay_color": "#f4d3ca",
+        "overlay_opacity": 1,
+        "section_visibility": "always"
+      }
+    },
+    "slider_8mGiGY": {
+      "type": "slider",
+      "blocks": {
+        "slide_mFBHxX": {
+          "type": "slide",
+          "settings": {
+            "videofile": "https://cdn.shopify.com/videos/c/o/v/60bb8752b3dd4aba923a6754b653ce4c.mp4",
+            "banner_subtitle": "",
+            "banner_title": "Bine ati venit la Infant",
+            "seo_heading": "h2",
+            "banner_desc": "Tot ce aveti nevoie bebelus si dumneavoastra!",
+            "desktop_title_size": 70,
+            "mobile_title_size": 36,
+            "button_size": "large",
+            "mobile_button_size": "m-med",
+            "button_text": "",
+            "button_link": "",
+            "button_text2": "",
+            "button_link2": "",
+            "button2_alternate": false,
+            "desktop_content_position": "d-center",
+            "mobile_content_position": "m-center",
+            "title_color": "#ffffff",
+            "subtitle_color": "#000000",
+            "subtitle_bgcolor": "#dcdcdc",
+            "desc_color": "#39454f",
+            "btn_bg": "#53bcba",
+            "btn_text": "#ffffff",
+            "btn_border": "#39454f",
+            "overlay_color": "#39454f",
+            "overlay_opacity": 0,
+            "title_color_m": "#ffffff",
+            "subtitle_color_m": "#000000",
+            "subtitle_bgcolor_m": "#dcdcdc",
+            "desc_color_m": "#ffffff",
+            "btn_bg_m": "#53bcba",
+            "btn_text_m": "#ffffff",
+            "btn_border_m": "#39454f",
+            "overlay_color_m": "#39454f",
+            "overlay_opacity_m": 0
+          }
+        },
+        "slide_J9Xgz9": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Descopera_Colec_ia_pentru_Plimbare.png",
+            "image_mobile": "shopify://shop_images/Untitled_design_66.png",
+            "videofile": "",
+            "banner_subtitle": "",
+            "banner_title": "Explorăm Lumea cu Infant",
+            "seo_heading": "h2",
+            "banner_desc": "Produse: Trybike, Coccolle",
+            "desktop_title_size": 70,
+            "mobile_title_size": 36,
+            "button_size": "large",
+            "mobile_button_size": "m-med",
+            "button_text": "Descoperă Colecția pentru Plimbare",
+            "button_link": "shopify://collections/la-plimbare",
+            "button_text2": "",
+            "button_link2": "",
+            "button2_alternate": false,
+            "desktop_content_position": "d-center",
+            "mobile_content_position": "m-center",
+            "title_color": "#ffffff",
+            "subtitle_color": "#000000",
+            "subtitle_bgcolor": "#dcdcdc",
+            "desc_color": "#ffffff",
+            "btn_bg": "#53bcba",
+            "btn_text": "#ffffff",
+            "btn_border": "#000000",
+            "overlay_color": "#39454f",
+            "overlay_opacity": 20,
+            "title_color_m": "#ffffff",
+            "subtitle_color_m": "#000000",
+            "subtitle_bgcolor_m": "#dcdcdc",
+            "desc_color_m": "#ffffff",
+            "btn_bg_m": "#53bcba",
+            "btn_text_m": "#ffffff",
+            "btn_border_m": "#2a2827",
+            "overlay_color_m": "#3a4750",
+            "overlay_opacity_m": 20
+          }
+        },
+        "slide_HNDVQT": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_64.png",
+            "image_mobile": "shopify://shop_images/Untitled_design_65.png",
+            "videofile": "",
+            "banner_subtitle": "",
+            "banner_title": "Construiește vise cu Seturile Walachia.",
+            "seo_heading": "h2",
+            "banner_desc": "",
+            "desktop_title_size": 70,
+            "mobile_title_size": 36,
+            "button_size": "med",
+            "mobile_button_size": "m-med",
+            "button_text": "Explorează Seturile Walachia",
+            "button_link": "shopify://collections/seturi-de-construcție-walachia",
+            "button_text2": "",
+            "button_link2": "shopify://collections/seturi-de-activitați-montessori",
+            "button2_alternate": false,
+            "desktop_content_position": "d-center",
+            "mobile_content_position": "m-center",
+            "title_color": "#ffffff",
+            "subtitle_color": "#000000",
+            "subtitle_bgcolor": "#dcdcdc",
+            "desc_color": "#000000",
+            "btn_bg": "#53bcba",
+            "btn_text": "#ffffff",
+            "btn_border": "#000000",
+            "overlay_color": "#39454f",
+            "overlay_opacity": 20,
+            "title_color_m": "#ffffff",
+            "subtitle_color_m": "#000000",
+            "subtitle_bgcolor_m": "#dcdcdc",
+            "desc_color_m": "#ffffff",
+            "btn_bg_m": "#53bcba",
+            "btn_text_m": "#ffffff",
+            "btn_border_m": "#3a4750",
+            "overlay_color_m": "#3a4750",
+            "overlay_opacity_m": 20
+          }
+        }
+      },
+      "block_order": [
+        "slide_mFBHxX",
+        "slide_J9Xgz9",
+        "slide_HNDVQT"
+      ],
+      "disabled": true,
+      "settings": {
+        "nav_style": "dots",
+        "content_below_image": false,
+        "rotate": false,
+        "interval": 5,
+        "desktop_height": "650px",
+        "mobile_height": "650px",
+        "bgcolor": "primary"
+      }
+    },
+    "hero_broadway_haine_yW3RPj": {
+      "type": "hero-broadway-haine",
+      "name": "🎭 Hero Broadway",
+      "settings": {
+        "autoscroll_speed": 1,
+        "enable_autoscroll": true,
+        "default_gender": "girls",
+        "accent_color": "#f9d2da",
+        "curve_intensity": 5,
+        "show_price": true,
+        "products_desktop": 5,
+        "products_tablet": 3,
+        "products_mobile": 2
+      }
+    },
+    "featured_collections_list_eJnL8G": {
+      "type": "featured-collections-list",
+      "blocks": {
+        "collection_PhkkmX": {
+          "type": "collection",
+          "settings": {
+            "collection": "alimente-copii"
+          }
+        },
+        "collection_48zEwB": {
+          "type": "collection",
+          "settings": {
+            "collection": "accesorii-hrana-bebeluși"
+          }
+        },
+        "collection_jq4JtB": {
+          "type": "collection",
+          "settings": {
+            "collection": "scutece-servetele"
+          }
+        },
+        "collection_ijYBxc": {
+          "type": "collection",
+          "settings": {
+            "collection": "sanatate"
+          }
+        }
+      },
+      "block_order": [
+        "collection_PhkkmX",
+        "collection_48zEwB",
+        "collection_jq4JtB",
+        "collection_ijYBxc"
+      ],
+      "settings": {
+        "heading": "Esentiale Bebe",
+        "highlight_font": "body",
+        "seo_heading": "h2",
+        "bgcolor": "primary",
+        "section_visibility": "always",
+        "top_space_desktop": 85,
+        "bottom_space_desktop": 20,
+        "top_space_mobile": 35,
+        "bottom_space_mobile": 35
+      }
+    },
+    "tabbed_collections_eMC7Qy": {
+      "type": "tabbed-collections",
+      "blocks": {
+        "collection_r93f4Y": {
+          "type": "collection",
+          "settings": {
+            "heading": "",
+            "collection": "huggies"
+          }
+        },
+        "collection_fJTVpj": {
+          "type": "collection",
+          "settings": {
+            "heading": "Pampers",
+            "collection": "pampers"
+          }
+        },
+        "collection_GedWwC": {
+          "type": "collection",
+          "settings": {
+            "heading": "Lapte Praf",
+            "collection": "lapte-praf-bebeluși"
+          }
+        }
+      },
+      "block_order": [
+        "collection_r93f4Y",
+        "collection_fJTVpj",
+        "collection_GedWwC"
+      ],
+      "settings": {
+        "enable_top_border": false,
+        "enable_bottom_border": false,
+        "border_style": "solid",
+        "heading": "Categorii Populare",
+        "highlight_font": "body",
+        "seo_heading": "h2",
+        "heading_size": "h2",
+        "tabs_position": "bottom",
+        "tabs_alignment": "center-center",
+        "products_style": "carousel",
+        "enable_swipe": true,
+        "products_per_row": 5,
+        "product_grid_radius_desktop": 10,
+        "product_grid_radius_mobile": 10,
+        "product_grid_spacing_desktop": 10,
+        "product_grid_spacing_mobile": 10,
+        "hide_tab_name": true,
+        "show_tabs_border": true,
+        "enable_view_all_button": true,
+        "view_all_button_text": "Toate Produsele",
+        "button_size": "small",
+        "mobile_button_size": "m-med",
+        "bgcolor": "primary",
+        "section_visibility": "always",
+        "top_space_desktop": 50,
+        "bottom_space_desktop": 35,
+        "top_space_mobile": 15,
+        "bottom_space_mobile": 15
+      }
+    },
+    "featured_collections_list_kbJcLR": {
+      "type": "featured-collections-list",
+      "blocks": {
+        "collection_XHtRxN": {
+          "type": "collection",
+          "settings": {
+            "collection": "frumusete-ingrijire"
+          }
+        },
+        "collection_CW4fWw": {
+          "type": "collection",
+          "settings": {
+            "collection": "alaptare"
+          }
+        },
+        "collection_LWUp6h": {
+          "type": "collection",
+          "settings": {
+            "collection": "sutiene-de-alaptare"
+          }
+        },
+        "collection_haFeD7": {
+          "type": "collection",
+          "settings": {
+            "collection": "haine-mamici"
+          }
+        }
+      },
+      "block_order": [
+        "collection_XHtRxN",
+        "collection_CW4fWw",
+        "collection_LWUp6h",
+        "collection_haFeD7"
+      ],
+      "settings": {
+        "heading": "Pentru Mamici",
+        "highlight_font": "body",
+        "seo_heading": "h2",
+        "bgcolor": "primary",
+        "section_visibility": "always",
+        "top_space_desktop": 85,
+        "bottom_space_desktop": 20,
+        "top_space_mobile": 35,
+        "bottom_space_mobile": 35
+      }
+    },
+    "9a1fe066-2f93-4cd9-9406-69df7c56cc79": {
+      "type": "text-with-icons",
+      "blocks": {
+        "template--16809124069669__9a1fe066-2f93-4cd9-9406-69df7c56cc79-16678017855c9a4f01-0": {
+          "type": "column",
+          "settings": {
+            "icon": "shipping",
+            "heading": "Transport Gratuit",
+            "seo_heading": "h2",
+            "size": "text-medium",
+            "subtext": "Comenzi de minim 350 Ron"
+          }
+        },
+        "template--16809124069669__9a1fe066-2f93-4cd9-9406-69df7c56cc79-16678017855c9a4f01-1": {
+          "type": "column",
+          "settings": {
+            "icon": "secure",
+            "heading": "Produse Utile",
+            "seo_heading": "h2",
+            "size": "text-medium",
+            "subtext": "Oferim doar ce aveti nevoie!"
+          }
+        },
+        "template--16809124069669__9a1fe066-2f93-4cd9-9406-69df7c56cc79-16678017855c9a4f01-2": {
+          "type": "column",
+          "settings": {
+            "icon": "heart",
+            "heading": "Suport Comunitar",
+            "seo_heading": "h2",
+            "size": "text-medium",
+            "subtext": "Fiecare Comanda Conteaza"
+          }
+        },
+        "template--16809124069669__9a1fe066-2f93-4cd9-9406-69df7c56cc79-16678017855c9a4f01-3": {
+          "type": "column",
+          "settings": {
+            "icon": "support",
+            "heading": "Contactati-ne!",
+            "seo_heading": "h2",
+            "size": "text-medium",
+            "subtext": "+40 730 046 747"
+          }
+        }
+      },
+      "block_order": [
+        "template--16809124069669__9a1fe066-2f93-4cd9-9406-69df7c56cc79-16678017855c9a4f01-0",
+        "template--16809124069669__9a1fe066-2f93-4cd9-9406-69df7c56cc79-16678017855c9a4f01-1",
+        "template--16809124069669__9a1fe066-2f93-4cd9-9406-69df7c56cc79-16678017855c9a4f01-2",
+        "template--16809124069669__9a1fe066-2f93-4cd9-9406-69df7c56cc79-16678017855c9a4f01-3"
+      ],
+      "settings": {
+        "container_width": false,
+        "enable_top_border": false,
+        "enable_bottom_border": false,
+        "section_border_style": "solid",
+        "column_background": true,
+        "mobile_column_count": "2",
+        "alignment": "center",
+        "icon_content_space_desktop": 50,
+        "icon_content_space_mobile": 15,
+        "enable_border": true,
+        "border_style": "solid",
+        "column_radius_desktop": 10,
+        "column_radius_mobile": 10,
+        "icon_background": true,
+        "icon_position": "top",
+        "bgcolor": "primary",
+        "column_background_color": "#abd9d3",
+        "icon_color": "#39454f",
+        "icon_background_color": "#f4d3ca",
+        "border_color": "#3a4750",
+        "section_visibility": "always",
+        "top_space_desktop": 60,
+        "bottom_space_desktop": 60,
+        "top_space_mobile": 30,
+        "bottom_space_mobile": 30
+      }
+    },
+    "featured_collection_MpH8Cn": {
+      "type": "featured-collection",
+      "settings": {
+        "enable_top_border": false,
+        "enable_bottom_border": false,
+        "border_style": "solid",
+        "collection": "suavinex-suzete-și-accesorii-confort-și-stil-pentru-bebelușul-tau",
+        "products_count": 4,
+        "slider_full_width": false,
+        "product_as_stacked": true,
+        "over_image_product": false,
+        "enable_swipe": false,
+        "product_grid_radius_desktop": 10,
+        "product_grid_radius_mobile": 10,
+        "product_grid_spacing_desktop": 10,
+        "product_grid_spacing_mobile": 10,
+        "heading": "",
+        "highlight_font": "body",
+        "seo_heading": "h2",
+        "heading_size": "h2",
+        "subheading": "",
+        "collection_heading": "",
+        "hide_description": true,
+        "collection_desc": "",
+        "bgcolor": "gradient",
+        "collection_title_color": "#ffffff",
+        "collection_desc_color": "#f4d3ca",
+        "section_visibility": "always",
+        "show_icon_on_image": false,
+        "icon": "snail",
+        "left_to_right": 4,
+        "top_to_bottom": -1,
+        "mobile_left_to_right": 3,
+        "mobile_top_to_bottom": 24,
+        "icon_animated_color": "#000000",
+        "top_space_desktop": 40,
+        "bottom_space_desktop": 60,
+        "top_space_mobile": 10,
+        "bottom_space_mobile": 50
+      }
+    },
+    "shapes_GMmW4N": {
+      "type": "shapes",
+      "settings": {
+        "select_shape": "shape2",
+        "image_fit": "contain",
+        "svg_code": "",
+        "flip_shape": true,
+        "enable_marquee": false,
+        "marquee_direction": "ltr",
+        "bgcolor": "primary",
+        "svg_color": "#ffffff",
+        "shape_ratio": "aspect",
+        "desktop_height": 200,
+        "mobile_height": 100
+      }
+    },
+    "featured_collection_NYkcMR": {
+      "type": "featured-collection",
+      "settings": {
+        "enable_top_border": false,
+        "enable_bottom_border": false,
+        "border_style": "solid",
+        "collection": "biberoane-și-accesorii",
+        "products_count": 6,
+        "slider_full_width": false,
+        "product_as_stacked": true,
+        "over_image_product": false,
+        "enable_swipe": false,
+        "product_grid_radius_desktop": 10,
+        "product_grid_radius_mobile": 10,
+        "product_grid_spacing_desktop": 10,
+        "product_grid_spacing_mobile": 10,
+        "heading": "",
+        "highlight_font": "body",
+        "seo_heading": "h2",
+        "heading_size": "h2",
+        "subheading": "",
+        "collection_heading": ".",
+        "hide_description": true,
+        "collection_desc": "",
+        "bgcolor": "gradient",
+        "collection_title_color": "#39454f",
+        "collection_desc_color": "#f9d2da",
+        "section_visibility": "always",
+        "show_icon_on_image": false,
+        "icon": "heart",
+        "left_to_right": 4,
+        "top_to_bottom": -1,
+        "mobile_left_to_right": 3,
+        "mobile_top_to_bottom": 24,
+        "icon_animated_color": "#f9d2da",
+        "top_space_desktop": 40,
+        "bottom_space_desktop": 60,
+        "top_space_mobile": 10,
+        "bottom_space_mobile": 50
+      }
+    },
+    "shapes_UamdKL": {
+      "type": "shapes",
+      "settings": {
+        "select_shape": "shape2",
+        "image_fit": "contain",
+        "svg_code": "",
+        "flip_shape": true,
+        "enable_marquee": false,
+        "marquee_direction": "ltr",
+        "bgcolor": "primary",
+        "svg_color": "#ffffff",
+        "shape_ratio": "aspect",
+        "desktop_height": 200,
+        "mobile_height": 100
+      }
+    },
+    "featured_collection_87xLbX": {
+      "type": "featured-collection",
+      "settings": {
+        "enable_top_border": false,
+        "enable_bottom_border": false,
+        "border_style": "solid",
+        "collection": "igiena-corporala",
+        "products_count": 6,
+        "slider_full_width": false,
+        "product_as_stacked": true,
+        "over_image_product": false,
+        "enable_swipe": false,
+        "product_grid_radius_desktop": 10,
+        "product_grid_radius_mobile": 10,
+        "product_grid_spacing_desktop": 10,
+        "product_grid_spacing_mobile": 10,
+        "heading": "",
+        "highlight_font": "body",
+        "seo_heading": "h2",
+        "heading_size": "h2",
+        "subheading": "",
+        "collection_heading": ".",
+        "hide_description": true,
+        "collection_desc": "",
+        "bgcolor": "gradient",
+        "collection_title_color": "#39454f",
+        "collection_desc_color": "#f9d2da",
+        "section_visibility": "always",
+        "show_icon_on_image": false,
+        "icon": "heart",
+        "left_to_right": 4,
+        "top_to_bottom": -1,
+        "mobile_left_to_right": 3,
+        "mobile_top_to_bottom": 24,
+        "icon_animated_color": "#f9d2da",
+        "top_space_desktop": 40,
+        "bottom_space_desktop": 60,
+        "top_space_mobile": 10,
+        "bottom_space_mobile": 50
+      }
+    },
+    "shapes_ezt6Yx": {
+      "type": "shapes",
+      "settings": {
+        "select_shape": "shape2",
+        "image_fit": "contain",
+        "svg_code": "",
+        "flip_shape": true,
+        "enable_marquee": false,
+        "marquee_direction": "ltr",
+        "bgcolor": "primary",
+        "svg_color": "#ffffff",
+        "shape_ratio": "aspect",
+        "desktop_height": 200,
+        "mobile_height": 100
+      }
+    },
+    "featured_collection_dEb7nN": {
+      "type": "featured-collection",
+      "settings": {
+        "enable_top_border": false,
+        "enable_bottom_border": false,
+        "border_style": "solid",
+        "collection": "jucarii-1",
+        "products_count": 6,
+        "slider_full_width": false,
+        "product_as_stacked": true,
+        "over_image_product": false,
+        "enable_swipe": false,
+        "product_grid_radius_desktop": 10,
+        "product_grid_radius_mobile": 10,
+        "product_grid_spacing_desktop": 10,
+        "product_grid_spacing_mobile": 10,
+        "heading": "",
+        "highlight_font": "body",
+        "seo_heading": "h2",
+        "heading_size": "h2",
+        "subheading": "",
+        "collection_heading": ".",
+        "hide_description": true,
+        "collection_desc": "",
+        "bgcolor": "gradient",
+        "collection_title_color": "#39454f",
+        "collection_desc_color": "#f9d2da",
+        "section_visibility": "always",
+        "show_icon_on_image": false,
+        "icon": "heart",
+        "left_to_right": 4,
+        "top_to_bottom": -1,
+        "mobile_left_to_right": 3,
+        "mobile_top_to_bottom": 24,
+        "icon_animated_color": "#f9d2da",
+        "top_space_desktop": 40,
+        "bottom_space_desktop": 60,
+        "top_space_mobile": 10,
+        "bottom_space_mobile": 50
+      }
+    },
+    "carte_personalizata_iNhA8G": {
+      "type": "carte-personalizata",
+      "name": "Carte Personalizată",
+      "settings": {}
+    },
+    "featured_collections_carousel_HaV7CP": {
+      "type": "featured-collections-carousel",
+      "blocks": {
+        "collection_cXABWd": {
+          "type": "collection",
+          "settings": {
+            "collection": "suavinex-biberoane-și-tetine-hranire-naturala-și-sigura-pentru-bebelușul-tau",
+            "heading": "",
+            "subheading": "",
+            "headingcolor": "#000000",
+            "subheadingcolor": "#000000"
+          }
+        },
+        "collection_RtdrAk": {
+          "type": "collection",
+          "settings": {
+            "collection": "suavinex-seturi-cadou-daruri-elegante-pentru-mamici-și-bebeluși",
+            "heading": "",
+            "subheading": "",
+            "headingcolor": "#000000",
+            "subheadingcolor": "#000000"
+          }
+        },
+        "collection_K8VXQR": {
+          "type": "collection",
+          "settings": {
+            "collection": "suavinex-suzete-și-accesorii-confort-și-stil-pentru-bebelușul-tau",
+            "heading": "",
+            "subheading": "",
+            "headingcolor": "#000000",
+            "subheadingcolor": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "collection_cXABWd",
+        "collection_RtdrAk",
+        "collection_K8VXQR"
+      ],
+      "settings": {
+        "style": "style1",
+        "enable_fullwidth": true,
+        "collections_per_row": 3,
+        "emphasize_center_image": false,
+        "heading": "Suavinex",
+        "highlight_font": "body",
+        "seo_heading": "h2",
+        "heading_size": "h2",
+        "subheading": "Eleganță și Inovație pentru Bebelușul Tău",
+        "description": "Este un brand spaniol renumit, dedicat creării de biberoane, suzete, accesorii pentru hrănire și îngrijire, toate realizate cu grijă și atenție la detalii. Fiecare produs este conceput pentru a oferi siguranță, confort și stil, folosind materiale de înaltă calitate și tehnologii avansate.",
+        "btntext": "Vezi Colectia Completa",
+        "btnlink": "shopify://collections/suavinex-eleganța-și-inovație-pentru-bebelușul-tau",
+        "button_size": "med",
+        "mobile_button_size": "m-med",
+        "bgcolor": "primary",
+        "section_visibility": "always",
+        "top_space_desktop": 40,
+        "bottom_space_desktop": 40,
+        "top_space_mobile": 35,
+        "bottom_space_mobile": 35
+      }
+    },
+    "rich_text_LVdfJm": {
+      "type": "rich-text",
+      "blocks": {
+        "richtext_6zdkNy": {
+          "type": "richtext",
+          "settings": {
+            "heading": "<a href=\"https://infant-ro.myshopify.com/pages/povestea-infant\" target=\"_blank\" title=\"https://infant-ro.myshopify.com/pages/povestea-infant\">De ce sa ne alegeti?</a>",
+            "highlight_font": "body",
+            "seo_heading": "h2",
+            "size": "h2",
+            "content": "<p>Alegând Infant, investiți în produse educative de calitate care sprijină dezvoltarea copiilor și contribuiți, de asemenea, la un impact social semnificativ. <a href=\"https://infant-ro.myshopify.com/pages/povestea-infant\" target=\"_blank\" title=\"https://infant-ro.myshopify.com/pages/povestea-infant\">Vezi aici ---&gt;</a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "richtext_6zdkNy"
+      ],
+      "settings": {
+        "content_width": "container sm-container",
+        "content_alignment": "center",
+        "bgcolor": "primary",
+        "section_visibility": "always",
+        "top_space_desktop": 50,
+        "bottom_space_desktop": 0,
+        "top_space_mobile": 30,
+        "bottom_space_mobile": 30
+      }
+    },
+    "image_with_text_U94pmG": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_thbHwU": {
+          "type": "heading",
+          "settings": {
+            "heading": "Misiunea Noastra",
+            "highlight_font": "body",
+            "heading_size": "h2",
+            "seo_heading": "h2"
+          }
+        },
+        "icon_with_text_UHamW4": {
+          "type": "icon-with-text",
+          "settings": {
+            "icon": "file",
+            "heading": "Educație prin experimentare",
+            "content": "<p>Responsabilitatea socială este o componentă esențială a filosofiei noastre. Ne angajăm să sprijinim dezvoltarea copiilor din comunitățile defavorizate prin direcționarea unui procent din veniturile noastre către furnizarea de resurse educaționale esențiale.</p>"
+          }
+        },
+        "icon_with_text_WPdNbt": {
+          "type": "icon-with-text",
+          "settings": {
+            "icon": "shipping",
+            "heading": "Promovarea sănătății mentale și fizice",
+            "content": "<p>Responsabilitatea socială este o componentă esențială a filosofiei noastre. Ne angajăm să sprijinim dezvoltarea copiilor din comunitățile defavorizate prin direcționarea unui procent din veniturile noastre către furnizarea de resurse educaționale esențiale.</p>"
+          }
+        },
+        "icon_with_text_GY6RWh": {
+          "type": "icon-with-text",
+          "settings": {
+            "icon": "shipping",
+            "heading": "Resposabilitate Sociala",
+            "content": "<p>Responsabilitatea socială este o componentă esențială a filosofiei noastre. Ne angajăm să sprijinim dezvoltarea copiilor din comunitățile defavorizate prin direcționarea unui procent din veniturile noastre către furnizarea de resurse educaționale esențiale.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_thbHwU",
+        "icon_with_text_UHamW4",
+        "icon_with_text_WPdNbt",
+        "icon_with_text_GY6RWh"
+      ],
+      "settings": {
+        "enable_fullwidth": false,
+        "enable_top_border": false,
+        "enable_bottom_border": false,
+        "border_style": "solid",
+        "image": "shopify://shop_images/Povestea_Infant_O_scena_calda_i_familiala_reflectand_devotamentul_brandului_fa_a_de_confortul_i_bunastarea_familiilor._c9600aab-5227-4553-b2b4-1c6f4fc9fa68.png",
+        "image_shadow": true,
+        "enable_image_animation": false,
+        "image_alignment": "left",
+        "image_height": "aspect",
+        "show_icon_on_image": false,
+        "icon": "snail",
+        "left_to_right": 50,
+        "top_to_bottom": 50,
+        "mobile_left_to_right": 50,
+        "mobile_top_to_bottom": 50,
+        "icon_animated_color": "#000000",
+        "content_position": "center",
+        "bgcolor": "gradient",
+        "image_shadow_color": "#dddddd",
+        "section_visibility": "always",
+        "top_space_desktop": 60,
+        "bottom_space_desktop": 30,
+        "top_space_mobile": 30,
+        "bottom_space_mobile": 30
+      }
+    },
+    "shapes_eB7tt9": {
+      "type": "shapes",
+      "settings": {
+        "select_shape": "shape2",
+        "image_fit": "contain",
+        "svg_code": "",
+        "flip_shape": true,
+        "enable_marquee": false,
+        "marquee_direction": "rtl",
+        "bgcolor": "secondary",
+        "svg_color": "#ffffff",
+        "shape_ratio": "aspect",
+        "desktop_height": 200,
+        "mobile_height": 100
+      }
+    },
+    "image_with_text_mrzwAG": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_XmctGB": {
+          "type": "heading",
+          "settings": {
+            "heading": "Seturi Montessori Educaționale și Distractive",
+            "highlight_font": "body",
+            "heading_size": "h2",
+            "seo_heading": "h2"
+          }
+        },
+        "text_JHCTYz": {
+          "type": "text",
+          "settings": {
+            "content": "<p>Descoperă colecția noastră de seturi de activități Montessori, create pentru a stimula imaginația și dezvoltarea copiilor prin jocuri educative. Fiecare set este conceput pentru a încuraja învățarea independentă, dezvoltarea abilităților motorii și gândirea creativă.</p>"
+          }
+        },
+        "icon_with_text_wRPfKk": {
+          "type": "icon-with-text",
+          "settings": {
+            "icon": "search",
+            "heading": "Explorează",
+            "content": "<p>Seturile noastre și transformă fiecare moment de joacă într-o oportunitate de învățare.</p>"
+          }
+        },
+        "button_EYiJXp": {
+          "type": "button",
+          "settings": {
+            "btn_text": "Descoperă colecția",
+            "btn_link": "shopify://collections/seturi-de-activitați-montessori",
+            "button_size": "small",
+            "mobile_button_size": "m-med"
+          }
+        }
+      },
+      "block_order": [
+        "heading_XmctGB",
+        "text_JHCTYz",
+        "icon_with_text_wRPfKk",
+        "button_EYiJXp"
+      ],
+      "settings": {
+        "enable_fullwidth": false,
+        "enable_top_border": false,
+        "enable_bottom_border": false,
+        "border_style": "solid",
+        "image": "shopify://shop_images/Default_Create_a_warm_and_engaging_image_featuring_a_Romanian_2.jpg",
+        "image_shadow": false,
+        "enable_image_animation": true,
+        "image_alignment": "left",
+        "image_height": "aspect",
+        "show_icon_on_image": false,
+        "icon": "snail",
+        "left_to_right": 50,
+        "top_to_bottom": 50,
+        "mobile_left_to_right": 50,
+        "mobile_top_to_bottom": 50,
+        "icon_animated_color": "#000000",
+        "content_position": "center",
+        "bgcolor": "secondary",
+        "image_shadow_color": "#dddddd",
+        "section_visibility": "always",
+        "top_space_desktop": 60,
+        "bottom_space_desktop": 60,
+        "top_space_mobile": 30,
+        "bottom_space_mobile": 30
+      }
+    },
+    "shapes_RLKtzk": {
+      "type": "shapes",
+      "settings": {
+        "select_shape": "shape2",
+        "image_fit": "contain",
+        "svg_code": "",
+        "flip_shape": false,
+        "enable_marquee": false,
+        "marquee_direction": "rtl",
+        "bgcolor": "secondary",
+        "svg_color": "#ffffff",
+        "shape_ratio": "aspect",
+        "desktop_height": 200,
+        "mobile_height": 100
+      }
+    },
+    "featured_collections_carousel_wwyTVV": {
+      "type": "featured-collections-carousel",
+      "blocks": {
+        "collection_fqfTYQ": {
+          "type": "collection",
+          "settings": {
+            "collection": "gender-reveal",
+            "heading": "",
+            "subheading": "",
+            "headingcolor": "#000000",
+            "subheadingcolor": "#000000"
+          }
+        },
+        "collection_tBrQUA": {
+          "type": "collection",
+          "settings": {
+            "collection": "baby-shower",
+            "heading": "",
+            "subheading": "",
+            "headingcolor": "#000000",
+            "subheadingcolor": "#000000"
+          }
+        },
+        "collection_aCfThK": {
+          "type": "collection",
+          "settings": {
+            "collection": "prima-intalnire-cu-bebelul",
+            "heading": "",
+            "subheading": "",
+            "headingcolor": "#000000",
+            "subheadingcolor": "#000000"
+          }
+        },
+        "collection_L7nzQ9": {
+          "type": "collection",
+          "settings": {
+            "collection": "pentru-botez-1",
+            "heading": "",
+            "subheading": "",
+            "headingcolor": "#000000",
+            "subheadingcolor": "#000000"
+          }
+        },
+        "collection_XF6kNe": {
+          "type": "collection",
+          "settings": {
+            "collection": "bagajul-maternitatii",
+            "heading": "",
+            "subheading": "",
+            "headingcolor": "#000000",
+            "subheadingcolor": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "collection_fqfTYQ",
+        "collection_tBrQUA",
+        "collection_aCfThK",
+        "collection_L7nzQ9",
+        "collection_XF6kNe"
+      ],
+      "settings": {
+        "style": "style1",
+        "enable_fullwidth": true,
+        "collections_per_row": 3,
+        "emphasize_center_image": true,
+        "heading": "Pachete Evenimente",
+        "highlight_font": "body",
+        "seo_heading": "h2",
+        "heading_size": "h2",
+        "subheading": "",
+        "description": "Pentru orice eveniment, noi avem solutia, pe care ti-o oferim fara stres si compacta!",
+        "btntext": "Toate Evenimentele",
+        "btnlink": "shopify://collections/pachete-evenimente",
+        "button_size": "default",
+        "mobile_button_size": "m-med",
+        "bgcolor": "primary",
+        "section_visibility": "always",
+        "top_space_desktop": 40,
+        "bottom_space_desktop": 40,
+        "top_space_mobile": 35,
+        "bottom_space_mobile": 35
+      }
+    },
+    "recently_viewed_product_tdeEXa": {
+      "type": "recently-viewed-product",
+      "settings": {
+        "heading": "Produse Vizionate Recent",
+        "highlight_font": "body",
+        "seo_heading": "h2",
+        "product_grid_radius_desktop": 10,
+        "product_grid_radius_mobile": 10,
+        "product_grid_spacing_desktop": 10,
+        "product_grid_spacing_mobile": 10,
+        "bgcolor": "primary",
+        "section_visibility": "always",
+        "top_space_desktop": 60,
+        "bottom_space_desktop": 60,
+        "top_space_mobile": 30,
+        "bottom_space_mobile": 30
+      }
+    },
+    "featured_articles_XEcMhG": {
+      "type": "featured-articles",
+      "blocks": {
+        "article_XdGGth": {
+          "type": "article",
+          "settings": {
+            "article": "despre-bebelusi/plagiocefalia-la-bebeluși-3-metode-eficiente-de-prevenire"
+          }
+        },
+        "article_dtUacm": {
+          "type": "article",
+          "settings": {
+            "article": "despre-bebelusi/cum-sa-evitam-greșelile-parinților-noștri-sfaturi-și-strategii"
+          }
+        },
+        "article_hzKq8K": {
+          "type": "article",
+          "settings": {
+            "article": "despre-bebelusi/ochii-de-lapte-cand-se-definitiveaza-culoarea-ochilor-bebelușilor-1"
+          }
+        }
+      },
+      "block_order": [
+        "article_XdGGth",
+        "article_dtUacm",
+        "article_hzKq8K"
+      ],
+      "settings": {
+        "overlay_content": false,
+        "show_date": false,
+        "heading": "Acceseaza biblioteca noastra Gratuit!",
+        "highlight_font": "body",
+        "seo_heading": "h2",
+        "button": "Vezi Toate Articolele --->",
+        "link": "shopify://blogs/despre-bebelusi",
+        "card_background": true,
+        "alignment": "center",
+        "size": "h6",
+        "bgcolor": "primary",
+        "section_visibility": "always",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "text_with_icons_MebQU8": {
+      "type": "text-with-icons",
+      "blocks": {
+        "column_FnW4aK": {
+          "type": "column",
+          "settings": {
+            "icon": "shipping",
+            "heading": "Livrare Gratuita",
+            "seo_heading": "h2",
+            "size": "text-medium",
+            "subtext": "350+ Ron"
+          }
+        },
+        "column_jAT4G9": {
+          "type": "column",
+          "settings": {
+            "icon": "shipping",
+            "heading": "Livrare Rapida",
+            "seo_heading": "h2",
+            "size": "text-medium",
+            "subtext": "1 - 3 Zile Max"
+          }
+        },
+        "column_Dm3Whh": {
+          "type": "column",
+          "settings": {
+            "icon": "phone",
+            "heading": "Suport Clienti",
+            "seo_heading": "h2",
+            "size": "text-medium",
+            "subtext": "Tel: +40 730 046 747"
+          }
+        },
+        "column_CYYJMY": {
+          "type": "column",
+          "settings": {
+            "icon": "global",
+            "heading": "Ramburs Rapid",
+            "seo_heading": "h2",
+            "size": "text-medium",
+            "subtext": "30 Zile Retur"
+          }
+        }
+      },
+      "block_order": [
+        "column_FnW4aK",
+        "column_jAT4G9",
+        "column_Dm3Whh",
+        "column_CYYJMY"
+      ],
+      "settings": {
+        "container_width": false,
+        "enable_top_border": false,
+        "enable_bottom_border": false,
+        "section_border_style": "solid",
+        "column_background": false,
+        "mobile_column_count": "2",
+        "alignment": "center",
+        "icon_content_space_desktop": 15,
+        "icon_content_space_mobile": 15,
+        "enable_border": false,
+        "border_style": "dashed",
+        "column_radius_desktop": 10,
+        "column_radius_mobile": 10,
+        "icon_background": true,
+        "icon_position": "top",
+        "bgcolor": "secondary",
+        "column_background_color": "",
+        "icon_color": "#000000",
+        "icon_background_color": "#f4d3ca",
+        "border_color": "#000000",
+        "section_visibility": "always",
+        "top_space_desktop": 30,
+        "bottom_space_desktop": 30,
+        "top_space_mobile": 30,
+        "bottom_space_mobile": 30
+      }
+    }
+  },
+  "order": [
+    "video_section_UjECDj",
+    "slider_8mGiGY",
+    "hero_broadway_haine_yW3RPj",
+    "featured_collections_list_eJnL8G",
+    "tabbed_collections_eMC7Qy",
+    "featured_collections_list_kbJcLR",
+    "9a1fe066-2f93-4cd9-9406-69df7c56cc79",
+    "featured_collection_MpH8Cn",
+    "shapes_GMmW4N",
+    "featured_collection_NYkcMR",
+    "shapes_UamdKL",
+    "featured_collection_87xLbX",
+    "shapes_ezt6Yx",
+    "featured_collection_dEb7nN",
+    "carte_personalizata_iNhA8G",
+    "featured_collections_carousel_HaV7CP",
+    "rich_text_LVdfJm",
+    "image_with_text_U94pmG",
+    "shapes_eB7tt9",
+    "image_with_text_mrzwAG",
+    "shapes_RLKtzk",
+    "featured_collections_carousel_wwyTVV",
+    "recently_viewed_product_tdeEXa",
+    "featured_articles_XEcMhG",
+    "text_with_icons_MebQU8"
+  ]
+}

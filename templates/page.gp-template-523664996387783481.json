@@ -1,0 +1,84 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gp_section_523665294317585472": {
+      "type": "gp-section-523665294317585472",
+      "settings": {
+        "section_preload": "true",
+        "ggMIRjcK7jA_text": "Contactează-ne",
+        "ggq365oQhpS_text": "<p>Suntem aici să te ajutăm cu orice întrebări sau nelămuriri. Completează formularul de mai jos și vom reveni la tine în cel mai scurt timp.</p>",
+        "ggdSKTULW-u_text": "<p>Phone:</p>",
+        "gg143YzHeXU_text": "<p><u>WhatsApp : </u><a href=\"https://wa.me/message/KRLXDNNCTIOML1\"><u>+40750234608</u></a></p>",
+        "ggTqeCofwrw_text": "<p>Address:</p>",
+        "ggwlO3OYkR1_text": "<p>Tudor Vladimirescu 185 ,Podu Turcului</p>",
+        "ggR9830qR-0_text": "<p>Email:</p>",
+        "gg4sbkpn2GG_text": "<p>office@infant.ro</p>",
+        "ggVy0YdFCIb_text": "Ore de disponibilitate:",
+        "gg0Q2G8LxfA_text": "<p>Luni - Vineri       09:00 - 17:00</p>",
+        "gg0o-dWUn0I_text": "<p>Nume</p>",
+        "gg-U9Dz8Tb8_placeholder": "* Introduceți prenumele dvs",
+        "ggHTpiCPapY_text": "<p>EMAIL</p>",
+        "ggUn0hjfNV__placeholder": "* Introduceți adresa dvs. de email",
+        "ggO71I1Y2-v_text": "<p>Mesajul Dumneavoastră</p>",
+        "ggg1_0o4CgT_placeholder": "Introduceți mesajul dvs",
+        "ggBGFHCi4oo_label": "Submit"
+      }
+    },
+    "gp_section_523665294300807993": {
+      "type": "gp-section-523665294300807993",
+      "settings": {
+        "section_preload": "false",
+        "ggkzjkpHqGE_text": "Bucură-te de viață alaturi de noi..!",
+        "gg0h4TfWjGh_text": "<p>Te iubim! La urma urmei, tu ești motivul pentru care venim la muncă în fiecare zi. Vă mulțumim pentru tot ce ne interesează.</p>"
+      }
+    },
+    "gp_section_523669372808463424": {
+      "type": "gp-section-523669372808463424",
+      "settings": {
+        "section_preload": "false",
+        "gg7el1mJOcv_text": "Intrebari &amp; Raspunsuri",
+        "gg_IOLOkxRv_text": "<p>Ai întrebări? Suntem aici pentru a ajuta</p>",
+        "ggIrwyJpTcu_text": "<p>CALL US:</p>",
+        "gg4Lk8d8bD2_text": "<p>+40 750234608</p>",
+        "ggH8ad7qioe_text": "<p>EMAIL:</p>",
+        "gg9NER7Qh2g_text": "<p>office@infant.ro</p>",
+        "ggL20dGz2A8_childItem_0": "<p>Care este politica de returnare pentru produsele achiziționate de pe site-ul Infant.ro?</p>",
+        "ggL20dGz2A8_childItem_1": "<p>Ce condiții trebuie îndeplinite pentru a beneficia de garanția produselor de pe Infant.ro?</p>",
+        "ggL20dGz2A8_childItem_2": "<p>Ce informații sunt necesare pentru a plasa o comandă pe Infant.ro?</p>",
+        "ggL20dGz2A8_childItem_3": "<p>Care este povestea din spatele brandului Infant?</p>",
+        "ggL20dGz2A8_childItem_4": "<p>Cum pot iniția un retur pe Infant.ro?</p>",
+        "ggL20dGz2A8_childItem_5": "<p>Cine suportă costurile de transport pentru retur?</p>",
+        "ggL20dGz2A8_childItem_6": "<p>Pot returna produsele personalizate sau produse de igienă?</p>",
+        "ggL20dGz2A8_childItem_7": "<p>Cât timp durează procesarea unui retur și rambursarea sumei?</p>",
+        "ggL20dGz2A8_childItem_8": "<p>Ce trebuie să fac dacă produsul primit este deteriorat sau defect?</p>",
+        "gg-kWlBuKbU_text": "<p>La Infant.ro, clienții au dreptul să returneze produsele achiziționate în termen de 14 zile calendaristice de la data primirii acestora. Produsele trebuie să fie în starea originală, nefolosite și în ambalajul original. Pentru a iniția un retur, clienții trebuie să contacteze echipa de suport prin email sau telefon, specificând detaliile comenzii și motivul returnării.</p>",
+        "ggK5uIWJZqU_text": "<p>Garanția produselor achiziționate de pe Infant.ro este valabilă pentru o perioadă de 24 de luni de la data achiziției. Produsele trebuie utilizate conform instrucțiunilor și specificațiilor producătorului. În cazul defectelor de fabricație, clienții trebuie să contacteze echipa de suport pentru a aranja returnarea produsului și evaluarea acestuia. Garanția nu acoperă uzura normală, utilizarea necorespunzătoare sau daunele cauzate de manipularea incorectă.</p>",
+        "ggROERxkAxA_text": "<p>Infant.ro se angajează să protejeze confidențialitatea datelor personale ale clienților. Site-ul utilizează măsuri de securitate tehnice și organizatorice adecvate pentru a proteja datele împotriva accesului neautorizat, utilizării incorecte sau divulgării. Datele personale sunt colectate și procesate doar în scopurile specificate în politica de confidențialitate și nu sunt partajate cu terți fără consimțământul explicit al clienților, cu excepția cazurilor impuse de lege.</p>",
+        "ggz517snFcx_text": "<p>Povestea Infant a început din dorința de a oferi produse de calitate pentru copii, care să răspundă nevoilor și așteptărilor părinților moderni. Fondatorii au fost inspirați de experiențele personale și de dorința de a crea un magazin online unde părinții să poată găsi produse sigure, inovatoare și accesibile. Infant.ro se mândrește cu o selecție atentă de produse, bazată pe calitate și funcționalitate, și cu un angajament constant față de satisfacția clienților.</p>",
+        "ggj_4eb2YiS_text": "<p>Pentru a iniția un retur, clienții trebuie să contacteze echipa de suport Infant.ro prin email la adresa specificată pe site sau prin telefon, menționând numărul comenzii și motivul returnării. Echipa de suport va oferi instrucțiuni detaliate pentru procesul de retur.</p>",
+        "ggdzTIeYgWZ_text": "<p>Costurile de transport pentru retur sunt suportate de către client, cu excepția cazului în care produsul returnat prezintă defecte de fabricație sau a fost livrat greșit. În aceste cazuri, Infant.ro va acoperi costurile de transport.</p>",
+        "ggtYafqzkGv_text": "<p>Conform politicii de returnare a Infant.ro, produsele personalizate și produsele de igienă nu pot fi returnate din motive de protecție a sănătății și din motive igienice, dacă au fost desigilate după livrare.</p>",
+        "ggJ_qFFTqTu_text": "<p>Procesarea unui retur poate dura până la 14 zile calendaristice de la data primirii produsului returnat. Rambursarea sumei va fi efectuată prin aceeași metodă de plată utilizată pentru achiziție, iar durata poate varia în funcție de politica băncii sau a procesatorului de plăți.</p>",
+        "gg1908xwlAs_text": "<p>În cazul în care produsul primit este deteriorat sau defect, clienții trebuie să contacteze imediat echipa de suport Infant.ro, furnizând detalii și, dacă este posibil, fotografii ale produsului. Infant.ro va aranja returnarea produsului și va oferi fie un produs de înlocuire, fie rambursarea sumei plătite.</p>"
+      }
+    },
+    "main-page": {
+      "type": "main-page",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main-page",
+    "gp_section_523665294317585472",
+    "gp_section_523665294300807993",
+    "gp_section_523669372808463424"
+  ]
+}

@@ -1,0 +1,128 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_UhYVUi": {
+          "type": "announcement",
+          "settings": {
+            "icon": "shipping",
+            "first_text": "Transport Gratuit 350+ Lei",
+            "date": "",
+            "btn": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement_UhYVUi"
+      ],
+      "settings": {
+        "show_bar": true,
+        "desktop_height": "adapt_image",
+        "mobile_height": "adapt_image",
+        "layout": "carousel",
+        "show_close": true,
+        "carousel_rotate": true,
+        "carousel_interval": 5,
+        "marquee_direction": "left",
+        "marquee_speed": 10,
+        "enable_language_selector": false,
+        "enable_currency_selector": false,
+        "enable_social_icons": true,
+        "fontcolor": "#ffffff",
+        "bg_style": "gradient",
+        "bgcolor": "#39454f",
+        "bgcolor2": "linear-gradient(87deg, rgba(244, 211, 202, 1), rgba(57, 69, 79, 1) 100%)",
+        "overlay_color": "rgba(0,0,0,0)",
+        "overlay_opacity": 50,
+        "btn_bgcolor": "#ffffff",
+        "btn_fontcolor": "#181818",
+        "bborder_color": "#ffffff"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "header_style": "header4",
+        "enable_sticky_header": true,
+        "sticky_header_style": "always",
+        "enable_header_shadow": true,
+        "enable_transparent_header": false,
+        "logo": "shopify://shop_images/BEST_TILL_NOW_71adcd83-4775-4000-9258-ed74ebacd325.png",
+        "logo_width": 200,
+        "logo_position": "center",
+        "menu_navigations": "hover",
+        "menu": "infant-new",
+        "type_font_size": 15,
+        "menu_position": "center",
+        "enable_catalog": false,
+        "enable_catalog_drawer": false,
+        "view_catalog": "View catalog",
+        "catalog_menu": "infant-new",
+        "trust_badge_link": "",
+        "show_search": true,
+        "account_type": "dropdown",
+        "cart_icon": "bag",
+        "enable_sticky_cart": true,
+        "show_cart_count": true,
+        "icon_weight": "bold",
+        "enable_language_selector": false,
+        "enable_currency_selector": false,
+        "store_icons": "phone",
+        "store_details_text": "Contactati-ne",
+        "store_content": "0750234608",
+        "store_link": "shopify://pages/contact-page-jul-22-17-24-15",
+        "header_bgcolor": "#ffffff",
+        "header_textcolor": "#39454f",
+        "header_textcolor_hover": "#53bcba",
+        "transparent_text_color": "#2a2827",
+        "hamburger_bgcolor": "#d4e9f9",
+        "hamburger_textcolor": "#333333",
+        "hamburger_textcolor_hover": "#0056b3",
+        "full_width_bgcolor": "",
+        "full_width_textcolor": "",
+        "full_width_textcolor_hover": "",
+        "mobile_menu_bg_color": "#f4d3ca",
+        "mobile_menu_text_color": "#2a2827",
+        "sub-menu_text_color": "#2a2827",
+        "mobile_menu_border_color": "#e0e0e0",
+        "mobile_menu_button": "#53bcba",
+        "mobile_menu_text": "#ffffff",
+        "mobile_menu_border": "#53bcba",
+        "catalogmenu_bg": "#e0e0e0",
+        "catologtext_color": "#2a2827",
+        "catologtext_hover": "#53bcba",
+        "catalog_bg": "#ffffff",
+        "catalog_text": "#2a2827",
+        "catalog_text_border": "#39454f",
+        "searchbar_text": "#2a2827",
+        "searchbar_icon_bg": "#39454f",
+        "searchbar_icon_color": "#f9d2da",
+        "store_details_color": "#f4d3ca",
+        "store_details_bg": "#39454f"
+      }
+    },
+    "mktr_custom_app": {
+      "type": "mktr_custom_app",
+      "disabled": true,
+      "settings": {}
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header",
+    "mktr_custom_app"
+  ]
+}

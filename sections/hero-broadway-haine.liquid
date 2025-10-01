@@ -1,0 +1,1031 @@
+{% comment %}
+  ==============================================
+  🎭 HERO BROADWAY - HAINE COPII
+  ==============================================
+  Secțiune Shopify cu layout-ul frumos din screenshot,
+  funcționalitate corectă de tag-uri și infinity scroll fără clonare
+  ==============================================
+{% endcomment %}
+
+<div class="hero-broadway-container">
+  <!-- Gender Toggle -->
+  <div class="broadway-gender-toggle">
+    <button class="gender-btn active" data-gender="girls">
+      <span class="gender-icon">👧</span>
+      <span class="gender-label">Fete</span>
+    </button>
+    <button class="gender-btn" data-gender="boys">
+      <span class="gender-icon">👦</span>
+      <span class="gender-label">Băieți</span>
+    </button>
+  </div>
+
+  <!-- Main Gallery Container -->
+  <div class="broadway-gallery-wrapper">
+    <div class="broadway-gallery" id="broadwayGallery">
+      <div class="gallery-track" id="galleryTrack">
+        <!-- Products will be loaded here dynamically -->
+        <div class="product-loading">
+          <div class="loading-spinner"></div>
+          <p>Se încarcă produsele...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="broadway-dots" id="broadwayDots"></div>
+
+    <!-- Manual Navigation -->
+    <button class="nav-btn nav-prev" id="navPrev" aria-label="Produs anterior">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" fill="none"/>
+      </svg>
+    </button>
+    <button class="nav-btn nav-next" id="navNext" aria-label="Produs următor">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Auto-scroll indicator -->
+  <div class="autoscroll-indicator">
+    <div class="indicator-bar" id="indicatorBar"></div>
+  </div>
+</div>
+
+<style>
+  /* ==============================================
+     🎨 BROADWAY HERO STYLES - BEAUTIFUL LAYOUT
+     ============================================== */
+
+  .hero-broadway-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ==============================================
+     👫 GENDER TOGGLE
+     ============================================== */
+
+  .broadway-gender-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .gender-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: #FFFFFF;
+    border: 2px solid #B6D7D1;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2A2827;
+    box-shadow: 0 4px 15px rgba(57, 69, 79, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gender-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(83, 188, 186, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .gender-btn:hover::before {
+    left: 100%;
+  }
+
+  .gender-btn.active {
+    background: linear-gradient(135deg, #53BCBA 0%, #39454F 100%);
+    border-color: #39454F;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(57, 69, 79, 0.2);
+  }
+
+  .gender-icon {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+  }
+
+  .gender-btn:hover .gender-icon {
+    transform: scale(1.1);
+  }
+
+  /* ==============================================
+     🎭 GALLERY CONTAINER - SEMICURVE EFFECT
+     ============================================== */
+
+  .broadway-gallery-wrapper {
+    position: relative;
+    perspective: 1000px;
+    margin: 2rem 0;
+  }
+
+  .broadway-gallery {
+    width: 100%;
+    height: 450px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 30px;
+    background: linear-gradient(135deg, rgba(83, 188, 186, 0.05) 0%, rgba(57, 69, 79, 0.05) 100%);
+    box-shadow:
+      0 20px 40px rgba(57, 69, 79, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+    /* Semicurve effect */
+    transform: perspective(800px) rotateX(5deg);
+    transform-style: preserve-3d;
+  }
+
+  .gallery-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  /* ==============================================
+     👕 PRODUCT CARDS - TALL LAYOUT
+     ============================================== */
+
+  .broadway-product {
+    flex: 0 0 20%; /* 5 products visible */
+    height: 100%;
+    padding: 1rem;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .product-card {
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(57, 69, 79, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .broadway-product:hover .product-card {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow:
+      0 25px 50px rgba(57, 69, 79, 0.2),
+      0 0 0 3px rgba(83, 188, 186, 0.3);
+    border-color: #53BCBA;
+  }
+
+  /* Spotlight effect */
+  .product-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(83, 188, 186, 0.3) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .broadway-product:hover .product-card::before {
+    opacity: 1;
+  }
+
+  .product-image {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    position: relative;
+    z-index: 2;
+  }
+
+  .broadway-product:hover .product-image {
+    transform: scale(1.05);
+  }
+
+  .product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(to top, rgba(57, 69, 79, 0.95), transparent);
+    color: #FFFFFF;
+    padding: 1.5rem 1rem;
+    z-index: 3;
+    position: relative;
+  }
+
+  .product-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #FFFFFF;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .product-price {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #53BCBA;
+    text-align: center;
+  }
+
+  /* ==============================================
+     🎯 NAVIGATION CONTROLS
+     ============================================== */
+
+  .broadway-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #B6D7D1;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .dot.active {
+    background: #53BCBA;
+    transform: scale(1.3);
+  }
+
+  .dot::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  .dot.active::before {
+    border-color: rgba(83, 188, 186, 0.3);
+  }
+
+  .nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #B6D7D1;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #39454F;
+    transition: all 0.3s ease;
+    opacity: 0;
+    z-index: 10;
+  }
+
+  .broadway-gallery-wrapper:hover .nav-btn {
+    opacity: 1;
+  }
+
+  .nav-btn:hover {
+    background: #53BCBA;
+    border-color: #39454F;
+    color: #FFFFFF;
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .nav-prev {
+    left: 1rem;
+  }
+
+  .nav-next {
+    right: 1rem;
+  }
+
+  /* ==============================================
+     ⏱️ AUTOSCROLL INDICATOR
+     ============================================== */
+
+  .autoscroll-indicator {
+    width: 100%;
+    height: 4px;
+    background: rgba(182, 215, 209, 0.3);
+    border-radius: 2px;
+    margin-top: 1rem;
+    overflow: hidden;
+  }
+
+  .indicator-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #53BCBA 0%, #39454F 100%);
+    border-radius: 2px;
+    transform: translateX(-100%);
+    animation: progress 1s linear infinite;
+  }
+
+  @keyframes progress {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .autoscroll-indicator.paused .indicator-bar {
+    animation-play-state: paused;
+  }
+
+  /* ==============================================
+     📱 RESPONSIVE DESIGN
+     ============================================== */
+
+  @media (max-width: 768px) {
+    .hero-broadway-container {
+      padding: 1rem 0.5rem;
+    }
+
+    .broadway-product {
+      flex: 0 0 33.333%; /* 3 products on mobile */
+    }
+
+    .broadway-gallery {
+      height: 350px;
+    }
+
+    .gender-btn {
+      padding: 0.8rem 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .product-title {
+      font-size: 0.9rem;
+    }
+
+    .product-price {
+      font-size: 1rem;
+    }
+
+    .nav-btn {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .broadway-product {
+      flex: 0 0 50%; /* 2 products on small mobile */
+    }
+
+    .broadway-gallery {
+      height: 300px;
+      border-radius: 20px;
+    }
+
+    .broadway-gender-toggle {
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .gender-btn {
+      padding: 0.7rem 1rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  /* ==============================================
+     🔄 LOADING STATES
+     ============================================== */
+
+  .product-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #2A2827;
+  }
+
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #B6D7D1;
+    border-top: 4px solid #53BCBA;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* ==============================================
+     🎨 HOVER ENHANCEMENTS
+     ============================================== */
+
+  .broadway-gallery-wrapper:hover .broadway-gallery {
+    transform: perspective(800px) rotateX(2deg);
+  }
+
+  .broadway-gallery-wrapper:hover .autoscroll-indicator {
+    opacity: 0.5;
+  }
+
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .broadway-product,
+    .product-card,
+    .gender-btn,
+    .gallery-track {
+      transition: none;
+    }
+
+    .indicator-bar {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+/* ==============================================
+   🚀 BROADWAY GALLERY JAVASCRIPT
+   ============================================== */
+
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // ==============================================
+  // 🎯 CONFIGURATION & STATE
+  // ==============================================
+  
+  const CONFIG = {
+    AUTOSCROLL_INTERVAL: 1000, // 1 second as requested
+    PAUSE_DURATION: 3000, // 3 seconds pause on interaction
+    TRANSITION_DURATION: 600, // milliseconds
+    PRODUCTS_PER_VIEW: {
+      desktop: 5,
+      tablet: 3, 
+      mobile: 2
+    }
+  };
+  
+  let currentGender = 'girls';
+  let currentIndex = 0;
+  let products = [];
+  let autoscrollTimer = null;
+  let pauseTimer = null;
+  let isUserInteracting = false;
+  let productsPerView = getProductsPerView();
+  
+  // ==============================================
+  // 🔍 DOM ELEMENTS
+  // ==============================================
+  
+  const galleryTrack = document.getElementById('galleryTrack');
+  const dotsContainer = document.getElementById('broadwayDots');
+  const prevBtn = document.getElementById('navPrev');
+  const nextBtn = document.getElementById('navNext');
+  const indicatorBar = document.getElementById('indicatorBar');
+  const genderButtons = document.querySelectorAll('.gender-btn');
+  
+  // ==============================================
+  // 📱 RESPONSIVE UTILITIES
+  // ==============================================
+  
+  function getProductsPerView() {
+    const width = window.innerWidth;
+    if (width <= 480) return CONFIG.PRODUCTS_PER_VIEW.mobile;
+    if (width <= 768) return CONFIG.PRODUCTS_PER_VIEW.tablet;
+    return CONFIG.PRODUCTS_PER_VIEW.desktop;
+  }
+  
+  // ==============================================
+  // 🛒 SHOPIFY API - FETCH PRODUCTS WITH PROPER TAG FILTERING
+  // ==============================================
+  
+  async function fetchProducts(gender) {
+    try {
+      showLoading();
+      
+      // Fetch ALL products and filter manually for proper AND logic
+      // Shopify's REST API doesn't support proper AND for tags
+      const response = await fetch('/products.json?limit=250'); // Get more products
+      const data = await response.json();
+      
+      if (data.products) {
+        // Filter products that have BOTH tags: 'broadway' AND gender
+        const filteredProducts = data.products.filter(product => {
+          const tags = product.tags || [];
+          const hasBoradway = tags.some(tag => tag.toLowerCase().includes('broadway'));
+          const hasGender = tags.some(tag => tag.toLowerCase().includes(gender.toLowerCase()));
+          
+          console.log(`Product: ${product.title}, Tags: ${tags}, Broadway: ${hasBoradway}, Gender: ${hasGender}`);
+          
+          return hasBoradway && hasGender;
+        });
+        
+        console.log(`Found ${filteredProducts.length} products with tags: broadway + ${gender}`);
+        
+        if (filteredProducts.length > 0) {
+          products = filteredProducts.map(product => ({
+            id: product.id,
+            title: product.title,
+            handle: product.handle,
+            price: formatPrice(product.variants[0].price),
+            image: product.images[0]?.src || '/assets/placeholder.jpg',
+            url: `/products/${product.handle}`,
+            tags: product.tags // Keep for debugging
+          }));
+          
+          renderProducts();
+          startAutoscroll();
+        } else {
+          showEmptyState();
+        }
+      } else {
+        showErrorState();
+      }
+      
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      showErrorState();
+    }
+  }
+  
+  function formatPrice(price) {
+    return `${parseFloat(price).toFixed(0)} RON`;
+  }
+  
+  // ==============================================
+  // 🎨 RENDER FUNCTIONS
+  // ==============================================
+  
+  function renderProducts() {
+    const productsHTML = products.map(product => `
+      <div class="broadway-product" data-product-id="${product.id}">
+        <div class="product-card" onclick="window.location.href='${product.url}'">
+          <img class="product-image" 
+               src="${product.image}" 
+               alt="${product.title}"
+               loading="lazy">
+          <div class="product-info">
+            <h3 class="product-title">${product.title}</h3>
+            <p class="product-price">${product.price}</p>
+          </div>
+        </div>
+      </div>
+    `).join('');
+    
+    galleryTrack.innerHTML = productsHTML;
+    createDots();
+    updateGalleryView();
+    
+    // Add click analytics
+    addProductClickTracking();
+  }
+  
+  function createDots() {
+    const totalSlides = Math.max(0, products.length - productsPerView + 1);
+    const dotsHTML = Array.from({length: totalSlides}, (_, i) => 
+      `<div class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></div>`
+    ).join('');
+    
+    dotsContainer.innerHTML = dotsHTML;
+    
+    // Add click listeners to dots
+    dotsContainer.querySelectorAll('.dot').forEach((dot, index) => {
+      dot.addEventListener('click', () => goToSlide(index));
+    });
+  }
+  
+  function showLoading() {
+    galleryTrack.innerHTML = `
+      <div class="product-loading">
+        <div class="loading-spinner"></div>
+        <p>Se încarcă produsele ${currentGender === 'girls' ? 'pentru fete' : 'pentru băieți'}...</p>
+      </div>
+    `;
+  }
+  
+  function showEmptyState() {
+    galleryTrack.innerHTML = `
+      <div class="product-loading">
+        <p>Nu s-au găsit produse cu tag-urile: broadway + ${currentGender}</p>
+        <p><small>Verifică că produsele au ambele tag-uri aplicat în Shopify.</small></p>
+      </div>
+    `;
+  }
+  
+  function showErrorState() {
+    galleryTrack.innerHTML = `
+      <div class="product-loading">
+        <p>Eroare la încărcarea produselor. Te rugăm să reîncerci.</p>
+      </div>
+    `;
+  }
+  
+  // ==============================================
+  // 🎠 INFINITY SCROLL NAVIGATION - NO CLONING
+  // ==============================================
+  
+  function updateGalleryView() {
+    const translateX = -(currentIndex * (100 / productsPerView));
+    galleryTrack.style.transform = `translateX(${translateX}%)`;
+    
+    // Update dots
+    dotsContainer.querySelectorAll('.dot').forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentIndex);
+    });
+  }
+  
+  function goToSlide(index) {
+    const maxIndex = Math.max(0, products.length - productsPerView);
+    currentIndex = Math.max(0, Math.min(index, maxIndex));
+    updateGalleryView();
+    pauseAutoscroll();
+  }
+  
+  function nextSlide() {
+    if (products.length <= productsPerView) return;
+    
+    const maxIndex = Math.max(0, products.length - productsPerView);
+    
+    // Infinity scroll - when reaching end, go back to start
+    if (currentIndex >= maxIndex) {
+      currentIndex = 0;
+    } else {
+      currentIndex++;
+    }
+    
+    updateGalleryView();
+  }
+  
+  function prevSlide() {
+    if (products.length <= productsPerView) return;
+    
+    const maxIndex = Math.max(0, products.length - productsPerView);
+    
+    // Infinity scroll - when at start, go to end
+    if (currentIndex <= 0) {
+      currentIndex = maxIndex;
+    } else {
+      currentIndex--;
+    }
+    
+    updateGalleryView();
+  }
+  
+  // ==============================================
+  // ⏱️ AUTOSCROLL SYSTEM
+  // ==============================================
+  
+  function startAutoscroll() {
+    stopAutoscroll();
+    if (products.length <= productsPerView) return;
+    
+    autoscrollTimer = setInterval(nextSlide, CONFIG.AUTOSCROLL_INTERVAL);
+    indicatorBar.parentElement.classList.remove('paused');
+  }
+  
+  function stopAutoscroll() {
+    if (autoscrollTimer) {
+      clearInterval(autoscrollTimer);
+      autoscrollTimer = null;
+    }
+    indicatorBar.parentElement.classList.add('paused');
+  }
+  
+  function pauseAutoscroll() {
+    stopAutoscroll();
+    
+    if (pauseTimer) clearTimeout(pauseTimer);
+    
+    pauseTimer = setTimeout(() => {
+      if (!isUserInteracting) {
+        startAutoscroll();
+      }
+    }, CONFIG.PAUSE_DURATION);
+  }
+  
+  // ==============================================
+  // 👆 TOUCH & GESTURE HANDLING
+  // ==============================================
+  
+  let touchStartX = 0;
+  let touchEndX = 0;
+  
+  galleryTrack.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    isUserInteracting = true;
+    pauseAutoscroll();
+  });
+  
+  galleryTrack.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+    
+    setTimeout(() => {
+      isUserInteracting = false;
+    }, 100);
+  });
+  
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const swipeDistance = touchStartX - touchEndX;
+    
+    if (Math.abs(swipeDistance) > swipeThreshold) {
+      if (swipeDistance > 0) {
+        nextSlide(); // Swipe left - next
+      } else {
+        prevSlide(); // Swipe right - previous  
+      }
+    }
+  }
+  
+  // ==============================================
+  // 🎯 EVENT LISTENERS
+  // ==============================================
+  
+  // Gender toggle
+  genderButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const gender = btn.dataset.gender;
+      if (gender !== currentGender) {
+        // Update active state
+        genderButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Switch gender
+        currentGender = gender;
+        currentIndex = 0;
+        stopAutoscroll();
+        fetchProducts(currentGender);
+        
+        // Analytics
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'gender_switch', {
+            'category': 'broadway_hero',
+            'label': gender
+          });
+        }
+      }
+    });
+  });
+  
+  // Navigation buttons
+  prevBtn.addEventListener('click', () => {
+    prevSlide();
+    pauseAutoscroll();
+  });
+  
+  nextBtn.addEventListener('click', () => {
+    nextSlide();
+    pauseAutoscroll();
+  });
+  
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.target.closest('.hero-broadway-container')) {
+      switch(e.key) {
+        case 'ArrowLeft':
+          e.preventDefault();
+          prevSlide();
+          pauseAutoscroll();
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          nextSlide();
+          pauseAutoscroll();
+          break;
+      }
+    }
+  });
+  
+  // Mouse interactions
+  const gallery = document.querySelector('.broadway-gallery-wrapper');
+  
+  gallery.addEventListener('mouseenter', () => {
+    isUserInteracting = true;
+    pauseAutoscroll();
+  });
+  
+  gallery.addEventListener('mouseleave', () => {
+    isUserInteracting = false;
+    // Auto-resume after short delay
+    setTimeout(() => {
+      if (!isUserInteracting) {
+        startAutoscroll();
+      }
+    }, 1000);
+  });
+  
+  // ==============================================
+  // 📊 ANALYTICS & TRACKING
+  // ==============================================
+  
+  function addProductClickTracking() {
+    document.querySelectorAll('.broadway-product').forEach(productEl => {
+      productEl.addEventListener('click', () => {
+        const productId = productEl.dataset.productId;
+        
+        // Google Analytics
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'product_click', {
+            'category': 'broadway_hero',
+            'label': `product_${productId}`,
+            'gender': currentGender
+          });
+        }
+        
+        // Custom analytics
+        if (typeof window.infantAnalytics !== 'undefined') {
+          window.infantAnalytics.track('broadway_hero_click', {
+            product_id: productId,
+            position: currentIndex,
+            gender: currentGender
+          });
+        }
+      });
+    });
+  }
+  
+  // ==============================================
+  // 📱 RESPONSIVE HANDLING
+  // ==============================================
+  
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      const newProductsPerView = getProductsPerView();
+      if (newProductsPerView !== productsPerView) {
+        productsPerView = newProductsPerView;
+        currentIndex = 0;
+        createDots();
+        updateGalleryView();
+      }
+    }, 250);
+  });
+  
+  // ==============================================
+  // 🚀 INITIALIZATION
+  // ==============================================
+  
+  // Start with girls products
+  fetchProducts(currentGender);
+  
+  // Performance optimization: Preload next gender
+  setTimeout(() => {
+    const nextGender = currentGender === 'girls' ? 'boys' : 'girls';
+    fetch(`/products.json?limit=20&tags=broadway%20AND%20${nextGender}`);
+  }, 3000);
+  
+});
+</script>
+
+{% schema %}
+{
+  "name": "🎭 Hero Broadway",
+  "settings": [
+    {
+      "type": "header",
+      "content": "🎯 Configurare Hero Section"
+    },
+    {
+      "type": "paragraph",
+      "content": "Galerie semicurbată cu autoscroll pentru haine de copii. Produsele trebuie să aibă tag-urile 'broadway' + 'girls/boys'."
+    },
+    {
+      "type": "range",
+      "id": "autoscroll_speed",
+      "label": "Viteza autoscroll (secunde)",
+      "min": 1,
+      "max": 5,
+      "step": 0.5,
+      "default": 1,
+      "info": "Durata în secunde între schimbarea automată a produselor"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoscroll",
+      "label": "Activează autoscroll",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "default_gender",
+      "label": "Gen implicit la încărcare",
+      "options": [
+        {
+          "value": "girls",
+          "label": "Fete"
+        },
+        {
+          "value": "boys",
+          "label": "Băieți"
+        }
+      ],
+      "default": "girls"
+    },
+    {
+      "type": "header",
+      "content": "🎨 Personalizare Vizuală"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Culoare accent",
+      "default": "#53BCBA",
+      "info": "Folosită pentru butoane și highlight-uri"
+    },
+    {
+      "type": "range",
+      "id": "curve_intensity",
+      "label": "Intensitatea efectului curbat",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 5,
+      "unit": "°"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Afișează prețurile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "📱 Setări Responsive"
+    },
+    {
+      "type": "range",
+      "id": "products_desktop",
+      "label": "Produse vizibile pe desktop",
+      "min": 3,
+      "max": 7,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "products_tablet",
+      "label": "Produse vizibile pe tablet",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "products_mobile",
+      "label": "Produse vizibile pe mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    }
+  ],
+  "presets": [
+    {
+      "name": "🎭 Hero Broadway",
+      "category": "Hero Sections"
+    }
+  ]
+}
+{% endschema %}

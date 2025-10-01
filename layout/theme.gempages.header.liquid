@@ -1,0 +1,139 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <script>  (function(f, a, s, h, i, o, n) {f['GlamiTrackerObject'] = i;  f[i]=f[i]||function(){(f[i].q=f[i].q||[]).push(arguments)};o=a.createElement(s),  n=a.getElementsByTagName(s)[0];o.async=1;o.src=h;n.parentNode.insertBefore(o,n)  })(window, document, 'script', '//www.glami.ro/js/compiled/pt.js', 'glami');  glami('create', '11bc01662958203fe969870297087820', 'ro');  glami('track', 'PageView');  {%- if template == 'collection' -%}    {% unless collection.title == 'Products' or collection.handle == 'all'%}      var collectionProducts = [];      {% for product in collection.products %}        collectionProducts.push('{{product.id}}')      {% endfor %}      glami('track', 'ViewContent', {        content_type: 'category',        item_ids: collectionProducts,        category_text: '{{collection.title}}'      });    {% endunless %}  {%- endif -%}  {%- if template == 'product' -%}    var currentVariantId = window.location.search.includes('variant')?      window.location.search.split('variant=')[1] :      "{{ product.selected_or_first_available_variant.id }}";    glami('track', 'ViewContent', {      content_type: 'product',      item_ids: [currentVariantId]    });    {%- if shop.money_format contains '{{amount}}' -%}      {%- assign value = product.price | money_without_currency | remove: "," -%}    {%- elsif shop.money_format contains '{{amount_no_decimals}}' -%}      {%- assign value = product.price | money_without_currency | remove: "," -%}    {%- elsif shop.money_format contains '{{amount_with_comma_separator}}' -%}      {%- assign value = product.price | money_without_currency | remove: "." | replace: ",", "." -%}    {%- elsif shop.money_format contains '{{amount_no_decimals_with_comma_separator}}' -%}      {%- assign value = product.price | money_without_currency | remove: "." | replace: ",", "." -%}    {%- elsif shop.money_format contains '{{amount_with_apostrophe_separator}}' -%}      {%- assign value = product.price | money_without_currency | remove: "'" -%}    {%- else -%}      {%- assign value = product.price | money_without_currency | remove: "." | replace: ",", "." -%}    {%- endif -%}    window.onload = function() {      document.querySelector('[name=add]').addEventListener('click', function() {        var variantId = window.location.search.includes('variant')?          window.location.search.split('variant=')[1]:          "{{ product.selected_or_first_available_variant.id }}";        glami('track', 'AddToCart', {          item_ids: [variantId],          product_names: '{{ product.title }}',          value: {{ value }},          currency: '{{ shop.currency }}'        });      })    }  {%- endif -%}  </script>
+	<!-- Added by AVADA SEO Suite -->
+	{% include 'avada-seo' %}
+	<!-- /Added by AVADA SEO Suite -->
+    <meta name="p:domain_verify" content="c07975ed774c3fe090ad7bd252100ecb"/>
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+
+  ttq.load('CS37FARC77U3OBONNRK0');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {%- render 'meta-tags' -%}
+     {%- render 'ecom_header' -%}
+
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+      <link rel="shortcut-icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    {%- unless settings.type_heading_font_family.system? and settings.type_base_font_family.system? -%}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- endunless -%}
+    <title>{{ page_title }}</title>
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+    {{ content_for_header }}
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    </script>
+
+    {%- render 'theme-style' -%}
+    {%- render 'theme-scripts' -%}
+
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TNS9LLJFNX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TNS9LLJFNX');
+</script>
+  </head>
+  <body
+    class="template_{{ template | handle }} page-loading breadcrumb-{{ settings.enable_breadcrumb }} theme-layout-{{ settings.layout_style }}"
+    style="--layoutRadius:{% if settings.layout_style == 'rounded' %}10px{% else %}0px{% endif %};"
+  >
+   
+    <a class="skip-to-content-link button yv-visually-hidden focus-inside" href="#MainContent">
+      {{ 'accessibility.skip_to_text' | t }}
+    </a>
+    <div class="body-wrapper">
+      <div class="wrapper">
+        {% sections 'header-group' %}
+        {%- if settings.enable_breadcrumb -%}
+          {%- render 'breadcrumb' -%}
+        {%- endif -%}
+        <main id="MainContent" class="content-for-layout focus-none">
+          {{ content_for_layout }}
+        </main>
+        
+        
+        
+        
+        
+        <ul class="list-unstyled" hidden>
+          <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
+        </ul>
+      </div>
+      
+    </div>
+    {%- if settings.enable_cart_drawer -%}
+      <div
+        id="mini_cart_shipping"
+        {% if settings.enable_shipping and settings.shipping_rate != blank %}
+          data-shipping="{{ settings.shipping_rate | times: 100 }}" data-shipText="{{ settings.shipping_text }}"
+        {% endif %}
+      >
+        {% if settings.enable_shipping and settings.shipping_rate != blank %}
+          <select id="shippingcountries" class="hidden" disabled>
+            {{ country_option_tags }}
+          </select>
+        {% endif %}
+      </div>
+    {%- endif -%}
+    {%- if request.page_type contains 'customers' -%}
+      <div class="yv-reorder-popup">
+        <div class="yv-reorder-popup-Container">
+          <div class="yv-reorder-popup-body"></div>
+        </div>
+      </div>
+    {% endif %}
+    {% unless settings.atc_alert == 'none' %}
+      <audio id="addToCartAlert">
+        {% assign tuneURL = settings.atc_alert | append: '.mp3' | asset_url %}
+        <source src="{{ tuneURL }}" type="audio/mpeg">
+      </audio>
+    {% endunless %}
+    {% if settings.enable_stickers %}
+      <div class="fixed-overlay"></div>
+    {% endif %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        {% if settings.enable_animation %}
+        AOS.init({
+          easing: 'ease',
+          once: true,
+          duration: 1000,
+          offset: 60,
+        });
+      {% endif %}
+      new universalParallax().init({
+        speed:10
+      });
+      });
+    </script>
+  
+  
+
+
+{{ "//cdn.shopify.com/s/files/1/0644/2975/2553/t/2/assets/splide.js" | script_tag}}
+  </body>
+</html>

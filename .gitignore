@@ -1,0 +1,40 @@
+# Shopify Theme Development
+.DS_Store
+Thumbs.db
+
+# Config files with sensitive data
+config/settings_data.json
+
+# Node modules
+node_modules/
+npm-debug.log
+
+# Editor directories
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Shopify CLI
+.shopify/
+
+# Environment variables
+.env
+.env.local
+
+# Build files
+dist/
+build/
+
+# Log files
+*.log
+logs/
