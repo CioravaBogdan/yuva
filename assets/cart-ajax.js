@@ -266,38 +266,34 @@ const countryList = {
 };
 
 let convertShippingAmount = freeShippingBarAmount;
+// 🚀 VANILLA JS - jQuery removed
 function checkShippingAvailablity() {
   let selectedCountry = Shopify.country;
-  let shippingCountriesContainer = $("#shippingcountries");
-  if (shippingCountriesContainer.length == 0) {
-    shippingCountriesContainer = $("#shippingCountry");
+  let shippingCountriesContainer = document.getElementById("shippingcountries");
+  if (!shippingCountriesContainer) {
+    shippingCountriesContainer = document.getElementById("shippingCountry");
   }
-  if (
-    shippingCountriesContainer &&
-    shippingCountriesContainer.find("option").length > 0
-  ) {
-    let shippingSelectedCountry = countryList[selectedCountry];
-    if (
-      shippingCountriesContainer.find(
+  if (shippingCountriesContainer) {
+    const options = shippingCountriesContainer.querySelectorAll("option");
+    if (options.length > 0) {
+      let shippingSelectedCountry = countryList[selectedCountry];
+      const matchingOption = shippingCountriesContainer.querySelector(
         'option[value="' + shippingSelectedCountry + '"]'
-      ).length > 0
-    ) {
-      return true;
-    } else {
-      return false;
+      );
+      return matchingOption !== null;
     }
-  } else {
-    return false;
   }
+  return false;
 }
 
+// 🚀 VANILLA JS - jQuery removed
 function freeShippingBar(cart) {
   let countryAvailable = checkShippingAvailablity();
   console.log('country available', countryAvailable);
-  let shippingBarContainer = $("[data-free-shipping-container]");
-  if (countryAvailable && shippingBarContainer.length > 0) {
+  const shippingBarContainer = document.querySelector("[data-free-shipping-container]");
+  if (countryAvailable && shippingBarContainer) {
     if (cart.item_count == 0) {
-      shippingBarContainer.addClass("hidden");
+      shippingBarContainer.classList.add("hidden");
       return false;
     }
     let cartPrice = cart.total_price;
@@ -313,20 +309,20 @@ function freeShippingBar(cart) {
     } else if (shippingPercentage > 100) {
       shippingPercentage = 100;
     }
-    if ($("[data-free-shipping-text]").length > 0) {
+    const shippingText = document.querySelector("[data-free-shipping-text]");
+    if (shippingText) {
       if (shippingPercentage >= 100) {
-        $("[data-free-shipping-text]").text(freeShippingBarSuccessText);
+        shippingText.textContent = freeShippingBarSuccessText;
       } else {
-        $("[data-free-shipping-text]").text(
-          freeShippingBarText.replace("||amount||", shippending)
-        );
+        shippingText.textContent = freeShippingBarText.replace("||amount||", shippending);
       }
     }
 
-    if ($("[data-free-shipping-bar]").length > 0) {
-      $("[data-free-shipping-bar]").css("width", shippingPercentage + "%");
+    const shippingBar = document.querySelector("[data-free-shipping-bar]");
+    if (shippingBar) {
+      shippingBar.style.width = shippingPercentage + "%";
     }
-    shippingBarContainer.removeClass("hidden");
+    shippingBarContainer.classList.remove("hidden");
   }
 }
 
@@ -343,7 +339,8 @@ function browserTabNotification() {
   }
 }
 
-$(document).ready(function () {
+// 🚀 VANILLA JS - jQuery removed
+document.addEventListener('DOMContentLoaded', function () {
   browserTabNotification();
   if (favicon) {
     favicon.badge(cartItemsCount);
@@ -360,23 +357,34 @@ $(document).ready(function () {
   }
 });
 
-$(document).on("keydown", "[name=note]", function (e) {
-  clearTimeout(cartNoteTyping);
+// 🚀 VANILLA JS - jQuery removed
+document.addEventListener("keydown", function(e) {
+  if (e.target.matches("[name=note]")) {
+    clearTimeout(cartNoteTyping);
+  }
 });
 
-$(document).on("keyup ", "[name=note]", function (evt) {
-  var _this = $(this);
-  clearTimeout(cartNoteTyping);
-  cartNoteTyping = setTimeout(function () {
-    var currentVal = _this.val();
-    $.ajax({
-      url: cartUpdateUrl,
-      type: "POST",
-      data: { note: currentVal },
-      dataType: "json",
-      success: function (result) {},
-    });
-  }, 750);
+document.addEventListener("keyup", function(evt) {
+  if (evt.target.matches("[name=note]")) {
+    const noteField = evt.target;
+    clearTimeout(cartNoteTyping);
+    cartNoteTyping = setTimeout(function () {
+      const currentVal = noteField.value;
+      const formData = new FormData();
+      formData.append('note', currentVal);
+      
+      fetch(cartUpdateUrl, {
+        method: "POST",
+        body: formData,
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      })
+      .then(response => response.json())
+      .then(result => {})
+      .catch(error => console.error('Cart note update error:', error));
+    }, 750);
+  }
 });
 
 if (window.location.pathname.indexOf("/cart") > -1) {
@@ -399,58 +407,88 @@ if (window.location.pathname.indexOf("/cart") > -1) {
       }
     }
 
+    // 🚀 VANILLA JS - jQuery removed
     function setupEventListeners() {
-      var button = document.getElementById("getShippingEstimates");
+      const button = document.getElementById("getShippingEstimates");
       if (button) {
         button.addEventListener("click", (e) => {
           e.preventDefault();
-          $("#ShippingWrapperResponse")
-            .html("")
-            .removeClass("success")
-            .removeClass("error")
-            .hide();
-          var shippingAddress = {};
-          shippingAddress.zip = jQuery("#shippingZip").val() || "";
-          shippingAddress.country = jQuery("#shippingCountry").val() || "";
-          shippingAddress.province = jQuery("#shippingProvince").val() || "";
+          const shippingResponse = document.getElementById("ShippingWrapperResponse");
+          if (shippingResponse) {
+            shippingResponse.innerHTML = "";
+            shippingResponse.classList.remove("success", "error");
+            shippingResponse.style.display = "none";
+          }
+          
+          const shippingAddress = {};
+          const zipInput = document.getElementById("shippingZip");
+          const countryInput = document.getElementById("shippingCountry");
+          const provinceInput = document.getElementById("shippingProvince");
+          
+          shippingAddress.zip = zipInput ? zipInput.value : "";
+          shippingAddress.country = countryInput ? countryInput.value : "";
+          shippingAddress.province = provinceInput ? provinceInput.value : "";
           _getCartShippingRates(shippingAddress);
         });
       }
     }
 
+    // 🚀 VANILLA JS - jQuery removed, using Fetch API
     var _getCartShippingRates = function (shippingAddress) {
-      var params = {
-        type: "POST",
-        url: "/cart/shipping_rates.json",
-        data: jQuery.param({ shipping_address: shippingAddress }),
-        success: function (data) {
-          _render(data.shipping_rates);
+      const formData = new URLSearchParams();
+      formData.append('shipping_address[zip]', shippingAddress.zip);
+      formData.append('shipping_address[country]', shippingAddress.country);
+      formData.append('shipping_address[province]', shippingAddress.province);
+      
+      fetch("/cart/shipping_rates.json", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-Requested-With': 'XMLHttpRequest'
         },
-        error: _onError,
-      };
-      jQuery.ajax(params);
+        body: formData
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(data => Promise.reject(data));
+        }
+        return response.json();
+      })
+      .then(data => {
+        _render(data.shipping_rates);
+      })
+      .catch(error => {
+        _onError(error);
+      });
     };
 
     var _fullMessagesFromErrors = function (errors) {
-      var fullMessages = [];
-      jQuery.each(errors, function (attribute, messages) {
-        jQuery.each(messages, function (index, message) {
+      const fullMessages = [];
+      Object.keys(errors).forEach(attribute => {
+        const messages = errors[attribute];
+        messages.forEach(message => {
           fullMessages.push(message);
         });
       });
       return fullMessages;
     };
-    var _onError = function (XMLHttpRequest, textStatus) {
-      var data = eval("(" + XMLHttpRequest.responseText + ")");
-      feedback = _fullMessagesFromErrors(data).join(", ") + ".";
-      $("#ShippingWrapperResponse")
-        .html('<p class="error-text">' + feedback + "</p>")
-        .addClass("error")
-        .show();
+    
+    var _onError = function (data) {
+      const feedback = _fullMessagesFromErrors(data).join(", ") + ".";
+      const shippingResponse = document.getElementById("ShippingWrapperResponse");
+      if (shippingResponse) {
+        shippingResponse.innerHTML = '<p class="error-text">' + feedback + "</p>";
+        shippingResponse.classList.add("error");
+        shippingResponse.style.display = "block";
+      }
     };
+    
     var _render = function (response) {
+      const shippingResponse = document.getElementById("ShippingWrapperResponse");
+      if (!shippingResponse) return;
+      
       if (response && response.length > 0) {
-        var html = '<p class="success-text">';
+        let html = '<p class="success-text">';
         response.forEach(function (shipping) {
           html += `<span><strong>${
             shipping.name
@@ -460,27 +498,27 @@ if (window.location.pathname.indexOf("/cart") > -1) {
           )}</span>`;
         });
         html += "</p>";
-        $("#ShippingWrapperResponse").html(html).addClass("success").show();
+        shippingResponse.innerHTML = html;
+        shippingResponse.classList.add("success");
+        shippingResponse.style.display = "block";
       } else {
-        $("#ShippingWrapperResponse")
-          .html('<p class="error-text">' + notAvailableLabel + "</p>")
-          .addClass("error")
-          .show();
+        shippingResponse.innerHTML = '<p class="error-text">' + notAvailableLabel + "</p>";
+        shippingResponse.classList.add("error");
+        shippingResponse.style.display = "block";
       }
     };
+    // 🚀 VANILLA JS - jQuery removed
     setTimeout(function () {
       shippingEstimates();
-      $.ajax({
-        url: mainCartUrl,
-        type: "GET",
-        dataType: "json",
-        success: function (result) {
+      fetch(mainCartUrl + '.json')
+        .then(response => response.json())
+        .then(result => {
           if (result.item_count > 0) {
             freeShippingBar(result);
-            upsellCartProducts(result)
+            upsellCartProducts(result);
           }
-        },
-      });
+        })
+        .catch(error => console.error('Cart fetch error:', error));
     }, 500);
     window.shippingEstimates = shippingEstimates;
   })();
