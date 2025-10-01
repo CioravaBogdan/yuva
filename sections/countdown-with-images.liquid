@@ -211,11 +211,13 @@
   {% endif %}
 </style>
 <script>
-  document.addEventListener("DOMContentLoaded",function(){
-    dealSection('countdown-section-{{ section.id }}');  
-    $(document).on('shopify:section:load', function () {
-      dealSection('countdown-section-{{ section.id }}');
-    });
+  // 🚀 VANILLA JS - jQuery removed for better performance
+  document.addEventListener("DOMContentLoaded", function(){
+    dealSection('countdown-section-{{ section.id }}');
+  });
+  
+  document.addEventListener('shopify:section:load', function () {
+    dealSection('countdown-section-{{ section.id }}');
   });
 </script>
 {% schema %}

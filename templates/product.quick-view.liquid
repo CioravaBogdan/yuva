@@ -556,8 +556,17 @@
 </script>
 </product-info>
 <script>
-  $(document).ready(function () {
-    flickitySlider($('.yv-quickview_product-main'));
-    flickitySlider($('.yv-quickview_product-thumb'));
+  // 🚀 VANILLA JS - jQuery removed for better performance
+  document.addEventListener('DOMContentLoaded', function () {
+    const mainSlider = document.querySelector('.yv-quickview_product-main');
+    const thumbSlider = document.querySelector('.yv-quickview_product-thumb');
+    
+    if (mainSlider && typeof flickitySlider === 'function') {
+      flickitySlider(mainSlider);
+    }
+    
+    if (thumbSlider && typeof flickitySlider === 'function') {
+      flickitySlider(thumbSlider);
+    }
   });
 </script>

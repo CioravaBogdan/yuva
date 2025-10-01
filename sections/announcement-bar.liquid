@@ -253,40 +253,78 @@ endif
        }
      },500);
    }
+   // 🚀 VANILLA JS - jQuery removed for better performance
    function initAnnouncement(){
-     var getnew_Pop = Cookies.get('announcement_closed');
+     const getnew_Pop = Cookies.get('announcement_closed');
      if(getnew_Pop != "true"){
-       $('#announcement-main-{{ section.id }}').removeClass('hidden');
-        $('body').removeClass('announcement-open');
-       let announcementSlider = $('#announcement{{ section.id }}').find('[data-flickity-slider]');
-       if(announcementSlider.length > 0){
+       const announcementMain = document.getElementById('announcement-main-{{ section.id }}');
+       if (announcementMain) {
+         announcementMain.classList.remove('hidden');
+       }
+       document.body.classList.remove('announcement-open');
+       
+       const announcementContainer = document.getElementById('announcement{{ section.id }}');
+       const announcementSlider = announcementContainer ? announcementContainer.querySelector('[data-flickity-slider]') : null;
+       
+       if(announcementSlider){
          setTimeout(function(){
-           announcementSlider.attr('data-manual','false')
-           flickitySlider(announcementSlider);
-           {%- comment -%} $(".announcement-bar-wrapper.flickity-enabled").flickity('resize') {%- endcomment -%}
-         },500);
+           announcementSlider.setAttribute('data-manual', 'false');
+           if (typeof flickitySlider === 'function') {
+             flickitySlider(announcementSlider);
+           }
+         }, 500);
        }
      }
    }
-   document.addEventListener("DOMContentLoaded", announcementTimer,false);
-   document.addEventListener("DOMContentLoaded", initAnnouncement,false);
-   document.addEventListener("shopify:section:load", announcementTimer,false);
-   document.addEventListener("shopify:section:load", initAnnouncement,false);
-   document.addEventListener("DOMContentLoaded",function(){
-       $('.announce_close').click(function(){
-         $('.announcement-bar').slideToggle();
-         $('#announcement-main-{{ section.id }}').addClass('hidden');
-         var date = new Date();
+   
+   document.addEventListener("DOMContentLoaded", announcementTimer, false);
+   document.addEventListener("DOMContentLoaded", initAnnouncement, false);
+   document.addEventListener("shopify:section:load", announcementTimer, false);
+   document.addEventListener("shopify:section:load", initAnnouncement, false);
+   
+   document.addEventListener("DOMContentLoaded", function(){
+     const closeButton = document.querySelector('.announce_close');
+     if (closeButton) {
+       closeButton.addEventListener('click', function(){
+         const announcementBar = document.querySelector('.announcement-bar');
+         const announcementMain = document.getElementById('announcement-main-{{ section.id }}');
+         
+         // Vanilla JS slideToggle equivalent
+         if (announcementBar) {
+           if (announcementBar.style.display === 'none') {
+             announcementBar.style.display = 'block';
+           } else {
+             announcementBar.style.transition = 'all 0.3s ease';
+             announcementBar.style.maxHeight = '0';
+             announcementBar.style.overflow = 'hidden';
+             setTimeout(() => {
+               announcementBar.style.display = 'none';
+             }, 300);
+           }
+         }
+         
+         if (announcementMain) {
+           announcementMain.classList.add('hidden');
+         }
+         
+         const date = new Date();
          date.setTime(date.getTime() + (parseInt(24 * 60 * 60 * 1000)));
          Cookies.set('announcement_closed', 'true', { expires: date, path: '/' });
-         $('body').removeClass('announcement-open');
-          let announcementHeight =0;
-            $('body').css('--announcement-height',announcementHeight+'px');
+         document.body.classList.remove('announcement-open');
+         
+         const announcementHeight = 0;
+         document.body.style.setProperty('--announcement-height', announcementHeight + 'px');
+         
          setTimeout(function(){
-           let headerHeight = $('#headerSection').height();
-           $('.yv-collections-topbar').css('top',headerHeight+'px');
-         },500);
+           const headerSection = document.getElementById('headerSection');
+           const collectionsTopbar = document.querySelector('.yv-collections-topbar');
+           if (headerSection && collectionsTopbar) {
+             const headerHeight = headerSection.offsetHeight;
+             collectionsTopbar.style.top = headerHeight + 'px';
+           }
+         }, 500);
        });
+     }
    });
 </script>
 {% schema %}

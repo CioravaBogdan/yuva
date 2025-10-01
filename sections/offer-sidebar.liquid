@@ -49,30 +49,70 @@
     </svg>    
 </button>
 <script>
-document.addEventListener("DOMContentLoaded",function(){ 
-  if ($(window).scrollTop() > ($(window).height() / 2)) {
-      $('#shopify-section-{{ section.id }}').show();
+// 🚀 VANILLA JS - jQuery removed for better performance
+document.addEventListener("DOMContentLoaded", function(){ 
+  const sectionElement = document.getElementById('shopify-section-{{ section.id }}');
+  const body = document.body;
+  const sidebarElement = document.querySelector('.yv-coupan-sidebar-element');
+  
+  // Initial visibility check
+  function checkScrollPosition() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    
+    if (scrollTop > (windowHeight / 2)) {
+      sectionElement.style.display = 'block';
+    } else {
+      sectionElement.style.display = 'none';
+    }
   }
-  $(window).on('scroll', function() {
-      if ($(this).scrollTop() > ($(this).height() / 2)) {
-          $('#shopify-section-{{ section.id }}').show();
-      } else {
-          $('#shopify-section-{{ section.id }}').hide();
+  
+  // Initial check
+  checkScrollPosition();
+  
+  // Optimized scroll listener with throttle
+  let scrollTimeout;
+  window.addEventListener('scroll', function() {
+    if (scrollTimeout) {
+      cancelAnimationFrame(scrollTimeout);
+    }
+    scrollTimeout = requestAnimationFrame(function() {
+      checkScrollPosition();
+      if (typeof closeVideoMedia === 'function') {
+        closeVideoMedia();
       }
-      closeVideoMedia();
-  }) 
-  $("body").on('click','.yv-coupan-panel',function(){
-    $("body").addClass("offer-open");
-    $(".yv-coupan-sidebar-element").addClass("open");
-    if($(".yv-coupan-sidebar").find("[data-flickity-slider]").hasClass('flickity-enabled')){
-      $(".yv-coupan-sidebar").find("[data-flickity-slider]").flickity('resize');
+    });
+  });
+  
+  // Open coupon panel
+  body.addEventListener('click', function(e) {
+    if (e.target.closest('.yv-coupan-panel')) {
+      body.classList.add('offer-open');
+      if (sidebarElement) {
+        sidebarElement.classList.add('open');
+      }
+      
+      // Resize flickity if enabled
+      const flickitySlider = document.querySelector('.yv-coupan-sidebar [data-flickity-slider]');
+      if (flickitySlider && flickitySlider.classList.contains('flickity-enabled')) {
+        const flkty = Flickity.data(flickitySlider);
+        if (flkty) {
+          flkty.resize();
+        }
+      }
     }
   });
-  $("body").on('click','.offer-close',function(){
-    $("body").removeClass("offer-open");
-    $(".yv-coupan-sidebar-element").removeClass("open");
+  
+  // Close coupon panel
+  body.addEventListener('click', function(e) {
+    if (e.target.closest('.offer-close')) {
+      body.classList.remove('offer-open');
+      if (sidebarElement) {
+        sidebarElement.classList.remove('open');
+      }
+    }
   });
-}) 
+}); 
 </script>
 {%- endcapture -%}
 <div class="offer-sidebar-box position-{{ section.settings.horizontal_position }}" style="--layoutRadius:{% if settings.layout_style == 'rounded' %}10px{% else %}0px{% endif %}">

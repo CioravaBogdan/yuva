@@ -137,4 +137,8 @@ if (document.readyState === 'loading') {
 } else {
   stickyHeaderInit();
 }
+
+// Also initialize on section reload
+document.addEventListener('shopify:section:load', stickyHeaderInit);
+})(); // End IIFE
 </script>
