@@ -1,0 +1,94 @@
+{%- comment -%}
+  WebP Image with Fallback
+  Optimized image loading with modern format support
+  
+  Parameters:
+  - image: Image object
+  - sizes: Responsive sizes (default: auto)
+  - class: CSS classes
+  - loading: lazy/eager (default: lazy for non-critical)
+  - fetchpriority: high/low/auto
+{%- endcomment -%}
+
+{%- liquid
+  assign image_sizes = sizes | default: '[200,400,600,800,1000,1200,1400,1600,1800,2000]'
+  assign loading_attr = loading | default: 'lazy'
+  assign fetch_priority = fetchpriority | default: 'auto'
+  assign img_class = class | default: ''
+-%}
+
+<picture>
+  {%- comment -%}WebP format for modern browsers{%- endcomment -%}
+  <source
+    type="image/webp"
+    {%- if settings.enable_lazyload and loading_attr == 'lazy' %}
+      data-srcset="
+        {%- for size in image_sizes -%}
+          {{ image | image_url: width: size, format: 'pjpg' }} {{ size }}w
+          {%- unless forloop.last -%}, {%- endunless -%}
+        {%- endfor -%}
+      "
+    {%- else %}
+      srcset="
+        {%- for size in image_sizes -%}
+          {{ image | image_url: width: size, format: 'pjpg' }} {{ size }}w
+          {%- unless forloop.last -%}, {%- endunless -%}
+        {%- endfor -%}
+      "
+    {%- endif %}
+    sizes="{{ sizes | default: 'auto' }}"
+  >
+  
+  {%- comment -%}JPEG fallback for older browsers{%- endcomment -%}
+  <source
+    type="image/jpeg"
+    {%- if settings.enable_lazyload and loading_attr == 'lazy' %}
+      data-srcset="
+        {%- for size in image_sizes -%}
+          {{ image | image_url: width: size }} {{ size }}w
+          {%- unless forloop.last -%}, {%- endunless -%}
+        {%- endfor -%}
+      "
+    {%- else %}
+      srcset="
+        {%- for size in image_sizes -%}
+          {{ image | image_url: width: size }} {{ size }}w
+          {%- unless forloop.last -%}, {%- endunless -%}
+        {%- endfor -%}
+      "
+    {%- endif %}
+    sizes="{{ sizes | default: 'auto' }}"
+  >
+  
+  {%- comment -%}Fallback IMG tag{%- endcomment -%}
+  <img
+    {% if id != blank %}id="{{ id }}"{% endif %}
+    class="{% if settings.enable_lazyload and loading_attr == 'lazy' %}lazyload no-js-hidden{% endif %} {{ img_class }}"
+    {%- if settings.enable_lazyload and loading_attr == 'lazy' %}
+      data-src="{{ image | image_url: width: image.width }}"
+      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 {{ image.width }} {{ image.height }}'%3E%3C/svg%3E"
+    {%- else %}
+      src="{{ image | image_url: width: image.width }}"
+    {%- endif %}
+    alt="{{ image.alt | escape | default: shop.name }}"
+    width="{{ image.width }}"
+    height="{{ image.height }}"
+    loading="{{ loading_attr }}"
+    fetchpriority="{{ fetch_priority }}"
+    decoding="async"
+    style="object-position:{{ image.presentation.focal_point }}; aspect-ratio: {{ image.width }}/{{ image.height }};"
+  >
+</picture>
+
+{%- if settings.enable_lazyload and loading_attr == 'lazy' %}
+  <noscript>
+    <img
+      src="{{ image | image_url: width: image.width }}"
+      alt="{{ image.alt | escape | default: shop.name }}"
+      width="{{ image.width }}"
+      height="{{ image.height }}"
+      loading="eager"
+      style="object-position:{{ image.presentation.focal_point }};"
+    >
+  </noscript>
+{%- endif -%}

@@ -43,38 +43,43 @@
     </div>
     <script>
       document.addEventListener("DOMContentLoaded",function(){
-        var age = jQuery(".age-verification");
-        var age_decline = jQuery(age).find(".decline-age");
-        var submit_age = jQuery(age).find(".submit-age");
-        var age_btn = jQuery(age).find(".reject-age");
-          var age_Pop = Cookies.get('age_verify_closed');
-          if (age_Pop != 'age_popup_closed_val' && window.location.pathname.indexOf('/challenge') < 0) {
-            setTimeout(function () {
-               $('.age-verification').addClass('active');
-            },5000);
-          }
-        jQuery(age_btn).on("click",function(){
-             var verifiction_outer = jQuery(".age-verification-outer");
-             var verifiction_decline = jQuery(".age-verification-decline");
-             jQuery(verifiction_outer).addClass('inactive');
-             jQuery(verifiction_decline).addClass('active');
-             jQuery(verifiction_outer).removeClass('active');
-             jQuery(verifiction_decline).removeClass('inactive');
+        // Vanilla JS replacement for jQuery
+        var age = document.querySelector(".age-verification");
+        var age_decline = age.querySelector(".decline-age");
+        var submit_age = age.querySelector(".submit-age");
+        var age_btn = age.querySelector(".reject-age");
+        var age_Pop = Cookies.get('age_verify_closed');
+        
+        if (age_Pop != 'age_popup_closed_val' && window.location.pathname.indexOf('/challenge') < 0) {
+          setTimeout(function () {
+            document.querySelector('.age-verification').classList.add('active');
+          },5000);
+        }
+        
+        age_btn.addEventListener("click",function(){
+          var verifiction_outer = document.querySelector(".age-verification-outer");
+          var verifiction_decline = document.querySelector(".age-verification-decline");
+          verifiction_outer.classList.add('inactive');
+          verifiction_decline.classList.add('active');
+          verifiction_outer.classList.remove('active');
+          verifiction_decline.classList.remove('inactive');
         });
-        jQuery(age_decline).on("click",function(){
-             var verifiction_outer = jQuery(".age-verification-outer");
-             var verifiction_decline = jQuery(".age-verification-decline");
-             jQuery(verifiction_outer).removeClass('inactive');
-             jQuery(verifiction_decline).removeClass('active');
-             jQuery(verifiction_outer).addClass('active');
-             jQuery(verifiction_decline).addClass('inactive');
+        
+        age_decline.addEventListener("click",function(){
+          var verifiction_outer = document.querySelector(".age-verification-outer");
+          var verifiction_decline = document.querySelector(".age-verification-decline");
+          verifiction_outer.classList.remove('inactive');
+          verifiction_decline.classList.remove('active');
+          verifiction_outer.classList.add('active');
+          verifiction_decline.classList.add('inactive');
         });
-        jQuery(submit_age).on("click",function(){
-             var age_verifiction = jQuery(".age-verification");
-             jQuery(age_verifiction).hide();
-             var date = new Date();
-             date.setTime(date.getTime() + parseInt('{{ settings.age_verify_popup_cookie }}') * 24 * 60 * 60 * 1000);
-             Cookies.set('age_verify_closed', 'age_popup_closed_val', { expires: date, path: '/' });
+        
+        submit_age.addEventListener("click",function(){
+          var age_verifiction = document.querySelector(".age-verification");
+          age_verifiction.style.display = 'none';
+          var date = new Date();
+          date.setTime(date.getTime() + parseInt('{{ settings.age_verify_popup_cookie }}') * 24 * 60 * 60 * 1000);
+          Cookies.set('age_verify_closed', 'age_popup_closed_val', { expires: date, path: '/' });
         });
       });
     </script>

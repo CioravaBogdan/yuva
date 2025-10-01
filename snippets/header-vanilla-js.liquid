@@ -1,0 +1,140 @@
+{%- comment -%}
+  Header Vanilla JS Replacement
+  Optimized vanilla JavaScript pentru header functionality
+  Înlocuiește toate funcțiile jQuery din sections/header.liquid
+{%- endcomment -%}
+
+<script>
+// Header Sticky Functionality - Vanilla JS (jQuery replacement)
+function stickyHeaderInit() {
+  const body = document.body;
+  const header = document.querySelector('header');
+  const headerSection = document.getElementById('shopify-section-{{ section.id }}');
+  const announcementBar = document.querySelector('.announcement-bar-section');
+  
+  // Mark as opened once
+  body.classList.add('opened-once');
+  
+  {% for block in section.blocks %}
+    {% if block.type == 'menu-badge' %}
+      {% if block.settings.menu_badge != blank and block.settings.badge_label != blank %}
+        if (!body.classList.contains("badge-enable")) {
+          body.classList.add("badge-enable");
+        }
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+  
+  let windowScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  
+  // Remove header classes and add current style
+  body.classList.remove('header1', 'header2', 'header3');
+  const headerStyle = header.getAttribute('data-header-style');
+  if (headerStyle) {
+    body.classList.add(headerStyle);
+  }
+  
+  // Add sticky status class
+  const stickyStatus = header.getAttribute('data-header-sticky');
+  if (stickyStatus) {
+    headerSection.classList.add(`sticky-header-status-${stickyStatus}`);
+  }
+  
+  // Calculate scroll height
+  let scrollHeight = 0;
+  let announcementHeight = announcementBar ? announcementBar.offsetHeight : 0;
+  scrollHeight += announcementHeight;
+  
+  // Set CSS variables
+  body.style.setProperty('--announcement-height', `${announcementHeight}px`);
+  
+  const headerHeight = document.querySelector('.shopify-section-main-header')?.offsetHeight || 0;
+  scrollHeight += headerHeight;
+  body.style.setProperty('--header-height', `${header.offsetHeight}px`);
+  
+  // Close nav if open
+  if (body.classList.contains("nav-open")) {
+    body.classList.remove("nav-open");
+  }
+  
+  // Handle transparent header
+  const transparent = header.getAttribute('header-transparent');
+  if (transparent === 'true') {
+    document.querySelector('.shopify-section-main-header')?.classList.add('transparent-header-true');
+  }
+  
+  // Scroll event handler with throttling for performance
+  let ticking = false;
+  let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        handleScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+  
+  function handleScroll() {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Update announcement height
+    if (currentScroll > 0) {
+      announcementHeight = 0;
+    } else {
+      announcementHeight = announcementBar ? announcementBar.offsetHeight : 0;
+    }
+    body.style.setProperty('--announcement-height', `${announcementHeight}px`);
+    
+    // Sticky header logic
+    if (currentScroll > scrollHeight) {
+      body.classList.add('sticky-header');
+    } else {
+      body.classList.remove('sticky-header', 'opened-once');
+    }
+    
+    // Scroll up/down detection
+    const isScrollUp = currentScroll < lastScrollTop;
+    const headerSticky = header.getAttribute('data-header-sticky');
+    const headerStickyStyle = header.getAttribute('data-header-sticky-style');
+    
+    if (headerSticky === 'true' && headerStickyStyle === 'on_scroll_up') {
+      if (currentScroll > scrollHeight) {
+        const searchBarContent = document.querySelector('.yv-header-searchbar-content');
+        if (searchBarContent) {
+          searchBarContent.style.display = 'none';
+        }
+        
+        if (isScrollUp) {
+          header.classList.remove('sticky-header-hidden');
+          document.querySelector(".shopify-section-main-header")?.classList.remove('sticky-header-hidden-parent');
+          body.classList.add('opened-once');
+        } else {
+          if (!body.classList.contains('opened-once')) {
+            header.classList.add('sticky-header-hidden');
+            document.querySelector(".shopify-section-main-header")?.classList.add('sticky-header-hidden-parent');
+          }
+          body.classList.remove('opened-once');
+          
+          // Close dropdowns
+          const accountDropdown = document.querySelector('[data-account-dropdown]');
+          if (accountDropdown && typeof DOMAnimations !== 'undefined') {
+            DOMAnimations.slideUp(accountDropdown);
+          }
+        }
+      }
+    }
+    
+    lastScrollTop = currentScroll;
+  }
+}
+
+// Initialize on DOM ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', stickyHeaderInit);
+} else {
+  stickyHeaderInit();
+}
+</script>

@@ -30,11 +30,33 @@
     {{ content_for_header }}
     <script>
       document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+      // Mark fonts as loading
+      document.documentElement.classList.add('fonts-loading');
     </script>
 
+    {%- comment -%}Critical CSS inline pentru fastest First Paint{%- endcomment -%}
+    {%- render 'critical-css' -%}
+    
     {%- render 'theme-style' -%}
     {%- render 'vanilla-js-helpers' -%}
     {%- render 'theme-scripts' -%}
+    
+    {%- comment -%}Font loading optimization{%- endcomment -%}
+    <script>
+      // Mark fonts as loaded after they're ready
+      if ('fonts' in document) {
+        document.fonts.ready.then(() => {
+          document.documentElement.classList.remove('fonts-loading');
+          document.documentElement.classList.add('fonts-loaded');
+        });
+      } else {
+        // Fallback for browsers without Font Loading API
+        window.addEventListener('load', () => {
+          document.documentElement.classList.remove('fonts-loading');
+          document.documentElement.classList.add('fonts-loaded');
+        });
+      }
+    </script>
   </head>
   <body
     class="template_{{ template | handle }} page-loading breadcrumb-{{ settings.enable_breadcrumb }} theme-layout-{{ settings.layout_style }}{% if settings.buttonAnimation == 'animated-arrow'%} button-style-arrow-animated{% endif %}"
@@ -123,5 +145,8 @@
     
     {%- comment -%}Performance Optimizations{%- endcomment -%}
     {%- render 'performance-optimizations' -%}
+    
+    {%- comment -%}Service Worker for PWA & Offline Support{%- endcomment -%}
+    {%- render 'service-worker-registration' -%}
   </body>
 </html>

@@ -47,6 +47,10 @@
   }
   // When the user clicks on the button, scroll to the top of the document
   function topFunction() {
-    jQuery('html, body').animate({ scrollTop: 0 });
+    // Vanilla JS replacement for jQuery animate
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 </script>

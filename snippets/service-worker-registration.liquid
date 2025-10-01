@@ -1,0 +1,123 @@
+{%- comment -%}
+  Service Worker Registration
+  Enables offline support and advanced caching
+{%- endcomment -%}
+
+{% if settings.enable_service_worker %}
+<script>
+// Service Worker Registration pentru Progressive Web App
+(function() {
+  'use strict';
+
+  // Check if Service Workers are supported
+  if ('serviceWorker' in navigator) {
+    // Register Service Worker
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('{{ 'service-worker.js' | asset_url }}', {
+        scope: '/'
+      })
+      .then((registration) => {
+        console.log('[Service Worker] Registered successfully:', registration.scope);
+        
+        // Check for updates periodically
+        setInterval(() => {
+          registration.update();
+        }, 60 * 60 * 1000); // Check every hour
+        
+        // Listen for updates
+        registration.addEventListener('updatefound', () => {
+          const newWorker = registration.installing;
+          
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              // New service worker available
+              console.log('[Service Worker] New version available');
+              
+              // Optional: Show update notification to user
+              if (confirm('O versiune nouă a site-ului este disponibilă. Reîncărcați pagina?')) {
+                window.location.reload();
+              }
+            }
+          });
+        });
+      })
+      .catch((error) => {
+        console.log('[Service Worker] Registration failed:', error);
+      });
+    });
+    
+    // Handle controller change
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      console.log('[Service Worker] Controller changed');
+      // Optionally reload to use new service worker
+    });
+    
+    // Listen for messages from service worker
+    navigator.serviceWorker.addEventListener('message', (event) => {
+      console.log('[Service Worker] Message:', event.data);
+      
+      if (event.data.type === 'CACHE_UPDATED') {
+        console.log('[Service Worker] Cache updated:', event.data.url);
+      }
+    });
+    
+    // Background Sync API - pentru sincronizare offline
+    if ('sync' in registration) {
+      // Register sync event când cart se modifică offline
+      window.addEventListener('online', () => {
+        navigator.serviceWorker.ready.then((registration) => {
+          registration.sync.register('sync-cart')
+            .then(() => {
+              console.log('[Service Worker] Sync registered');
+            })
+            .catch((error) => {
+              console.log('[Service Worker] Sync registration failed:', error);
+            });
+        });
+      });
+    }
+    
+    // Offline/Online detection
+    window.addEventListener('online', () => {
+      console.log('[App] Back online');
+      document.body.classList.remove('offline');
+      
+      // Show notification
+      if (typeof showNotification === 'function') {
+        showNotification('Conexiune restabilită', 'success');
+      }
+    });
+    
+    window.addEventListener('offline', () => {
+      console.log('[App] Gone offline');
+      document.body.classList.add('offline');
+      
+      // Show notification
+      if (typeof showNotification === 'function') {
+        showNotification('Conexiune pierdută. Funcționalitate limitată.', 'warning');
+      }
+    });
+  } else {
+    console.log('[Service Worker] Not supported in this browser');
+  }
+})();
+</script>
+
+<style>
+/* Offline indicator */
+.offline::before {
+  content: '⚠️ Offline - Unele funcții pot fi limitate';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #ff9800;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  z-index: 99999;
+  font-size: 14px;
+  font-weight: bold;
+}
+</style>
+{% endif %}
