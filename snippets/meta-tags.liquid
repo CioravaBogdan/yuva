@@ -13,11 +13,30 @@
     assign og_url = shop.url
   endif
 -%}
+
+{%- comment -%}Enhanced Meta Tags for AI Search Engines & Performance{%- endcomment -%}
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#ffffff">
+<meta name="format-detection" content="telephone=no">
+
+{%- comment -%}Open Graph Meta Tags{%- endcomment -%}
 <meta property="og:site_name" content="{{ shop.name }}">
 <meta property="og:url" content="{{ og_url }}">
 <meta property="og:title" content="{{ og_title | escape }}">
 <meta property="og:type" content="{{ og_type }}">
 <meta property="og:description" content="{{ og_description | escape }}">
+<meta property="og:locale" content="{{ request.locale.iso_code }}">
+
+{%- comment -%}Twitter Card Meta Tags for Better Social Sharing{%- endcomment -%}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ og_title | escape }}">
+<meta name="twitter:description" content="{{ og_description | escape }}">
+{%- unless settings.social_twitter_link == blank -%}
+  <meta name="twitter:site" content="{{ settings.social_twitter_link | split: 'twitter.com/' | last | prepend: '@' }}">
+  <meta name="twitter:creator" content="{{ settings.social_twitter_link | split: 'twitter.com/' | last | prepend: '@' }}">
+{%- endunless -%}
 {%- if request.page_type == 'product' -%}
   {%- assign og_type = 'product' -%}
   {%- if product.images.size > 0 -%}
@@ -95,21 +114,32 @@
   {% if request.page_type == 'product' %}
     <script type="application/ld+json">
       {
-        "@context": "http://schema.org/",
+        "@context": "https://schema.org/",
         "@type": "Product",
         "name": "{{ product.title | strip_html | escape }}",
         "url": "{{ shop.url }}{{ product.url }}",
         {% if product.featured_image %}
           "image": [
-            "https:{{ product.featured_image.src | image_url }}"
+            "https:{{ product.featured_image.src | image_url: width: 1200 }}"
+            {% if product.images.size > 1 %}
+              {% for image in product.images limit: 5 offset: 1 %}
+                ,"https:{{ image.src | image_url: width: 1200 }}"
+              {% endfor %}
+            {% endif %}
           ],
         {% endif %}
-        "description": "{{ product.description | strip_html | escape }}",
+        "description": "{{ product.description | strip_html | truncate: 5000 | escape }}",
         {% if product.selected_or_first_available_variant.sku != blank %}
           "sku": "{{ product.selected_or_first_available_variant.sku }}",
+          "gtin": "{{ product.selected_or_first_available_variant.barcode }}",
+          "mpn": "{{ product.selected_or_first_available_variant.sku }}",
         {% endif %}
         "brand": {
-          "@type": "Thing",
+          "@type": "Brand",
+          "name": "{{ product.vendor | escape }}"
+        },
+        "manufacturer": {
+          "@type": "Organization",
           "name": "{{ product.vendor | escape }}"
         },
         {% if product.variants %}

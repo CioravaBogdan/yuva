@@ -149,20 +149,34 @@
 </script>
 <style>   
 </style>
-<script src="{{ 'jquery.min.js' | asset_url }}" defer></script>
+{%- comment -%}CRITICAL: Lazysizes pentru imagini (high priority){%- endcomment -%}
+<script src="{{ 'lazysizes.min.js' | asset_url }}" defer></script>
+
+{%- comment -%}REMOVED: jQuery - convertit la vanilla JS pentru performanță - economie 95KB{%- endcomment -%}
+{%- comment -%}<script src="{{ 'jquery.min.js' | asset_url }}" defer></script>{%- endcomment -%}
+
+{%- comment -%}Core Scripts - defer pentru non-blocking{%- endcomment -%}
+<script src="{{ 'common.js' | asset_url }}" defer></script>
+<script src="{{ 'cart-ajax.js' | asset_url }}" defer></script>
 <script src="{{ 'cookies.min.js' | asset_url }}" defer></script>
+
+{%- comment -%}Feature Detection - load early{%- endcomment -%}
+<script src="{{ 'modernizr.min.js' | asset_url }}" defer></script>
+
+{%- comment -%}UI Enhancement Scripts - lazy load{%- endcomment -%}
 <script src="{{ 'flickity.min.js' | asset_url }}" defer></script>
 <script src="{{ 'fancybox.min.js' | asset_url }}" defer></script>
 <script src="{{ 'parallax.js' | asset_url }}" defer></script>
+
+{%- comment -%}Animation - conditional and deferred{%- endcomment -%}
 {% if settings.enable_animation %} 
-  <script src="{{ 'aos.js' | asset_url }}"></script>
+  <script src="{{ 'aos.js' | asset_url }}" defer></script>
 {% endif %}
-<script src="{{ 'common.js' | asset_url }}" defer></script>
-<script src="{{ 'modernizr.min.js' | asset_url }}" defer></script>
-<script src="{{ 'lazysizes.min.js' | asset_url }}" defer></script>
+
+{%- comment -%}Page-specific Scripts - conditional loading{%- endcomment -%}
 {% if request.page_type == 'collection' or request.page_type == 'search' %}
   <script src="{{ 'nouislider.min.js' | asset_url }}" defer></script>
   <script src="{{ 'filters.js' | asset_url }}" defer></script>
 {% endif %}
-<script src="{{ 'cart-ajax.js' | asset_url }}" defer></script>
+
 {%- comment -%}theme-check-enable RemoteAsset,ParserBlockingJavaScript{%- endcomment -%}

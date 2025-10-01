@@ -1,5 +1,5 @@
 <style>
-  /*============= page loader css start ========*/
+  /*============= Critical Above-the-Fold CSS ========*/
   .yv-page-loader {
     position: fixed;
     width: 100%;
@@ -24,31 +24,43 @@
   /*============= page loader css end ========*/
 </style>
 {%- render 'style-variables' -%}
+
+{%- comment -%}Preload Critical CSS Only{%- endcomment -%}
 {{ 'common.min.css' | asset_url | preload_tag: as: 'style' }}
-{{ 'customer.css' | asset_url | preload_tag: as: 'style' }}
 {{ 'header.min.css' | asset_url | preload_tag: as: 'style' }}
-{{ 'footer.min.css' | asset_url | preload_tag: as: 'style' }}
 {{ 'theme.min.css' | asset_url | preload_tag: as: 'style' }}
-{{ 'responsive.min.css' | asset_url | preload_tag: as: 'style' }}
-{{ 'fancybox.min.css' | asset_url | preload_tag: as: 'style' }}
-{{ 'flickity.min.css' | asset_url | preload_tag: as: 'style' }}
-{% if settings.enable_animation %}
-  {{ 'aos.css' | asset_url | preload_tag: as: 'style' }}
-{% endif %}
-{{ 'flickity.min.css' | asset_url | stylesheet_tag }}
-{{ 'fancybox.min.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}Load Critical CSS{%- endcomment -%}
 {{ 'common.min.css' | asset_url | stylesheet_tag }}
-{{ 'customer.css' | asset_url | stylesheet_tag }}
 {{ 'header.min.css' | asset_url | stylesheet_tag }}
-{{ 'footer.min.css' | asset_url | stylesheet_tag }}
 {{ 'theme.min.css' | asset_url | stylesheet_tag }}
 {{ 'responsive.min.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}Defer Non-Critical CSS{%- endcomment -%}
+<link rel="preload" href="{{ 'footer.min.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'footer.min.css' | asset_url }}"></noscript>
+
+<link rel="preload" href="{{ 'customer.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'customer.css' | asset_url }}"></noscript>
+
+<link rel="preload" href="{{ 'flickity.min.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'flickity.min.css' | asset_url }}"></noscript>
+
+<link rel="preload" href="{{ 'fancybox.min.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'fancybox.min.css' | asset_url }}"></noscript>
+
 {% if settings.enable_animation %}
-  {{ 'aos.css' | asset_url | stylesheet_tag }}
+  <link rel="preload" href="{{ 'aos.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>{{ 'aos.css' | asset_url | stylesheet_tag }}</noscript>
 {% endif %}
+
+{%- comment -%}Conditional CSS Loading{%- endcomment -%}
 {% if template contains 'product' %}
-  <link rel="stylesheet" href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css">
+  <link rel="preload" href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css"></noscript>
 {% endif %}
+
 {% if request.page_type == 'collection' or request.page_type == 'search' %}
-  <link rel="stylesheet" href="{{ 'nouislider.min.css' | asset_url }}">
+  <link rel="preload" href="{{ 'nouislider.min.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ 'nouislider.min.css' | asset_url }}"></noscript>
 {% endif %}

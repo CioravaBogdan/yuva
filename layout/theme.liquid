@@ -4,17 +4,25 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    
+    {%- comment -%}Critical Resource Hints for Performance{%- endcomment -%}
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.shopify.com">
+    <link rel="preconnect" href="https://monorail-edge.shopifysvc.com" crossorigin>
+    <link rel="dns-prefetch" href="https://monorail-edge.shopifysvc.com">
+    {%- unless settings.type_heading_font_family.system? and settings.type_base_font_family.system? -%}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+      <link rel="dns-prefetch" href="https://fonts.shopifycdn.com">
+    {%- endunless -%}
+    
     {%- render 'meta-tags' -%}
     <link rel="canonical" href="{{ canonical_url }}">
-    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
       <link rel="shortcut-icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
 
-    {%- unless settings.type_heading_font_family.system? and settings.type_base_font_family.system? -%}
-      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
-    {%- endunless -%}
     <title>{{ page_title }}</title>
     {%- if page_description -%}
       <meta name="description" content="{{ page_description | escape }}">
@@ -25,6 +33,7 @@
     </script>
 
     {%- render 'theme-style' -%}
+    {%- render 'vanilla-js-helpers' -%}
     {%- render 'theme-scripts' -%}
   </head>
   <body
@@ -110,6 +119,9 @@
         speed:10
       });
       });
-    </script>   
+    </script>
+    
+    {%- comment -%}Performance Optimizations{%- endcomment -%}
+    {%- render 'performance-optimizations' -%}
   </body>
 </html>

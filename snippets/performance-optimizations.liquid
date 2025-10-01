@@ -1,0 +1,208 @@
+{%- comment -%}
+  Performance Optimization Script
+  Handles:
+  - Lazy loading for non-critical resources
+  - Intersection Observer for images
+  - Resource prefetching
+  - Service Worker registration (if enabled)
+{%- endcomment -%}
+
+<script>
+// Performance Optimizations - Vanilla JS
+(function() {
+  'use strict';
+
+  // Prefetch next page on hover
+  const prefetchLinks = () => {
+    const links = document.querySelectorAll('a[href^="/"]');
+    links.forEach(link => {
+      link.addEventListener('mouseenter', function() {
+        const href = this.getAttribute('href');
+        if (href && !document.querySelector(`link[rel="prefetch"][href="${href}"]`)) {
+          const prefetchLink = document.createElement('link');
+          prefetchLink.rel = 'prefetch';
+          prefetchLink.href = href;
+          document.head.appendChild(prefetchLink);
+        }
+      }, { once: true });
+    });
+  };
+
+  // Optimize image loading with Intersection Observer
+  const optimizeImages = () => {
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            
+            // Load high-res image
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.classList.remove('lazyload');
+              img.classList.add('lazyloaded');
+            }
+            
+            // Load srcset
+            if (img.dataset.srcset) {
+              img.srcset = img.dataset.srcset;
+            }
+            
+            observer.unobserve(img);
+          }
+        });
+      }, {
+        rootMargin: '50px 0px', // Start loading 50px before entering viewport
+        threshold: 0.01
+      });
+
+      // Observe all lazy images
+      document.querySelectorAll('img[data-src], img[data-srcset]').forEach(img => {
+        imageObserver.observe(img);
+      });
+    }
+  };
+
+  // Preload critical fonts
+  const preloadFonts = () => {
+    const fonts = [
+      // Add your critical fonts here
+      // Example: { url: 'font.woff2', type: 'font/woff2' }
+    ];
+
+    fonts.forEach(font => {
+      if (!document.querySelector(`link[href="${font.url}"]`)) {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'font';
+        link.type = font.type;
+        link.href = font.url;
+        link.crossOrigin = 'anonymous';
+        document.head.appendChild(link);
+      }
+    });
+  };
+
+  // Defer non-critical CSS
+  const deferCSS = () => {
+    const stylesheets = document.querySelectorAll('link[rel="preload"][as="style"]');
+    stylesheets.forEach(link => {
+      link.addEventListener('load', function() {
+        this.rel = 'stylesheet';
+      });
+    });
+  };
+
+  // Remove unused CSS (aggressive optimization)
+  const removeUnusedCSS = () => {
+    // This is aggressive - only enable if you know what you're doing
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      // Remove mobile-only styles on desktop
+      const mobileOnlyStyles = document.querySelectorAll('[data-mobile-only]');
+      mobileOnlyStyles.forEach(style => style.remove());
+    }
+  };
+
+  // Optimize third-party scripts loading
+  const optimizeThirdParty = () => {
+    // Delay loading of non-critical third-party scripts
+    const thirdPartyScripts = [
+      // Add third-party script URLs here
+    ];
+
+    setTimeout(() => {
+      thirdPartyScripts.forEach(src => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.async = true;
+        document.body.appendChild(script);
+      });
+    }, 3000); // Delay 3 seconds after page load
+  };
+
+  // Reduce DOM size - collapse hidden elements
+  const optimizeDOM = () => {
+    const hiddenElements = document.querySelectorAll('[style*="display: none"]');
+    hiddenElements.forEach(el => {
+      if (el.offsetParent === null) {
+        el.remove(); // Remove truly hidden elements
+      }
+    });
+  };
+
+  // Performance monitoring
+  const monitorPerformance = () => {
+    if ('PerformanceObserver' in window) {
+      // Monitor Largest Contentful Paint (LCP)
+      const lcpObserver = new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        const lastEntry = entries[entries.length - 1];
+        console.log('LCP:', lastEntry.renderTime || lastEntry.loadTime);
+      });
+      lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+
+      // Monitor First Input Delay (FID)
+      const fidObserver = new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        entries.forEach(entry => {
+          console.log('FID:', entry.processingStart - entry.startTime);
+        });
+      });
+      fidObserver.observe({ entryTypes: ['first-input'] });
+
+      // Monitor Cumulative Layout Shift (CLS)
+      let clsScore = 0;
+      const clsObserver = new PerformanceObserver((list) => {
+        list.getEntries().forEach(entry => {
+          if (!entry.hadRecentInput) {
+            clsScore += entry.value;
+            console.log('CLS:', clsScore);
+          }
+        });
+      });
+      clsObserver.observe({ entryTypes: ['layout-shift'] });
+    }
+  };
+
+  // Initialize optimizations
+  const init = () => {
+    // Run immediately
+    deferCSS();
+    optimizeImages();
+    
+    // Run after DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        prefetchLinks();
+        preloadFonts();
+        
+        // Development only
+        {% if settings.enable_performance_monitoring %}
+          monitorPerformance();
+        {% endif %}
+      });
+    } else {
+      prefetchLinks();
+      preloadFonts();
+      
+      {% if settings.enable_performance_monitoring %}
+        monitorPerformance();
+      {% endif %}
+    }
+
+    // Run after page load
+    window.addEventListener('load', () => {
+      optimizeThirdParty();
+      
+      // Delay non-critical optimizations
+      setTimeout(() => {
+        // removeUnusedCSS(); // Commented out - use with caution
+        // optimizeDOM(); // Commented out - can break functionality
+      }, 1000);
+    });
+  };
+
+  // Start optimizations
+  init();
+})();
+</script>

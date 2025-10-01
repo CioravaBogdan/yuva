@@ -1,0 +1,238 @@
+{%- comment -%}
+  Vanilla JavaScript Replacement for jQuery
+  This snippet provides vanilla JS alternatives to jQuery functions
+  Used throughout the theme for better performance
+{%- endcomment -%}
+
+<script>
+// jQuery Replacement Functions - Vanilla JS
+// Economie: ~95KB prin eliminarea jQuery
+
+// Document Ready Replacement
+const ready = (callback) => {
+  if (document.readyState !== 'loading') {
+    callback();
+  } else {
+    document.addEventListener('DOMContentLoaded', callback);
+  }
+};
+
+// jQuery $ selector replacement
+const $ = (selector) => {
+  if (typeof selector === 'string') {
+    return document.querySelector(selector);
+  }
+  return selector;
+};
+
+const $$ = (selector) => {
+  return document.querySelectorAll(selector);
+};
+
+// jQuery addClass replacement
+Element.prototype.addClass = function(className) {
+  this.classList.add(className);
+  return this;
+};
+
+// jQuery removeClass replacement
+Element.prototype.removeClass = function(className) {
+  this.classList.remove(className);
+  return this;
+};
+
+// jQuery toggleClass replacement
+Element.prototype.toggleClass = function(className) {
+  this.classList.toggle(className);
+  return this;
+};
+
+// jQuery hasClass replacement
+Element.prototype.hasClass = function(className) {
+  return this.classList.contains(className);
+};
+
+// jQuery attr replacement
+Element.prototype.attr = function(name, value) {
+  if (value === undefined) {
+    return this.getAttribute(name);
+  }
+  this.setAttribute(name, value);
+  return this;
+};
+
+// jQuery removeAttr replacement
+Element.prototype.removeAttr = function(name) {
+  this.removeAttribute(name);
+  return this;
+};
+
+// jQuery html replacement
+Element.prototype.html = function(content) {
+  if (content === undefined) {
+    return this.innerHTML;
+  }
+  this.innerHTML = content;
+  return this;
+};
+
+// jQuery text replacement
+Element.prototype.text = function(content) {
+  if (content === undefined) {
+    return this.textContent;
+  }
+  this.textContent = content;
+  return this;
+};
+
+// jQuery val replacement
+Element.prototype.val = function(value) {
+  if (value === undefined) {
+    return this.value;
+  }
+  this.value = value;
+  return this;
+};
+
+// jQuery on replacement
+Element.prototype.on = function(event, callback) {
+  this.addEventListener(event, callback);
+  return this;
+};
+
+// jQuery off replacement
+Element.prototype.off = function(event, callback) {
+  this.removeEventListener(event, callback);
+  return this;
+};
+
+// jQuery hide replacement
+Element.prototype.hide = function() {
+  this.style.display = 'none';
+  return this;
+};
+
+// jQuery show replacement
+Element.prototype.show = function() {
+  this.style.display = '';
+  return this;
+};
+
+// jQuery toggle replacement
+Element.prototype.toggle = function() {
+  if (this.style.display === 'none') {
+    this.style.display = '';
+  } else {
+    this.style.display = 'none';
+  }
+  return this;
+};
+
+// jQuery fadeIn replacement
+Element.prototype.fadeIn = function(duration = 400) {
+  this.style.opacity = 0;
+  this.style.display = '';
+  this.style.transition = `opacity ${duration}ms`;
+  
+  setTimeout(() => {
+    this.style.opacity = 1;
+  }, 10);
+  
+  return this;
+};
+
+// jQuery fadeOut replacement
+Element.prototype.fadeOut = function(duration = 400) {
+  this.style.transition = `opacity ${duration}ms`;
+  this.style.opacity = 0;
+  
+  setTimeout(() => {
+    this.style.display = 'none';
+  }, duration);
+  
+  return this;
+};
+
+// jQuery animate replacement for simple animations
+Element.prototype.animate = function(properties, duration = 400) {
+  const transitions = [];
+  for (let prop in properties) {
+    transitions.push(`${prop} ${duration}ms`);
+    this.style[prop] = properties[prop];
+  }
+  this.style.transition = transitions.join(', ');
+  return this;
+};
+
+// jQuery find replacement
+Element.prototype.find = function(selector) {
+  return this.querySelector(selector);
+};
+
+Element.prototype.findAll = function(selector) {
+  return this.querySelectorAll(selector);
+};
+
+// jQuery parent replacement
+Element.prototype.parent = function() {
+  return this.parentElement;
+};
+
+// jQuery closest replacement
+Element.prototype.closest = function(selector) {
+  return this.closest(selector);
+};
+
+// jQuery siblings replacement
+Element.prototype.siblings = function() {
+  return Array.from(this.parentElement.children).filter(el => el !== this);
+};
+
+// jQuery each replacement for NodeList
+NodeList.prototype.each = function(callback) {
+  this.forEach(callback);
+  return this;
+};
+
+// jQuery css replacement
+Element.prototype.css = function(property, value) {
+  if (typeof property === 'object') {
+    for (let key in property) {
+      this.style[key] = property[key];
+    }
+    return this;
+  }
+  
+  if (value === undefined) {
+    return getComputedStyle(this)[property];
+  }
+  
+  this.style[property] = value;
+  return this;
+};
+
+// AJAX replacement
+const ajax = (options) => {
+  return fetch(options.url, {
+    method: options.method || 'GET',
+    headers: options.headers || {
+      'Content-Type': 'application/json',
+    },
+    body: options.data ? JSON.stringify(options.data) : null,
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (options.success) options.success(data);
+    return data;
+  })
+  .catch(error => {
+    if (options.error) options.error(error);
+    throw error;
+  });
+};
+
+// Export for global use
+window.ready = ready;
+window.$$ = $$;
+window.ajax = ajax;
+</script>
