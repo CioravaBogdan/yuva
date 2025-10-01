@@ -524,68 +524,83 @@ if (window.location.pathname.indexOf("/cart") > -1) {
   })();
   // Update quantity based on input on change
 
+  // 🚀 VANILLA JS - jQuery removed, using Fetch API
   changeCartItem = function (line, quantity) {
-    var params = {
-      type: "POST",
-      url: cartChangeUrl,
-      data: "quantity=" + quantity + "&line=" + line,
-      dataType: "json",
-      success: function (cart) {
-        // if (quantity == 0) {
-        //     $('[name="updates[]"][data-line="' + line + '"]').closest('tr').remove();
-        // }
-        if (cart.item_count == 0) {
-          emptyCartStatus = true;
-          // $('[data-cart-form]').hide();
-          // $('[data-cart-empty]').show();
-          $("[data-cart-count]").hide();
-        } else {
-          emptyCartStatus = false;
-          cartItemsCount = cart.item_count;
-          if (favicon) {
-            favicon.badge(cartItemsCount);
-          }
-          $("[data-cart-count]").show();
+    const formData = new URLSearchParams();
+    formData.append('quantity', quantity);
+    formData.append('line', line);
+    
+    fetch(cartChangeUrl, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: formData
+    })
+    .then(response => response.json())
+    .then(cart => {
+      if (cart.item_count == 0) {
+        emptyCartStatus = true;
+        document.querySelectorAll("[data-cart-count]").forEach(el => {
+          el.style.display = "none";
+        });
+      } else {
+        emptyCartStatus = false;
+        cartItemsCount = cart.item_count;
+        if (favicon) {
+          favicon.badge(cartItemsCount);
+        }
+        document.querySelectorAll("[data-cart-count]").forEach(el => {
+          el.style.display = "block";
+        });
 
-          var item = cart.items[line - 1];
-          if (item) {
-            $('[name="updates[]"][data-line="' + line + '"]').val(
-              item.quantity
-            );
+        const item = cart.items[line - 1];
+        if (item) {
+          const input = document.querySelector(`[name="updates[]"][data-line="${line}"]`);
+          if (input) {
+            input.value = item.quantity;
           }
         }
-        cartPageUpdate(cart);
-      },
-      error: function (XMLHttpRequest, textStatus) {
-        jQuery.getJSON(cartUrl, function (cart, textStatus) {
+      }
+      cartPageUpdate(cart);
+    })
+    .catch(error => {
+      // Error handling - fetch cart data again
+      fetch(cartUrl + '.json')
+        .then(response => response.json())
+        .then(cart => {
           if (quantity == 0) {
-            $('[name="updates[]"][data-line="' + line + '"]')
-              .closest("tr")
-              .remove();
+            const input = document.querySelector(`[name="updates[]"][data-line="${line}"]`);
+            if (input) {
+              const row = input.closest("tr");
+              if (row) row.remove();
+            }
           }
           cartItemsCount = cart.item_count;
           if (favicon) {
             favicon.badge(cartItemsCount);
           }
           if (cart.item_count == 0) {
-            // $('[data-cart-form]').hide();
-            // $('[data-cart-empty]').show();
-            $("[data-cart-count]").hide();
+            document.querySelectorAll("[data-cart-count]").forEach(el => {
+              el.style.display = "none";
+            });
           } else {
-            $("[data-cart-count]").show();
+            document.querySelectorAll("[data-cart-count]").forEach(el => {
+              el.style.display = "block";
+            });
 
-            var item = cart.items[line - 1];
+            const item = cart.items[line - 1];
             if (item) {
-              $('[name="updates[]"][data-line="' + line + '"]').val(
-                item.quantity
-              );
+              const input = document.querySelector(`[name="updates[]"][data-line="${line}"]`);
+              if (input) {
+                input.value = item.quantity;
+              }
             }
           }
           cartPageUpdate(cart);
         });
-      },
-    };
-    jQuery.ajax(params);
+    });
   };
 
   $(document).on("click", ".line_item_change", function (evt) {
