@@ -65,8 +65,10 @@ class CustomerAddresses {
         if (target.hasAttribute('data-address')) {
             elementId = target.dataset.id;
         }
-        focusElement = $('#' + elementId)
-        $(document).find('.yv_side_drawer_close').trigger('focus');
+        // 🚀 VANILLA JS - jQuery removed
+        focusElement = document.getElementById(elementId);
+        const drawerClose = document.querySelector('.yv_side_drawer_close');
+        if (drawerClose) drawerClose.focus();
         var popUp = target.parentNode.querySelector(".addressPopUp").innerHTML;
         var newTarget = document.querySelector('[data-drawer-body]');
         var parent = document.querySelector('[data-side-drawer]');
@@ -100,140 +102,187 @@ class CustomerAddresses {
 }
 
 //** Reorder Product **//
-$('.reorderButton').on('click', function(e) {
-    e.preventDefault();
-    console.log('reorderButton')
-    let button = e.target;
-    let formHtml = button.closest('.action-container').querySelector('.Reorder__container');
-    let cloneForm = formHtml.cloneNode(true);
-    let cartData = $('.yv-reorder-popup-body').html(cloneForm);
-    if (emptyCartStatus) {
-        $('.yv-reorder-popup-body').find('.Reorder__container').addClass('cart-empty');
-        $(cartData).find('.reorder__clear-cart').attr("disabled", true);
+// 🚀 VANILLA JS - jQuery removed
+document.addEventListener('click', function(e) {
+    if (e.target.closest('.reorderButton')) {
+        e.preventDefault();
+        console.log('reorderButton');
+        let button = e.target.closest('.reorderButton');
+        let formHtml = button.closest('.action-container').querySelector('.Reorder__container');
+        let cloneForm = formHtml.cloneNode(true);
+        const popupBody = document.querySelector('.yv-reorder-popup-body');
+        popupBody.innerHTML = '';
+        popupBody.appendChild(cloneForm);
+        
+        if (emptyCartStatus) {
+            const container = popupBody.querySelector('.Reorder__container');
+            if (container) container.classList.add('cart-empty');
+            const clearCart = popupBody.querySelector('.reorder__clear-cart');
+            if (clearCart) clearCart.setAttribute('disabled', 'true');
+        } else {
+            const clearCart = popupBody.querySelector('.reorder__clear-cart');
+            if (clearCart) clearCart.removeAttribute('disabled');
+            const warningWrapper = popupBody.querySelector('.cart-warning-wrapper');
+            if (warningWrapper) warningWrapper.innerHTML = "<p class='error-text'>" + cartStatusNotEmpty + "</p>";
+        }
+        document.body.classList.add('reorderPopupShow');
     }
-    let addToCart = $('.yv-reorder-popup-body').find('.Reorder__container');
-    if (emptyCartStatus) {
-        $(cartData).find('.reorder__clear-cart').attr("disabled", true);
-    } else {
-        $(cartData).find('.reorder__clear-cart').attr("disabled", false);
-        $(cartData).find('.cart-warning-wrapper').html("<p class='error-text'>"+cartStatusNotEmpty+"</p>");
-    }
-    $('body').addClass('reorderPopupShow');
 });
 
 // Reorder Popup Close
-$(document).on('click', '.reorder__cancel-item', function(e) {
-    e.preventDefault();
-    var addToCartForm = $(this).closest('.Reorder__container');
-    addToCartForm.removeClass('cart-warning');
-    addToCartForm.removeClass('addToCart');
-    $('body').removeClass('reorderPopupShow');
+// 🚀 VANILLA JS - jQuery removed
+document.addEventListener('click', function(e) {
+    if (e.target.closest('.reorder__cancel-item')) {
+        e.preventDefault();
+        const addToCartForm = e.target.closest('.Reorder__container');
+        if (addToCartForm) {
+            addToCartForm.classList.remove('cart-warning', 'addToCart');
+        }
+        document.body.classList.remove('reorderPopupShow');
+    }
 });
 
 //** Add To Cart **//
-$(document).on('click', '.reorder__add_to_cart', function(e) {
-    e.preventDefault();
-    var button = e.target
-    this.classList.add('is-loading');
-    var addToCartForm = button.closest('.Reorder__container').querySelectorAll('form');
-    Shopify.queue = [];
-    addToCartForm.forEach(form => {
-        var formData = new FormData(form);
-        Shopify.queue.push({
-            form: formData,
-            formSelector: form
+// 🚀 VANILLA JS - jQuery removed
+document.addEventListener('click', function(e) {
+    const addToCartBtn = e.target.closest('.reorder__add_to_cart');
+    if (addToCartBtn) {
+        e.preventDefault();
+        addToCartBtn.classList.add('is-loading');
+        const addToCartForm = addToCartBtn.closest('.Reorder__container').querySelectorAll('form');
+        Shopify.queue = [];
+        addToCartForm.forEach(form => {
+            const formData = new FormData(form);
+            Shopify.queue.push({
+                form: formData,
+                formSelector: form
+            });
         });
-    });
-    multipleProductsAddToCart();
+        multipleProductsAddToCart();
+    }
 });
 
 //**  Move Along Function **//
+// 🚀 VANILLA JS - jQuery removed, using Fetch API
 multipleProductsAddToCart = function() {
     // If we still have requests in the queue, let's process the next one.
     if (Shopify.queue.length) {
-        var request = Shopify.queue.shift();
-        let formData = request.form;
-        let form = request.formSelector;
-        var data = $(form).serialize();
-        $(form).find('.form-status').addClass('hidden');
-        $(form).find('.form-loading').removeClass('hidden');
-        $.ajax({
-            type: 'POST',
-            url: cartAddUrl,
-            data: data,
-            dataType: 'json',
-            success: function(res) {
-                $(form).find('.form-status').addClass('hidden');
-                $(form).find('.form-success').removeClass('hidden');
-                multipleProductsAddToCart();
-            },
-            error: function(XMLHttpRequest, textStatus) {
-                let submit = $('.reorder__add_to_cart');
-                if (textStatus) {
-                    $(form).find('.form-status').addClass('hidden');
-                    $(form).find('.form-error').removeClass('hidden');
-                }
-                if (Shopify.queue.length) {
-                    multipleProductsAddToCart()
-                }
-                setTimeout(function() {
-                    submit.removeClass('is-loading');
-                }, 1000)
+        const request = Shopify.queue.shift();
+        const formData = request.form;
+        const form = request.formSelector;
+        
+        const formStatus = form.querySelector('.form-status');
+        const formLoading = form.querySelector('.form-loading');
+        if (formStatus) formStatus.classList.add('hidden');
+        if (formLoading) formLoading.classList.remove('hidden');
+        
+        fetch(cartAddUrl, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
             }
+        })
+        .then(response => response.json())
+        .then(res => {
+            const formSuccess = form.querySelector('.form-success');
+            if (formStatus) formStatus.classList.add('hidden');
+            if (formSuccess) formSuccess.classList.remove('hidden');
+            multipleProductsAddToCart();
+        })
+        .catch(error => {
+            const submit = document.querySelector('.reorder__add_to_cart');
+            const formError = form.querySelector('.form-error');
+            
+            if (formStatus) formStatus.classList.add('hidden');
+            if (formError) formError.classList.remove('hidden');
+            
+            if (Shopify.queue.length) {
+                multipleProductsAddToCart();
+            }
+            
+            setTimeout(function() {
+                if (submit) submit.classList.remove('is-loading');
+            }, 1000);
         });
     }
     // If the queue is empty, we add 1 to cart
     else {
         setTimeout(function() {
-            let submit = $('.reorder__add_to_cart');
-            $('body').removeClass('reorderPopupShow');
+            const submit = document.querySelector('.reorder__add_to_cart');
+            document.body.classList.remove('reorderPopupShow');
+            
             if (cartDrawerEnable) {
-                $('[data-drawer-body]').html(preLoadLoadGif);
-                $('body').find('[data-side-drawer]').attr('class', 'yv_side_drawer_wrapper')
-                $('body').find('[data-drawer-title]').html(cartTitleLabel);
-                $('body').find('[data-side-drawer]').attr('id', 'mini__cart');
-                $('body').find('[data-side-drawer]').addClass('mini_cart');
-                $('body').removeClass('quickview-open');
-                $('body').addClass('side_Drawer_open');
-                jQuery.getJSON(cartUrl, function(cart, textStatus) {
-                    buildCart(cart, true);
-                    setTimeout(function() {
-                        submit.removeClass('is-loading');
-                    }, 1000)
-                });
+                const drawerBody = document.querySelector('[data-drawer-body]');
+                const sideDrawer = document.querySelector('[data-side-drawer]');
+                const drawerTitle = document.querySelector('[data-drawer-title]');
+                
+                if (drawerBody) drawerBody.innerHTML = preLoadLoadGif;
+                if (sideDrawer) {
+                    sideDrawer.setAttribute('class', 'yv_side_drawer_wrapper');
+                    sideDrawer.setAttribute('id', 'mini__cart');
+                    sideDrawer.classList.add('mini_cart');
+                }
+                if (drawerTitle) drawerTitle.innerHTML = cartTitleLabel;
+                
+                document.body.classList.remove('quickview-open');
+                document.body.classList.add('side_Drawer_open');
+                
+                fetch(cartUrl)
+                    .then(response => response.json())
+                    .then(cart => {
+                        buildCart(cart, true);
+                        setTimeout(function() {
+                            if (submit) submit.classList.remove('is-loading');
+                        }, 1000);
+                    });
             } else {
                 window.location.assign(mainCartUrl);
             }
-        }, 1000)
+        }, 1000);
     }
 }
 
 //** Clear Cart **// 
-$(document).on('click', '.reorder__clear-cart', function(e) {
-    e.preventDefault();
-    var button = e.target;
-    var addToCartForm = $(this).closest('.Reorder__container');
-    fetch(window.Shopify.routes.root + 'cart/clear.js', {
+// 🚀 VANILLA JS - jQuery removed
+document.addEventListener('click', function(e) {
+    if (e.target.closest('.reorder__clear-cart')) {
+        e.preventDefault();
+        const button = e.target.closest('.reorder__clear-cart');
+        const addToCartForm = button.closest('.Reorder__container');
+        
+        fetch(window.Shopify.routes.root + 'cart/clear.js', {
+            method: 'POST'
         })
-        .then((response) => {
-            return response.json();
-        })
-        .then(function(json) {
-            jQuery.getJSON(cartUrl, function(cart, textStatus) {
-                buildCart(cart, true);
-                if (emptyCartStatus = true) {
-                    button.setAttribute("disabled", true);
-                    $(addToCartForm).closest('.Reorder__container').find('.cart-warning-wrapper').html("<p class='success-text'>"+cartStatusEmpty+"</p>");
-                }
-            });
+        .then(response => response.json())
+        .then(json => {
+            fetch(cartUrl)
+                .then(response => response.json())
+                .then(cart => {
+                    buildCart(cart, true);
+                    if (emptyCartStatus = true) {
+                        button.setAttribute("disabled", true);
+                        const warningWrapper = addToCartForm.querySelector('.cart-warning-wrapper');
+                        if (warningWrapper) {
+                            warningWrapper.innerHTML = "<p class='success-text'>" + cartStatusEmpty + "</p>";
+                        }
+                    }
+                });
         });
+    }
 });
-$(document).on('change', '#variantQty', function() {
-    let value = parseInt($(this).val());
-    let maxLength = parseInt($(this).attr('maxlength'));
-    if (value > maxLength) {
-        $(this).val(maxLength);
-    } else if (value <= 0) {
-        $(this).val(1);
+
+// 🚀 VANILLA JS - jQuery removed
+document.addEventListener('change', function(e) {
+    if (e.target.id === 'variantQty') {
+        const input = e.target;
+        let value = parseInt(input.value);
+        let maxLength = parseInt(input.getAttribute('maxlength'));
+        
+        if (value > maxLength) {
+            input.value = maxLength;
+        } else if (value <= 0) {
+            input.value = 1;
+        }
     }
 });

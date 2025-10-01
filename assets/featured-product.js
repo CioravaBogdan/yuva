@@ -22,14 +22,16 @@ Theme.FeaturedProduct = (() => {
       let instance;
 
       if (slider.hasAttribute("data-mobile-only")) {
-        if ($(window).width() < 768 && !slider.classList.contains('flickity-enabled')) {
+        // 🚀 VANILLA JS - jQuery removed
+        if (window.innerWidth < 768 && !slider.classList.contains('flickity-enabled')) {
           instance = new Flickity(slider, options);
           setTimeout(() => instance.resize(), 300);
         } else if (slider.classList.contains('flickity-enabled')) {
           instance?.destroy();
         }
       } else if (slider.hasAttribute("data-desktop-only")) {
-        if ($(window).width() >= 768 && !slider.classList.contains('flickity-enabled')) {
+        // 🚀 VANILLA JS - jQuery removed
+        if (window.innerWidth >= 768 && !slider.classList.contains('flickity-enabled')) {
           instance = new Flickity(slider, options);
           setTimeout(() => instance.resize(), 300);
         } else if (slider.classList.contains('flickity-enabled')) {
@@ -70,14 +72,16 @@ Theme.FeaturedProduct = (() => {
       let instance;
 
       if (slider.hasAttribute("data-mobile-only")) {
-        if ($(window).width() < 768 && !slider.classList.contains('flickity-enabled')) {
+        // 🚀 VANILLA JS - jQuery removed
+        if (window.innerWidth < 768 && !slider.classList.contains('flickity-enabled')) {
           instance = new Flickity(slider, options);
           setTimeout(() => instance.resize(), 300);
         } else if (slider.classList.contains('flickity-enabled')) {
           instance?.destroy();
         }
       } else if (slider.hasAttribute("data-desktop-only")) {
-        if ($(window).width() >= 768 && !slider.classList.contains('flickity-enabled')) {
+        // 🚀 VANILLA JS - jQuery removed
+        if (window.innerWidth >= 768 && !slider.classList.contains('flickity-enabled')) {
           instance = new Flickity(slider, options);
           setTimeout(() => instance.resize(), 300);
         } else if (slider.classList.contains('flickity-enabled')) {
