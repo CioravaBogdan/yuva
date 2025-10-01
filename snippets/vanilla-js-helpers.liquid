@@ -178,10 +178,8 @@ Element.prototype.parent = function() {
   return this.parentElement;
 };
 
-// jQuery closest replacement
-Element.prototype.closest = function(selector) {
-  return this.closest(selector);
-};
+// jQuery closest replacement - REMOVED (native closest() already exists in modern browsers)
+// Modern browsers have native Element.closest() support - no polyfill needed
 
 // jQuery siblings replacement
 Element.prototype.siblings = function() {

@@ -2,8 +2,9 @@ document.addEventListener("DOMContentLoaded", searchTabsInit, false);
 document.addEventListener("shopify:section:load", searchTabsInit, false);
 document.addEventListener("DOMContentLoaded", speechInit, false);
 document.addEventListener("shopify:section:load", speechInit, false);
-var $resultsBox = $('.yv-search-result-container');
-var searchbarresult=$('body').find('.yv-header-searchbar-content');
+// 🚀 VANILLA JS - jQuery fallback with compatibility check
+var $resultsBox = typeof $ !== 'undefined' ? $('.yv-search-result-container') : document.querySelector('.yv-search-result-container');
+var searchbarresult = typeof $ !== 'undefined' ? $('body').find('.yv-header-searchbar-content') : document.querySelector('.yv-header-searchbar-content');
 
 function removeHtmlEntities(str) {
     const htmlEntities = {
@@ -46,16 +47,23 @@ function searchTabsInit() {
 }
 
 var searchTyping;
-$(document).ready(function() {
-    $('body').on('click','.search-form',function(e) {
-        e.preventDefault();
-        focusElement = $('.search-form');
-        var _class = $(this).data('search-drawer');
-        $('body').toggleClass(_class);
-        $('input.search-input').trigger('focus');
-        $('#recent_search_list').html('');
-        recentSearch();
-        focusElementsRotation($('.search-bar-container'));
+// 🚀 VANILLA JS - jQuery removed
+document.addEventListener('DOMContentLoaded', function() {
+    document.body.addEventListener('click', function(e) {
+        const searchForm = e.target.closest('.search-form');
+        if (searchForm) {
+            e.preventDefault();
+            focusElement = searchForm;
+            const _class = searchForm.getAttribute('data-search-drawer');
+            document.body.classList.toggle(_class);
+            const searchInput = document.querySelector('input.search-input');
+            if (searchInput) searchInput.focus();
+            const recentList = document.getElementById('recent_search_list');
+            if (recentList) recentList.innerHTML = '';
+            recentSearch();
+            const searchContainer = document.querySelector('.search-bar-container');
+            if (searchContainer) focusElementsRotation(searchContainer);
+        }
     });
     /// AjaX Product Search
     $('.AjaxSearchResponse').prepend('');

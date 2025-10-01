@@ -329,7 +329,7 @@ function freeShippingBar(cart) {
 var favicon = false;
 
 function browserTabNotification() {
-  if (browserNotificationStatus) {
+  if (browserNotificationStatus && typeof Favico !== 'undefined') {
     favicon = new Favico({
       animation: "pop",
       bgColor: browserNotificationBg,

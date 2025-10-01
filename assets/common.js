@@ -393,12 +393,14 @@ function isOnScreen(elem, form) {
     );
 }
 
-jQuery.fn.scrollTo = function (elem) {
-    $(this).scrollTop(
-        $(this).scrollTop() - $(this).offset().top + $(elem).offset().top
-    );
-    return this;
-};
+// 🚀 VANILLA JS - jQuery.fn.scrollTo removed (use common-vanilla.js scrollToElement instead)
+// Commented out to prevent jQuery dependency errors
+// jQuery.fn.scrollTo = function (elem) {
+//     $(this).scrollTop(
+//         $(this).scrollTop() - $(this).offset().top + $(elem).offset().top
+//     );
+//     return this;
+// };
 
 function truncate(str, no_words) {
     var length = str.split(" ").length;
